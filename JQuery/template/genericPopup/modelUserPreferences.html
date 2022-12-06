@@ -1,0 +1,130 @@
+﻿<style>    
+    .rowHieght {
+        height: 50px
+    }
+</style>
+<div class="modal-dialog" id="modelMyPreferences">
+    <div class="modal-content">
+        <div class="modal-header" id="modelMyPreferencesHeader">
+            <button type="button" class="close" data-dismiss="modal" data-bind="click:function(){$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="my_preferences"></h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <ul class="nav nav-tabs" id="tabPreferences" role="tablist">
+                    <li role="presentation" id="tabBasic" class="active"><a tabindex="0" role="tab" style="width: 80px" data-bind="click:showBasicDetails" data-i18n="my_preferences_basic"></a></li>
+                    <li role="presentation" id="tabAlertSubscriptions"><a tabindex="0" role="tab" data-bind="click:showAlertSubscriptions" data-i18n="my_preferences_alert_subscriptions"></a></li>
+                </ul>
+                <div class="col-md-12" id="basicPrefernceDiv">
+                    <div class="row" style="height: 400px; margin: 5px -10px 5px -10px; background-color: #f5f5f5;border: 1px groove; border-color: #ddd">
+                        <div class="col-md-4" style="padding-top: 10px">
+                            <div class="form-group rowHieght">
+                                <h5 class="m0 b" data-i18n="home_screen"></h5>
+                            </div>
+                            <div class="form-group rowHieght">
+                                <h5 class="m0 b" data-i18n="default_device_search"></h5>
+                            </div>
+							<div class="form-group rowHieght" data-bind="visible:IsCareEnabledUser">
+                                <h5 class="m0 b" data-i18n="include_care_data_in_device_search"></h5>
+                            </div>
+                            <div class="form-group rowHieght" data-bind="visible:IsAdminUser">
+                                <h5 class="m0 b" data-i18n="apply_all_users"></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding-top: 5px">
+                            <div class="form-group rowHieght">
+                                <div class="v-chosen" id="screenComboDiv" data-bind="click:onClickdropdownScreen">
+                                    <select id="dropdownScreen" class="chosen-select form-control" data-bind="chosen: screensArray, optionsText: 'ScreenName',
+                                                 optionsValue: 'ScreenName'"></select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group rowHieght">
+                                <div class="v-chosen" id="searchComboDiv" data-bind="click:onClickdropdownSearch">
+                                    <select id="dropdownSearch" class="chosen-select form-control" data-bind="chosen: globalSavedSearchArray, optionsText: 'SearchName', optionsValue: 'SearchName'"></select>
+                                    <!--<select id="dropdownSearch" class="chosen-select form-control" data-bind="foreach: globalSavedSearchArray">
+                                        <option data-bind="attr: { disabled: enabled, value: SearchName }, text: SearchName"></option>
+                                    </select>-->
+                                </div>
+                            </div>
+                            <div class="form-group rowHieght" style="padding-top: 4px" data-bind="visible:IsCareEnabledUser">
+                                <input type="checkbox" id="includeCareDataChk" />
+                            </div>
+							<div class="form-group rowHieght" style="padding-top: 4px" data-bind="visible:IsAdminUser">
+                                <input type="checkbox" id="applyAllUsrChk" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" id="alertSubscriptionsDiv">
+                    <div class="grid-area" id="editmainGridDiv" style="height: 400px">
+                        <div id="jqxgridAlertSubscriptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnRemoveUserPreferences" data-i18n="remove_userPreferences" data-bind="click:function(){removeUserPeferencesPopup()}" class="btn btn-primary"></button>
+            <button type="button" id="btnSaveUserPreferences" data-i18n="save" data-bind="click:function(){saveUserPreferences()}" class="btn btn-primary"></button>
+            <button type="button" id="btnSaveUserAlerts" data-i18n="save" data-bind="click:function(){saveClicked('jqxgridAlertSubscriptions')}" class="btn btn-primary hide"></button>
+            <button type="button" id="btnCancelUserPreferencesAlerts" data-i18n="cancel" data-bind="click:function(){cancel($parent.unloadTempPopup)}" class="btn btn-default btn-edit-c"></button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="configChangeConfirmation" data-keyboard="true" data-backdrop="static">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="configChangeConfirmationMessage" data-i18n="user_preference_changes_save"></span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="configChangeConfirmation_Yes" tabindex="0" class="btn btn-success" data-bind="click:function () {cancelUserPreferenceChanges()}" data-i18n="btn_YES"></button>
+                    <button type="button" id="configChangeConfirmation_No" tabindex="0" class="btn btn-default" data-bind="click: function () {cancelTabChange()}" data-i18n="btn_NO"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---Remove Preferences confirmation---->
+<div class="modal" id="RemovePreferencesConfirmPopup" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="removeConfirmationMsg"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="RemovePreferencesConfirmPopup_Confo_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){removeUserPeferences()}"></button>
+                    <button id="RemovePreferencesConfirmPopup_Confo_No" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:closeRemovalConfimationPopup()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End-->

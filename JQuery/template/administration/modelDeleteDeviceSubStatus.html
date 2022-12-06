@@ -1,0 +1,23 @@
+﻿<div class="modal-dialog modal-mm m-alarts" id="modelDeleteDeviceSubStatus">
+        <div class="modal-content" id="deletedSubStatusID">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2 pr0">
+                        <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                    </div>
+                    <div class="col-md-10 pl8">
+                        <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                         
+                         <span id="deleteCount"></span>&nbsp;
+                  </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+               
+                <button id="yesBtndeleteDeviceSubStatus" tabindex="0" type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: function (){deleteSubStatus($parent.observableModelPopup),$parent.unloadTempPopup('unloadTemplate',0)}">Yes</button>
+                <button type="button" class="btn btn-default" id="btnDeletedDeviceID" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate',0)}">No</button>
+            </div>
+        </div>
+    </div>
+

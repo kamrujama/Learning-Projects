@@ -1,0 +1,52 @@
+﻿<div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true" data-i18n="[title]Close">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="qualifiers_configure"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="row" style="margin:0px">
+                <div class="col-md-12" style="padding:0px;">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                            <label data-i18n="qualifiers_select_models"></label>
+                            <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd; height: 300px !important; overflow-y:auto">
+                                <div class="panel panel-custom">
+                                    <div class="panel-body p0">
+                                        <div data-bind="foreach:models">
+                                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                <div class="form-group" id="columnDiv">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" data-bind="attr: { id: 'chkModel-' + ModelId, checked: IsSelected, disabled: IsDisabled}, event: {change: $parent.changeCheckBoxValue}, value: ModelName, checked: IsSelected">
+                                                            <span data-bind="text:ModelName" style="cursor: default"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-md-8" style="text-align: left">
+                    <button type="button" id="btnQualifiersSelectAll" tabindex="0" class="btn btn-primary" data-i18n="qualifiers_select_all" data-bind="attr: {disabled: isReadOnly},click:function(){selectAllModels()}"></button>
+                    <button type="button" id="btnQualifiersUnSelectAll" tabindex="0" class="btn btn-primary" data-i18n="qualifiers_unselect_all" data-bind="attr: {disabled: isReadOnly},click:function(){unSelectAllModels()}"></button>
+                    <span class="btn btn-sm bn cd" style="padding-left:0px"><span>Total selected Models:</span> <span id="spanModelsCount" style="width:30px"></span></span>
+                </div>
+                <div class="col-md-4" style="text-align: right">
+                    <button type="button" id="btnQualifiersSave" tabindex="0" class="btn btn-primary" data-i18n="qualifiers_save" data-bind="attr: {disabled: isReadOnly},click:function () {saveQualifiers($parent.unloadAddTemplatepopup)}"></button>
+                    <button type="button" id="btnQualifiersCancel" tabindex="0" class="btn btn-default" data-i18n="qualifiers_cancel" data-bind="click: function () {cancelQualifiers($parent.unloadTempPopup)}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

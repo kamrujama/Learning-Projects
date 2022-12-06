@@ -1,0 +1,163 @@
+﻿
+<!-- content header start -->
+<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+</ol>
+<!-- content header end -->
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="search-box-m">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="pull-left btn-mgl">
+                                        <a class="btn btn-default" role="button" id="btnRefresh" tabindex="0" data-i18n="[title]refresh_audit_aeport_list" data-bind="click:function(){refreshGrid('jqxgridAuditReport')}"><i class="icon-spinner9"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 pl0">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a class="btn btn-default" role="button" id="btnRestFilter" tabindex="0" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridAuditReport')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" role="button" id="btnExportToexcel" tabindex="0" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridAuditReport')}"><i class="icon-export-excel"></i></a>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div id="jqxgridAuditReport" style="width: 100%"></div>
+                            <div id="pagerDivAuditReport"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="viewAuditReportModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlage">
+                <div data-bind='component:AuditReportModelPopup'>
+                    <!--<div class="modal bs-example-modal-lg" id="viewAuditReportModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div data-bind="if: templateFlage">
+                            <div data-bind='component:observableModelComponent'> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal bs-example-modal-lg" id="modelpopup" style="z-index: 9999" data-backdrop="static" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div>
+            <div data-bind="component:observableModelpopup">
+            </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal end-->
+<!-- click on viewresult modal popup open ----->
+<div class="modal bs-example-modal-lg" id="openModalPopup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+         <div class="modal-dialog vertical-align-center modal-lg" id="mdlAuditLogReportItem">
+            <div class="modal-content">
+                <div class="modal-header" id="mdlAuditLogReportItemHeader">
+                    <button type="button" class="close" tabindex="0" data-bind="click: function () {closeOpenModel('jqxgridAuditReport','jqxGridAuditLogReportDetails')}" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="testhead" class="modal-title"></h4>
+                    <span data-i18n="audit_log_report_details"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right btn-mg">
+                                <a class="btn btn-default" id="btnModelRestFilterId" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilter('jqxGridAuditLogReportDetails')}"><i class="icon-reset-filter"></i></a>
+                                <a class="btn btn-default" id="btnModelShowHideId" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxGridAuditLogReportDetails')}"><i class="icon-hide-column"></i></a>
+                                <a class="btn btn-default" id="btnModelExportToexcelId" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel(true,'jqxGridAuditLogReportDetails')}"><i class="icon-export-excel"></i></a>
+                                <a class="btn btn-default" id="btnModelRefreshId" tabindex="0" role="button" data-i18n="[title]refresh" data-bind="click: function () {refreshGrid('jqxGridAuditLogReportDetails')}"><i class="icon-spinner9"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--grid area start-->
+                            <div class="grid-area" id="gridAreaAuditDeviceDetailsDiv">
+                                <div id="jqxGridAuditLogReportDetails"></div>
+                                <div id="pagerDivAuditReportDetails">
+                                </div>
+                                <!--grid area end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal bs-example-modal-lg" id="viewDetailsHierarchy" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-lg" id="mdlHierarchyAuditLogReportItem">
+            <div class="modal-content">
+                <div class="modal-header" id="mdlHierarchyAuditLogReportItemHeader">
+                    <button type="button" class="close" tabindex="0" data-bind="click: function () { closeOpenModel('jqxgridAuditReport', 'jqxGridHierarchyAuditLogReportDetails') }" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="H1" class="modal-title"></h4>
+                    <span data-i18n="audit_log_report_details"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right btn-mg">
+                                <a class="btn btn-default" id="btnHierarchyRestFilter" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () { clearfilter('jqxGridHierarchyAuditLogReportDetails') }"><i class="icon-reset-filter"></i></a>
+                                <a class="btn btn-default" id="btnHierarchyShowHide" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () { openPopup('modelShowHideCol', 'jqxGridHierarchyAuditLogReportDetails') }"><i class="icon-hide-column"></i></a>
+                                <a class="btn btn-default" id="btnHierarchyExport" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToExcel(true, 'jqxGridHierarchyAuditLogReportDetails') }"><i class="icon-export-excel"></i></a>
+                                <a class="btn btn-default" id="btnHierarchyRefresh" tabindex="0" role="button" data-i18n="[title]refresh" data-bind="click: function () { refreshGrid('jqxGridHierarchyAuditLogReportDetails') }"><i class="icon-spinner9"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--grid area start-->
+                            <div class="grid-area" id="gridAreaAuditHierarchiesDetailsDiv">
+                                <div id="jqxGridHierarchyAuditLogReportDetails"></div>
+                                <div id="pagerDivHierarchyAuditLogReportDetails">
+                                </div>
+                                <!--grid area end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

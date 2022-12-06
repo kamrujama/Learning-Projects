@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Get Post</title>
+    <style>
+      body {
+        text-align: center;
+        background-color: #ececec;
+      }
+      .content {
+        height: 200px;
+        width: 400px;
+        background-color: maroon;
+        color: whitesmoke;
+        padding: 10px;
+        margin: 20px auto;
+        border: 5px solid green;
+        overflow: auto;
+      }
+      .heading {
+        color: blanchedalmond;
+        text-decoration: line-through;
+      }
+      .btn {
+        color: wheat;
+        background-color: maroon;
+        outline: none;
+        border: none;
+        padding: 10px;
+        font-size: 1.2rem;
+        border-radius: 10px;
+      }
+
+      .box{
+        height: 150px;
+        width: 400px;
+        margin: 20px auto;
+        border-radius: 5px;
+        /* border: 2px solid black; */
+        padding: 5px 10px 5px 10px;
+        box-sizing: border-box;
+        box-shadow: 10px 10px 10px rgba(0,  0,  0,  .1),
+                    -10px -10px 10px rgba(255, 255, 255, 1),
+                    inset 10px 10px 10px rgba(0,  0,  0, .1),
+                    inset -10px -10px  10px rgba(255, 255, 255, 1);
+      }
+      .tan{
+        background-color: tan;
+      }
+      .maroon{
+        background-color: maroon;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Get - Post Methods</h2>
+    <div
+      class="content demo"
+      id="box"
+    >
+      <h2>Heading Inside</h2>
+      <label for="">Name : </label
+      ><input
+        type="text"
+        placeholder="Name..."
+        id="inputBox"
+      />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+        eligendi ab deleniti nemo corrupti voluptas minus aut saepe a
+        voluptatibus beatae inventore quibusdam sed sequi deserunt voluptates
+        necessitatibus officiis, nobis doloribus suscipit? Magni id quidem iure
+        soluta placeat quod, vel eos a eaque quisquam non excepturi quibusdam
+        error suscipit est.
+      </p>
+    </div>
+    <button id="setText">Set New Text</button>
+
+    <div class="box">
+      <h2>Classes Using JQuery</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi asperiores
+        dicta nobis quia quibusdam ex ducimus beatae nam sint officia!
+      </p>
+    </div>
+    <button id="add">Add Class</button>
+    <button id="remove" style="margin: 0px 2px;">Remove Class</button>
+    <button id="toggle">Toggle Class</button>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        // Get methods
+        /*
+        1 - .html() -> Gives all text and tag inside of selected tag
+        2 - .text() -> Gives only text inside selected tag
+        3 - .attr() -> Gives the value of selected attribute
+        4 - .val() -> Gives the value of form fields
+        */
+
+        let html = $('#box').html()
+        console.log(html)
+
+        let text = $('#box').text()
+        console.log(text)
+
+        let attr = $('#box').attr('class')
+        console.log(attr)
+
+        $('#inputBox').change(function () {
+          val = $(this).val()
+          alert('Your Text : ' + val)
+        })
+
+        $('#setText').click(function () {
+          $('h2').text('Get Set Heading')
+          $('p').text('This is the new text set in the paragraph')
+          $('input').val('I Love Allah')
+          $('h2').html('New <b>Get</b><i> Set</i> Heading')
+          $('h2').attr('class', 'heading')
+          $('button')
+            .attr('class', 'btn')
+            .text('Changed')
+            .mouseleave(function () {
+              $(this).removeClass('btn').text('Set New Text')
+            })
+        })
+
+        $("#add").click(function(){
+          $(".box").addClass("tan maroon")
+        })
+
+        $("#remove").click(function(){
+          $(".box").removeClass("maroon")
+        })
+
+        $("#toggle").click(function(){
+          $(".box").toggleClass("maroon")
+        })
+      })
+    </script>
+  </body>
+</html>

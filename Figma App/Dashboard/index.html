@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figma Tutorial</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            transition: all 0.5s ease-in;
+        }
+
+        .check {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background-color: rgb(139, 215, 25);
+            color: white;
+            margin-top: -5px;
+            border: none;
+        }
+
+        .account {
+            height: 40px;
+            width: 40px;
+            border: 2px solid rgb(100, 101, 98);
+            border-radius: 50%;
+            padding: 5px;
+            font-size: 1rem;
+            color: white;
+            text-align: center;
+            background-color: rgb(100, 101, 98);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .nav-link,
+        .nav-item {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-item:hover .nav-link {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .account:hover {
+            transform: scale(0.8);
+            color: white;
+        }
+
+        .caret-down {
+            transition: all 0.5s ease-in-out;
+        }
+
+        .caret-down:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar starts here -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="
+            font-style: italic;
+            font-weight: bolder;
+            font-size: 1.5rem;
+            color: white;
+          ">Verifone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="account" role="button">
+                A
+            </span>
+            <i class="fa fa-caret-down caret-down" style="color: white;margin-left: 5px;" role="button"></i>
+            <!-- <button class="btn btn-primary">
+                Account<span class="caret-down"></span>
+            </button> -->
+        </div>
+    </nav>
+    <!-- Navbar ends here -->
+
+    <!-- body container starts here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="container mx-5 my-5">
+                    <h3 class="heading">Welcome to Petro Cloud</h3>
+                    <p>
+                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                    <p> neque perspiciatis facere voluptas voluptates ipsum iste sit,
+                        praesentium</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- block section -->
+        
+        <div class="container mx-5" style="overflow: hidden;">
+            <div class="row" style="margin-right: 70px;">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">1. Heading</div>
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quos commodi vitae
+                            eveniet, cupiditate quisquam quam illo cum facere.
+                        </div>
+                        <div>
+                            <button class="btn mx-2 my-2" style="color:rgb(139, 215, 25);;font-weight:bolder;">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-check-circle check" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path
+                                        d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                                </svg>
+                                Done</button>
+                            <!-- <i class="bi bi-check-circle"></i>
+                            <i class="bi bi-check-circle"></i> -->
+
+            
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">1. Heading</div>
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quos commodi vitae
+                            eveniet, cupiditate quisquam quam illo cum facere.
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary mx-3 my-2">Create Site</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">1. Heading</div>
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quos commodi vitae
+                            eveniet, cupiditate quisquam quam illo cum facere.
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary mx-3 my-2">Create Roles</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">1. Heading</div>
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus quos commodi vitae
+                            eveniet, cupiditate quisquam quam illo cum facere.
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary mx-3 my-2">Create Site</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row my-3">
+                        <div class="col-12" style="width: 100vw;">
+                            <div class="card">
+                                <div class="card-body">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis impedit tempora
+                                    error est quo
+                                    officia laudantium corporis ipsam, molestias temporibus at quos saepe dolore eaque
+                                    veritatis veniam!
+                                    Quod mollitia expedita velit iste dolore praesentium vel architecto nemo omnis
+                                    dignissimos quisquam
+                                    dolor, et corporis impedit, facilis ducimus, voluptatem eos eius unde?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- block section ends here -->
+
+
+
+
+    </div>
+    <!-- body containers ends here -->
+</body>
+
+</html>

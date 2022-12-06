@@ -1,0 +1,40 @@
+﻿<div class="modal-dialog" id="modalParentRFSDetails">
+	<div class="modal-content" id="modalParentRFSDetailsContent">
+		<div class="modal-header" id="modalParentRFSDetailsHeader">
+			<button type="button" id="btnCloseParentRFSDetails" tabindex="0" class="close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-bind="text:titleText"></h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right btn-mg">
+						<a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click: function () {clearFilter('jqxGridParentRFSDetails')}"><i class="icon-reset-filter"></i></a>
+						<a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel('jqxGridParentRFSDetails')}"><i class="icon-export-excel"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="grid-area">
+						<div id="jqxGridParentRFSDetails"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal bs-example-modal-lg" id="modalReferenceSetViewDetails" tabindex="-1" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div>
+				<div data-bind='component:observableModelPopupDetails'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+﻿<div class="modal-dialog editParams classGlbSel" id="mdlDeviceEditParameter">
+    <div class="modal-content">
+        <div class="modal-header"id="mdlDeviceEditParameterContent">
+            <button type="button" class="close" aria-label="Close" data-bind="click: function () {cancelPopup($parents[1].unloadTempPopup)}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-bind="text:editDeviceEditParameterHeader"></h4>
+        </div>
+        <div class="modal-body" style="padding:0px;" >
+            <label id="updateAcrossAllInstancesCheck" class="checkbox-inline" style="font-weight:bold;margin-left:5px;">
+                <input type="checkbox" id="chkValidation" data-bind="checked:checkAcrossAllInstances,event:{change:onChangeAcrosssAllInstances}">
+                <span data-i18n="update_parameters_across_all_instances"></span>
+            </label>
+            <div>
+                <div data-bind='component:parametersObservableModel'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

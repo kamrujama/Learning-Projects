@@ -1,0 +1,25 @@
+﻿<div class="vertical-tab">
+
+    <div class="row">
+        <div class="device-profile-sub-tab">
+            <!-- ko if: diagnosticHistoryTabs.length == 0 -->
+            <ul id="diagnosticHistoryTabHeader" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a id="actionStatusForDeviceProfile" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="jobs" data-bind="click:function(){showDiagnosticHistory('actionStatusForDeviceProfile')}"></a></li>
+                <li role="presentation"><a id="diagnosticReportForDeviceProfile" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="attribute_Details" data-bind="click:function(){showDiagnosticHistory('diagnosticReportForDeviceProfile')}"></a></li>
+            </ul>
+            <!-- /ko -->
+            <!-- ko ifnot: diagnosticHistoryTabs.length == 0 -->
+            <ul id="diagnosticHistoryTabHeader" class="nav nav-tabs" role="tablist" data-bind="foreach: diagnosticHistoryTabs">
+                <li role="presentation" data-bind="css: { 'active': name === 'jobs_data' }, attr: { id: name + 'tabDiv' }, click: function () { $parent.showDiagnosticHistory(id) }"> <a href="#templateArea" data-bind="attr: { id:id }, text: displayName" aria-controls="templateArea" role="tab" data-toggle="tab"></a></li>
+            </ul>
+            <!-- /ko -->
+        </div>
+        <div class="device-profile-sub-div">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="diagnostictemplateArea">
+                    <div data-bind='component: observableDiagnosticHistory'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

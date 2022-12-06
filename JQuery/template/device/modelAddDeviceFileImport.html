@@ -1,0 +1,63 @@
+﻿<div class="modal-dialog" id="mdlAddDeviceImport">
+	<div class="modal-content">
+		<div class="modal-header" id="mdlAddDeviceImportHeader">
+			<button type="button" id="addDeviceCloseBtn" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="modalTitle"></h4>
+		</div>
+		<div class="modal-body">
+			<div id="sampleFileDiv" class="hide">
+				<h5>
+					Upload an XML file to create Parameter Templates for the applications. View a sample file
+					<a href="/assets/documents/Import-parameter-templates-sample.xml" target="_blank" style="text-decoration: underline">here.</a>
+				</h5>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-12">
+						<label for="exampleInputEmail1" data-i18n="File_name"></label>
+						<div class="row">
+							<div class="col-md-8 pr0">
+								<input id="selectDeviceID" type="text" style="width:425px" disabled class="form-control file-input">
+							</div>
+							<div class="col-md-4 pl0 pr" style="left: 41px;width: 70px;">
+								<button class="btn btn-primary" style="height:26px; padding: 2px 10px !important;" id="fileInputDeviceIDBtn" type="file" data-i18n="browse"></button>
+								<input id="fileInputDeviceID" type="file" data-bind="event:{change:handleDeviceSelect},css:{'disabled':!checkRights('Devices', 'IsModifyAllowed')}" class="form-control file-inputs" style="cursor:pointer" data-i18n="[title]browse">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="btn_import" class="btn btn-primary" data-i18n="import" data-bind="click: function () {importAddDevice($parent.observableModelPopup,fileInputDeviceID,'NO')},css:{'disabled':!checkRights('Devices', 'IsModifyAllowed')}" disabled></button>
+			<button type="button" id="btn_import_Cancel" class="btn btn-default" data-i18n="cancel" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal"></button>
+		</div>
+	</div>
+</div>
+<div class="modal" id="addDeviceImportConfirmPopup" style="z-index: 9999" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span data-i18n="confirmation_message_import_blank_timezone_hierachies"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="addDeviceImportConfirmPopup_Confo_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function () {importAddDevice($parent.observableModelPopup,fileInputDeviceID,'YES')}"></button>
+                    <button id="addDeviceImportConfirmPopup_Confo_No" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelConfirm"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

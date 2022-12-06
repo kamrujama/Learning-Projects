@@ -1,0 +1,24 @@
+﻿
+
+    <div class="modal-dialog modal-mm m-alarts">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2 pr0">
+                        <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                    </div>
+                    <div class="col-md-10 pl8">
+                        <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                        <span id="deleteMsgId"></span>
+                         <span id="deleteCountId"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modelDelLibYes" tabindex="0" class="btn btn-danger" data-dismiss="modal" data-bind="click: function() {deleteLibrary($parent.observableModelPopup,$parent.refershTileview);}">Yes</button>
+                <button type="button" class="btn btn-default" id="deleteContentNoBtn" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">No</button>
+            </div>
+        </div>
+    </div>
+

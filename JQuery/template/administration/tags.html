@@ -1,0 +1,80 @@
+﻿<!-- content header start -->
+<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+	<li>
+		<a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+	</li>
+	<li data-bind="css : {'active':$root.menulevel3() == ''}">
+		<a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+	</li>
+	<li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-white">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-8">
+						<a tabindex="0" class="btn btn-default" id="btnRefreshTags" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridTags')}"><i class="icon-spinner9"></i></a>
+						<a tabindex="0" class="btn btn-default" id="btnAddTags" role="button" data-i18n="[title]add_tags" data-bind="click: function() {openPopup('modelAddTags','jqxgridTags')},css:{'disabled':!retval}"><i class="icon-plus"></i></a>
+						<a tabindex="0" class="btn btn-default" id="btnDeleteTags" role="button" data-i18n="[title]delete_tags" data-bind="click:function(){deleteTagsConfirmation('jqxgridTags')},css:{'disabled':!retval}"><i class="icon-bin"></i></a>
+					</div>
+					<div class="col-md-4">
+						<div class="pull-right btn-mg">
+							<a tabindex="0" class="btn btn-default" id="btnResetTags" role="button" data-i18n="[title]reset" data-bind="click:function(){clearFilter('jqxgridTags')}"><i class="icon-reset-filter"></i></a>
+							<a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel('jqxgridTags')}"><i class="icon-export-excel"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div id="gridArea" class="grid-area pb0">
+							<div id="jqxgridTags"></div>
+							<div id="pagerDivTags"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="modelAddTag" tabindex="-1" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div data-bind="if: templateFlag">
+				<div data-bind='component:observableModelPopup'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal end-->
+<!--confirmation popup for without header all check box for delete operation-->
+<div class="modal" id="deleteTagsDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p id="deleteTagsText"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+
+					<button id="btnDeleteTags_Yes" tabindex="0" type="button" class="btn btn-danger" data-dismiss="modal" data-i18n="confirmation_yes" data-bind="click:function(){deleteTags('jqxgridTags')}"></button>
+					<button id="btnDeleteTags_No" type="button" tabindex="0" class="btn btn-default" data-dismiss="modal" data-i18n="confirmation_no"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

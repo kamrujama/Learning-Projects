@@ -1,0 +1,26 @@
+﻿<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="visible:$root.menulevel3,css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white" style="width: 610px;">
+            <div class="panel-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="grid-st">
+                            <div class="grid-area">
+                                <div id="jqxgridLincenseDetails"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

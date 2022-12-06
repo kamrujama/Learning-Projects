@@ -1,0 +1,154 @@
+﻿<!-- content header start -->
+<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                         <div class="col-md-12" data-bind='component:observableCriteria'></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a class="btn btn-primary" tabindex="0" role="button" data-i18n="[title]cancel_download" data-bind="click: function () {cancelJobStatus('modelCancelVRKDownloadJob','jqxgridVRKDownloadJob')},css:{'disabled':!checkRights('Download Schedule', 'IsDeleteAllowed')}"><i class="icon-cross"></i></a>
+                            <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilter('jqxgridVRKDownloadJob')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" id="btnShowHide" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridVRKDownloadJob')}"><i class="icon-hide-column"></i></a>
+                            <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel(true,'jqxgridVRKDownloadJob')}"><i class="icon-export-excel"></i></a>
+                            <a class="btn btn-default" id="btnRefresh" tabindex="0" role="button" data-i18n="[title]refresh" data-bind="click: function () {refreshGrid('jqxgridVRKDownloadJob')}"><i class="icon-spinner9"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                     <div class="col-md-12">
+                    <div id="criteriabtnDiv" style="display:none">
+                            <div class="panel panel-default mt10">
+                                <div class="panel-heading" style="height: 34px;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="m0">Search Criteria</h4>
+                                        </div>
+                                        <div class="col-md-6 tar">
+                                            <div class="btn" id="expandQuickLinkDiv" data-bind="click:expandCriteria" style="float: right; margin-top: -6px">
+                                                <a class="btn btn-default btn-xs" role="button" tabindex="0" data-i18n="[title]collapse"><i class="icon-angle-up"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="deviceCriteriaDiv"  class="truncate p10">
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div id="jqxgridVRKDownloadJob"></div>
+                            <div id="pagerDivDownloadJob">
+                            </div>
+                            <!--grid area end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- content end -->
+
+<!---model start---->
+<div class="modal bs-example-modal-lg" id="jobStautsView" data-backdrop="static" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind="component:observableModelComponent">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal bs-example-modal-lg" id="modelpopup" style="z-index: 9999" data-backdrop="static" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind="component:observableModelpopup">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----model end---->
+
+<!-- click on viewresult modal popup open ----->
+<div class="modal bs-example-modal-lg" id="modelVRKResults" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-lg" id="mdlVrkDownloadLibraryJob">
+            <div class="modal-content">
+                <div class="modal-header" id="mdlVrkDownloadLibraryJobHeader">
+                    <button type="button" tabindex="0" class="close" data-bind="click: function () {closeOpenModel('jqxgridVRKDownloadJob','modelVRKResults')}" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="testhead" class="modal-title"></h4>
+                    <span data-i18n="download_results_for_serial#"></span>
+                    <span id="serialNumber" data-bind="text: serialNumber"></span>
+                    <span id="modelName" data-bind="text: modelName"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right btn-mg">
+                                <a class="btn btn-default" id="btnModelRestFilterId" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilter('jqxGridVRKResults')}"><i class="icon-reset-filter"></i></a>
+                                <a class="btn btn-default" id="btnModelShowHideId" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxGridVRKResults')}"><i class="icon-hide-column"></i></a>
+                                <a class="btn btn-default" id="btnModelExportToexcelId" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel(true,'jqxGridVRKResults')}"><i class="icon-export-excel"></i></a>
+                                <a class="btn btn-default" id="btnModelRefreshId" tabindex="0" role="button" data-i18n="[title]refresh" data-bind="click: function () {refreshGrid('jqxGridVRKResults')}"><i class="icon-spinner9"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--grid area start-->
+                            <div class="grid-area" id="VRKResultsDiv">
+                                <div id="jqxGridVRKResults"></div>
+                                <div id="pagerDivVRKResults"></div>
+                                <!--grid area end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal bs-example-modal-lg" id="AdvanceSearchModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-big">
+            <div class="modal-content" id="mdlVRKAdvanceSearch">
+                <div id="mdVRKAdvanceSearchModal" class="modal-header">
+                    <button type="button" tabindex="0" class="close" data-dismiss="modal" data-bind="click:unloadAdvancedSearch" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1" data-i18n="advance_search"></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="if: AdvanceTemplateFlag">
+                        <div data-bind='component:observableAdvancedSearchModelPopup'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

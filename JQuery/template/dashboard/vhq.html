@@ -1,0 +1,315 @@
+<!--<div style="display:block;overflow:auto">-->
+<!--<div id="CounterWidetMainDiv" class="row" data-bind="foreach:modifiedStaticDataWidget" >
+
+
+</div>-->
+<!--</div>-->
+<div class="row droppable-w-counter" id="mainCounterWidget" data-bind="foreach:modifiedStaticDataWidget" style="margin-right:0px!important">
+    <div style="cursor:move" class="col-md-3 pr0" data-bind="attr:{id:id}">
+        <div data-bind="attr:{'class':'dash-p-sm '+background}">
+            
+            <a class="btn btn-sm" style="margin-top: -14px; margin-right: -17px; float: right;" href="javascript:;" data-bind="click:$parent.removeCunterWidget"><i title="Remove" class="icon-cross"></i></a>
+            
+                <h4 class="mb5" style="padding-top: 0px;font-weight:500;color:white" data-bind="text:name"></h4>
+            
+                <h1 class="mt0 col-sm-12" style="margin-bottom: -5px; float: right; font-weight: 200;font-size:60px; color: white" ><span style="float:right" data-bind="attr:{id:id+'counterCount'},visible:progress"></span></h1>
+                <!--<h5 class="mb5" style="padding-top: 16px;" data-bind="text:name,visible:!progress"></h5>-->
+                <h1 class="mt0 col-sm-12" style="margin-bottom: -5px; float: right; font-weight: 200; font-size:60px; color: white;"><span style="float:right" data-bind="attr:{id:id+'counterCountPro'},visible:!progress"></span></h1>
+           
+            <div class="progress p-custom hide" data-bind="visible:progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bind="attr:{id:id+'percentageDiv'}">
+                <span data-bind="attr:{id:id+'perSpan'}"></span>
+            </div>
+        </div>
+            
+                <h5 class="mb5" style="float: right; font-size: 14px; color: white;padding-right:20px;"><span data-bind="text:ctypedesc"></span></h5></div>
+            
+    </div>
+
+</div>
+<div class="" style="margin-bottom:5px">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-4" style="margin-bottom:5px">
+        <div class="pull-right btn-mg">
+            <a class="btn btn-default" style="padding-top:6px!important; margin-right:50px;" id="btnRefresh" role="button" data-i18n="[title]refresh_data" data-bind="click:refreshStandarWidget"><i class="icon-spinner9"></i></a>
+        </div>
+    </div>
+</div>
+<div id="mainChartPanel" class="row dashpanel">
+    <div class="col-md-6 pr0 main-Content-Padding" data-bind="attr:{id:'mainChartDiv'},foreach:widgetData">
+
+        <div class="panel panel-inverse" data-bind="attr:{id:'expandDrilplaceholder'+$index()}">
+            <div class="panel-heading dash-ph" data-bind="attr:{id:WidgetId}">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h4 class="panel-title" data-bind="attr:{id:'paneltitle'+WidgetId},text:WidgetName" style="font-weight:bold"></h4>
+
+                    </div>
+                    <div class="col-md-5 tar">
+                        <div class="panel-heading-btn ac-btn">
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.expandPanalhover('expandpARight'+$index())}},attr:{id:'expandpARight'+$index()},click:function(){$parent.expandClick($data,'expandpARight'+$index(),$index(),'left')}"><i class="icon-expand" title="Expand / Compress"></i></a>
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.collapsePanalhover('colpARight'+$index())}},attr:{id:'colpARight'+$index()},click:function(){$parent.collapsePanalClick('colpARight'+$index())}"><i class="icon-angle-up" style="font-size:22px" title="Collapse / Expand"></i></a>
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.removePanalhover('removepARight'+$index())}},attr:{id:'removepARight'+$index()},click:function(){$parent.HideWidget($data,'removepARight'+$index(),$index())}"><i class="icon-cross" title="Remove"></i></a>
+                            <a href="javascript:;" data-i18n="[title]click_to_back_chart" style="margin-left:348px" class="btn btn-sm hide" data-bind="attr:{id:'backchartRight'+$index()},click:function(){$parent.backToBarChart($data,$index())}"><i style="font-size:22px" class="icon-arrow-left2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body pt0" style="width: 100%; height: 278px; overflow-y:auto">
+                <div class="dash-pb" data-bind="attr:{id:'placeholder'+$index()}" style="width: 100%; height: 236px;"></div>
+                <div class="dash-pb" data-bind="attr:{id:'drildownplaceholder'+$index()}" style="width: 100%; height: 276px;"></div>
+                <div class="hide" data-bind="attr:{id:'noDataLable'+$index()}" style="position:absolute;margin-top:-147px;padding-left:188px"><span data-i18n="no_data_found">No data found</span></div>
+                <div class="legendChartDiv" data-bind="visible:widgetLabels().length>0,attr:{id:'legendElement'+$index()}"><a class="moveLegendLeftChart hide" data-bind="attr:{id:'legendLablemoveLeft'+$index()}"><i class=" icon-angle-left" style="border-radius:1.25em"></i></a> <span class="legendPanelChart" data-bind="attr:{id:'legendLable'+$index()},foreach: widgetLabels"><span style="display:inline-block"><i class="icon-circle" style="border-radius: 1.25em; font-size: 12px" data-bind="style: { color: $data.fillColor }"></i><span style="padding: 8px; font-size: 11px;" data-bind="text: $data.Name"></span></span></span><a class="moveLegendRightChart hide" data-bind="attr:{id:'legendLablemoveright'+$index()}"><i class=" icon-angle-right" style="border-radius:1.25em"></i></a> </div>
+                <div class="noChartLegend" data-bind="visible:widgetLabels().length==0">  </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-6 main-Content-Padding" data-bind="attr:{id:'mainChartDivRight'},foreach:widgetDataRight">
+
+        <div class="panel panel-inverse" data-bind="attr:{id:'expandDrilplaceholderRight'+$index()}">
+            <div class="panel-heading dash-ph" data-bind="attr:{id:WidgetId}">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h4 class="panel-title" data-bind="attr:{id:'paneltitle'+WidgetId},text:WidgetName" style="font-weight:bold"></h4>
+
+                    </div>
+                    <div class="col-md-5 tar">
+                        <div class="panel-heading-btn ac-btn">
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.expandPanalhover('expandpA'+$index())}},attr:{id:'expandpA'+$index()},click:function(){$parent.expandClick($data,'expandpA'+$index(),$index(),'right')}"><i class="icon-expand" title="Expand / Compress"></i></a>
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.collapsePanalhover('colpA'+$index())}},attr:{id:'colpA'+$index()},click:function(){$parent.collapsePanalClick('colpA'+$index())}"><i class="icon-angle-up" style="font-size:22px" title="Collapse / Expand"></i></a>
+                            <a href="javascript:;" class="btn btn-sm" data-bind="event:{mouseover:function(){$parent.removePanalhover('removepA'+$index())}},attr:{id:'removepA'+$index()},click:function(){$parent.HideWidgetRight($data,'removepA'+$index(),$index())}"><i class="icon-cross" title="Remove"></i></a>
+                            <a href="javascript:;" data-i18n="[title]click_to_back_chart" style="margin-left:348px" class="btn btn-sm hide" data-bind="attr:{id:'backchart'+$index()},click:function(){$parent.backToRightBarChart($data,$index())}"><i style="font-size:22px" class="icon-arrow-left2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body pt0" style="width: 100%; height: 278px; overflow-y:auto">
+                <div class="dash-pb" data-bind="attr:{id:'placeholderRight'+$index()}" style="width: 100%; height: 236px;"></div>
+                <div class="dash-pb" data-bind="attr:{id:'drildownplaceholderRight'+$index()}" style="width: 100%; height: 276px;"></div>
+                <div class="hide" data-bind="attr:{id:'noDataLableRight'+$index()}" style="position:absolute;margin-top:-147px;padding-left:188px"><span data-i18n="no_data_found">No data found</span></div>
+                <div class="legendChartDiv" data-bind="visible:widgetLabels().length>0,attr:{id:'legendElementRight'+$index()}"><a class="moveLegendLeftChart hide" data-bind="attr:{id:'legendLablemoveLeftRight'+$index()}"><i class=" icon-angle-left" style="border-radius:1.25em"></i></a> <span class="legendPanelChart" data-bind="attr:{id:'legendLableRight'+$index()},foreach: widgetLabels"><span style="display:inline-block"><i class="icon-circle" style="border-radius:1.25em;font-size:12px;" data-bind="style: { color: $data.fillColor }"></i><span style="padding: 8px; font-size: 11px;" data-bind="text: $data.Name"></span></span></span><a class="moveLegendRightChart hide" data-bind="attr:{id:'legendLablemoverightRight'+$index()}"><i class=" icon-angle-right" style="border-radius:1.25em"></i></a> </div>
+                <div class="noChartLegend" data-bind="visible:widgetLabels().length==0">  </div>
+            </div>
+
+
+    </div>
+
+</div>
+
+<!---new for drill down------->
+<!--<div class="panel panel-inverse panel-sm-expand hide" id="openDrillDiv" style="height: 550px;" data-sortable-id="index-1">
+            <div class="panel-heading dash-ph" id="7" >
+                <div class="row">
+                    <div class="col-md-7">
+                        <h4 class="panel-title" >Download Chart</h4>
+
+                    </div>
+                    <div class="col-md-5 tar">
+                        <div class="panel-heading-btn ac-btn">
+                            <a  class="btn btn-sm show"  style="margin-left: 348px;" href="javascript:;" data-i18n="[title]click_to_back_chart" data-bind="click:backToMainChart" ><i class="icon-arrow-left2" style="font-size: 22px;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body pt0">
+                <div class="dash-pb" id="opendrilDownChart" style="width: 100%; height: 236px;" >
+
+
+                </div>
+
+            </div>
+        </div>-->
+<div class="panel panel-inverse panel-sm-expand hide" id="openDrillDiv" style="height: 46px;" data-sortable-id="index-1">
+    <div class="panel-heading dash-ph" id="modalChartDiv">
+        <div class="row">
+            <div class="col-md-7">
+                <h4 class="panel-title" id="drillDownHead"></h4>
+
+            </div>
+            <div class="col-md-5 tar">
+                <div class="panel-heading-btn ac-btn pull-right">
+                    <a class="btn btn-md show" style="margin-left: 348px;" href="javascript:;" data-i18n="[title]click_to_back_chart" data-bind="click:backToMainChart"><i class="icon-cross"></i></a>
+                        <a class="btn btn-lg show" style="margin-left: 306px;margin-top:-33px; width:42px; " href="javascript:;" data-bind="click:refreshDrillDownChart" data-i18n="[title]refresh_data"><i class="icon-spinner9"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+       
+<!----end------>
+<!-- widget panel start -->
+
+<div class="widget-panel">
+        <a class="wpa-btn" id="btnWidgetToggle" role="button" data-bind="click:widgetopen" title="Show Widget Browser" style="top: 173px; margin-left: -12px; width: 50px; font-size: 21px;"><i id="widgetMenuIcon" class="icon-angle-left"></i></a>
+    <!--<a class="wpa-btn" title="Expand standard widgets" id="standardbtn" style="top: 275px;margin-left:-12px;width:50px;" data-bind="click:widgetopen"><i class="icon-angle-left"></i></a>
+    <a class="wpa-btn" title="Expand counter widgets" id="counterbtn" style="top: 125px;margin-left:-12px;width:50px;" data-bind="click:CounterWidgetopen"><i class="icon-angle-left"></i></a>-->
+    <ul id="widgetTabCntr" class="nav nav-tabs">
+        <li class="active" role="presentation">
+            <a data-toggle="tab" role="tab" data-bind="click:function(){$('#standardWidgetCollection').css('z-index', 3000);$('#counterWidgetCollection').css('z-index', 999999);}" aria-controls="Static" href="#counterWidgetCollection">Counters</a>
+        </li>
+
+        <li role="presentation">
+            <a data-toggle="tab" role="tab" data-bind="click:function(){$('#counterWidgetCollection').css('z-index', 3000);$('#standardWidgetCollection').css('z-index', 999999);}" aria-controls="Standard" href="#standardWidgetCollection">Charts</a>
+        </li>
+    </ul>
+    <div class="panel-overflow tab-pane fade" id="standardWidgetCollection">
+       <div class="frame smart" style="overflow:auto; margin-left: 2px;">
+            <p style="text-align: center; color: black; line-height: 16px; font-size: 14px; margin-top: 20px;" data-bind="visible:widgetlist().length==0">
+                All charts are added to the Dashboard Screen!
+            </p>
+            <ul class="widget-ul-dash items " data-bind="foreach:widgetlist">
+                <li style="height:150px">
+                    <div class="graph-area " data-bind="attr:{id:Identifier}">
+                        <div style="display:none" data-bind="attr:{id:WidgetId}"></div>
+                        <div data-bind="attr:{id:'panal'+$index()}" class="graph-place">
+                            <img data-bind="attr:{'src':WidgetSourceData.imgSource}" />
+                        </div>
+                        <!--<a data-bind="attr:{id:'btnhande'+$index()},click:function(){$parent.handelWidget($data,$index())}" class="btn btn-success widget-btn">Add</a>-->
+                        <a data-bind="attr:{id:'btnhande'+$index()},click:function(){$parent.handelStandardWidget($data,$index())}" class="btn btn-success widget-btn">Add</a>
+                    </div>
+                    <label class="widget-name hierarchys" data-bind="text:WidgetName,attr:{'title':WidgetName}"></label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-overflow tab-pane fade in active" id="counterWidgetCollection">
+          <div class="frame smart" style="overflow:auto;margin-left: 2px;">
+            <p style="text-align: center; color: black; line-height: 16px; font-size: 14px; margin-top: 20px;" data-bind="visible:CounterWidgetlist().length==0">
+                All counters are added to the Dashboard Screen!
+            </p>
+            <ul class="widget-ul-dash items " data-bind="foreach:CounterWidgetlist">
+                <li style="height:142px">
+                    <div class="graph-area ui-draggable " style="z-index:999999;margin-top:15px" data-bind="attr:{id:'counterList'+id}">
+
+                        <div data-bind="attr:{id:'panal'+$index(),'class':'graph-place vf-ter-gray'}" style="width: 100%;height: 120px;">
+                            <p style="color:white;padding-top:35px" data-bind="text:WidgetName"></p>
+                        </div>
+                        <a data-bind="attr:{id:'btnhande'+$index()},click:function(){$parent.handelCounterWidget($data,$index())}" class="btn btn-success widget-btn">Add</a>
+                    </div>
+                    <!--<label class="widget-name hierarchys" data-bind="text:WidgetName,attr:{'title':WidgetName}"></label>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--<div  class="widget-panel">
+    <a  class="wpa-btn" title="Counter widget" data-bind="click:CounterWidgetopen"><i class="icon-angle-left"></i></a>
+    <div class="panel-overflow" id="counterWidgetCollection" style="display:none">
+        <div class="frame smart" style="overflow: hidden;">
+            <ul class="widget-ul items slimScrolldrag" data-bind="foreach:CounterWidgetlist">
+                <li style="height:172px">
+                    <div class="graph-area">
+                        <div  data-bind="attr:{id:'panal'+$index()}" class="graph-place">
+
+                        </div>
+                        <a data-bind="attr:{id:'btnhande'+$index()},click:function(){$parent.handelWidget($data,$index())}" class="btn btn-danger widget-btn">Remove</a>
+                    </div>
+                    <label class="widget-name hierarchys" data-bind="text:WidgetName,attr:{'title':WidgetName}"></label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>-->
+<!-- widget panel end -->
+<!----Model------>
+<div class="modal" id="drilDownModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Drildown</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 tal">
+
+                    </div>
+                    <div>
+                        <div id='chartContainer' style="width: 850px; height: 500px;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt20">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="grid-area">
+                                    <div id="jqxgridPiechart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-i18n="cancel"></button>
+                <button type="button" class="btn btn-primary" data-i18n="save"></button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+<!----endmodelpopup-->
+
+<div class="dash-filter-area" id="dashboardChartFilterGrid">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 id="resultLable" class="panel-title mt10"></h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="pull-right btn-mg">
+                        <a class="btn btn-default" href="#" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilter('chartGrid')}"><i class="icon-reset-filter"></i></a>
+                        <a class="btn btn-default" href="#" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','chartGrid')}"><i class="icon-hide-column"></i></a>
+                        <a class="btn btn-default" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel('chartGrid')}"><i class="icon-export-excel"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!--grid area start-->
+                    <div class="grid-area" id="chartGridMainDiv" style="padding-bottom:0px;margin-bottom:-20px;">
+                        <div id="chartGrid"  />
+
+                    </div>
+                    <div>
+                        <span>Showing </span>
+                        <span id="showngSp"></span>
+                        <span> result(s)</span>
+                        <span style="padding-left: 293px;"> * Device Time Zone</span>
+                    </div>
+                    <!--grid area end-->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <div class="modal bs-example-modal-lg" style="z-index: 9999999" id="viewCharPopupModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="vertical-align-center">
+                <div data-bind="if: templateFlag">
+                    <div style="z-index: 9999999" data-bind='component:CharModelPopup'>
+                    </div>
+                </div>
+            
+    </div>
+        </div>
+    </div>
+
+

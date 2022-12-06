@@ -1,0 +1,42 @@
+﻿<div class="modal-dialog" id="mdlExportToXml">
+            <div class="modal-content">
+                <div class="modal-header" id="mdlExportToXmlHeader">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click:function(){$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" data-i18n="export_options"></h4>
+                </div>
+                <div class="modal-body">
+                    <h4 data-i18n="data_in_exported_file"></h4>
+                    <div style="padding-left:20px">
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkHierarchies" value="">
+                            <label data-i18n="hierarchies">
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkGroup" value="">
+                            <label data-i18n="groups">
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkSwAssignment" value="">
+                            <label data-i18n="softwareAssignment">
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkSoftwareAssignmentNParametere" value="">
+                            <label data-i18n="software_assignment_and_parameters">
+                            </label>
+                        </div>
+                    </div>
+                    <p data-i18n="export_options_download"></p>
+
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-primary" data-bind="click:function(){ExportClicked($parent.gridIdForShowHide(),$parent.unloadTempPopup('unloadTemplate'))}" data-i18n="device_serch_export"></button>
+                    <button type="button" class="btn btn-default" data-i18n="cancel" data-bind="click:function(){$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal"></button>
+                </div>
+            </div>
+</div>
+   

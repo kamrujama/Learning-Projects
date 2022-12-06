@@ -1,0 +1,49 @@
+﻿<div class="vertical-tab">
+
+    <div class="row">
+        <div class="device-profile-sub-tab" style="width:11%">
+            <ul id="diagnosticProfileTabHeader" class="nav nav-tabs" role="tablist" id="tablistDiagProf" data-bind="foreach: diagnosticProfileTabs">
+                <li role="presentation" data-bind="css: { 'active': name === 'dignostic_data' }, attr: { id: name + 'tabDiv' }, click: function () { check(name) }"> <a href="#" data-bind="    attr: { id: id, 'href': '#' + name + 'Div' }, text: displayValue" aria-controls="dignostic_datatabDiv" role="tab" data-toggle="tab"></a></li>
+            </ul>
+        </div>
+        <div class="device-profile-sub-div">
+            <div class="row" style="width:99.5%;margin-left:-4px!important">
+                <div class="col-md-12" id="showHideResetExportDivDiagProf" style="padding-right:0px;">
+                    <div class="pull-right btn-mg" style="padding-bottom:6px;">
+                                    <a class="btn btn-default" id="A1" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilteDiagnosticProfileGrid()}"><i class="icon-reset-filter"></i></a>
+                                    <a class="btn btn-default" id="btnShowHide" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridAlertHistory')}"><i class="icon-hide-column"></i></a>
+                                    <a class="btn btn-default" id="A2" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelDiagnosticProfileGrids()},visible:VHQFlag"><i class="icon-export-excel"></i></a>
+
+                                </div>
+                            </div>
+            <div id="diagnosticProfileDetailsDiv" class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="dignostic_dataDiv">
+                    <div id="dignostic_data"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="process_dataDiv">
+                    <div id="process_data"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="process_file_handlesDiv">
+                    <div id="process_file_handles"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="system_keyDiv">
+                    <div id="system_key"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="diagnosticProfile" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>

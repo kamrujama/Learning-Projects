@@ -1,0 +1,451 @@
+﻿<div class="advance-searchh" id="mdlAdvancedSearch">
+	<div class="panel panel-default">
+		<div class="panel-heading clearfix" role="tab" id="advanceSearchHeading">
+			<!--<h4 class="panel-title" data-i18n="advance_search_title"></h4>-->
+			<div class="col-md-6" style="padding-top:4px;">
+				<label class="radio-inline" tabindex="0">
+					<input tabindex="0" type="radio" name="inlineRadioOptions" class="hierarchy-tabs-btn" data-bind="checked:searchCheck,click:showHierarchy" id="rbtHierarchy" value="Hierarchy" checked>
+					<span data-i18n="rbt_hierarchy"></span>
+				</label>
+				<label class="radio-inline" tabindex="0">
+					<input tabindex="0" type="radio" name="inlineRadioOptions" class="group-tabs-btn" data-bind="checked:searchCheck,click:showGroups" id="rbtGroups" value="Groups">
+					<span data-i18n="group"></span>
+				</label>
+			</div>
+			<div class="col-md-6">
+				<div class="search-box-m pull-right" style="width: 335px;">
+					<div class="row" id="SearchDDLdiv">
+						<div style="display: inline;">
+							<div style="float: left">
+								<input type="text" tabindex="0" id="txtQuickSearchDevice" maxlength="255" class="form-control" autocomplete="off" style="width: 300px; height:30px; display: inline; margin-left: 0px;" value="" data-bind="click:expandUL" placeholder="Saved Search" />
+							</div>
+							<div><a class="btn btn-primary" tabindex="0" role="button" data-bind="click:addQuickSearch($parent),visible:applyForGrid">Go</a></div>
+							<div><a class="btn btn-primary" tabindex="0" role="button" data-bind="click:function(){applyQuickSearchForChart($parent.applyAdvancedSearchForChart)},visible:applyForChart">Go</a></div>
+						</div>
+						<div class="quick-edit-pop" style="margin-left:-51px;">
+							<ul class="sub-menu hide" id="allSearchUL" data-bind="foreach:allSearches">
+								<li data-bind="attr:{id:'selectedQuickSearchLi'+$index()}">
+									<table>
+										<tr style="height: 25px" data-bind="click:function(){$parent.selectSearchquick($data,$index())}">
+											<td style="width: 180px"><a style="float: left" tabindex="0" class="quick-search-criteria"><span data-bind="text:SearchName,css:{'boldLi':SearchID==0},attr:{'title':SearchName}"></span></a></td>
+											<td><a style="float: right; margin-right: 10px" role="button" tabindex="0" data-bind="visible:SearchType!=2, css:{'disabled':!IsAdmin}, click:$parent.confirmDelete" title="Delete search"><i class="icon-bin"></i></a></td>
+											<td><a style="float: right; margin-right: 10px" role="button" tabindex="0" data-bind="visible:SearchType!=2, css:{'disabled':!IsAdmin}, click:function(){$parent.copyAdvancedSearch($data,$index())}" title="Copy search"><i class="icon-copy"></i></a></td>
+										</tr>
+									</table>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div id="hierarchyDiv" class="tab-panels hierarchy-tabs">
+				<div data-bind='component:observableHierarchy' style="padding-top:10px;"></div>
+			</div>
+			<div id="GroupDiv" class="groups-tabs">
+				<div class="row" style="padding-top:5px">
+					<div class="col-md-12">
+						<div class="pull-right btn-mg">
+							<a class="btn btn-default" role="button" tabindex="0" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelGroups('groupsGrid')}"><i class="icon-export-excel"></i></a>
+							<a class="btn btn-default" role="button" tabindex="0" data-i18n="[title]reset" data-bind="click:function(){clearfilterforGroup('groupsGrid')}"><i class="icon-reset-filter"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default mt5">
+					<div class="panel-heading v-list-h">
+						<h4 class="m0" data-i18n="select_groups"></h4>
+					</div>
+					<div class="panel-body">
+						<div id="groupContainer">
+							<div id="groupsGrid"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<label class="checkbox-inline mt10">
+		<input type="checkbox" id="chkAutoSelectConnected" data-bind="checked:checkConnectedDevices,event: { change: checkAutoSelect }">
+		<span data-i18n="auto_select_connected_devices"></span>
+	</label>
+	<div class="row mt20" data-bind="visible:isSelectedColumns">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="col-sm-12 panel-heading v-list-h">
+					<span class="m0" style="font-size:14px;" data-i18n="selected_columns"></span>
+				</div>
+				<div class="panel-body" id="selectedColumnsDiv" data-bind="visible:selectedColumns.length>0">
+					<div class="row">
+						<div class="col-md-12 hierarchys" style="margin-left:8px;" data-bind="foreach:selectedGridColumns">
+							<div style="margin-top: 3px;">
+								<span class="selected-columns-label" data-bind="text:DisplayName"></span>
+								<a style="margin-left:0px;"><i class="icon-cross" tabindex="0" data-bind="click:function(){$parent.removeColumnsFromGrid($data)}"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="searchDiv" class="row border-box mt20"
+		 style="padding-bottom: 1em;margin-bottom: 5px; margin-left: 2px;margin-right: 2px">
+		<div class="border-box-group-white">
+			<span class="border-box-group-text" data-i18n="Search"></span>
+		</div>
+		<div class="row mt10">
+			<div class="col-md-12">
+				<div class="panel">
+					<div class="form-group ml10 mr10">
+						<label class="radio-inline" tabindex="0">
+							<input tabindex="0" type="radio" name="accessTypeGroup" id="rbtAttributes" data-bind="click:selectSearchType,checked:checkSearchType" value="Attributes">
+							<span data-i18n="device_search_attributes"></span>
+						</label>
+						<label class="radio-inline" tabindex="0">
+							<input tabindex="0" type="radio" name="accessTypeGroup" id="rbtFileSearch" data-bind="click:selectSearchType,checked:checkSearchType" value="Files">
+							<span data-i18n="device_search_csv_file"></span>
+						</label>
+					</div>
+					<div class="form-group ml10 mr10" id="selectCustomFileDiv" style="display: none">
+						<div class="row">
+							<div class="col-md-12">
+								<label for="exampleInputEmail1" data-i18n="File_name"></label>
+								<div class="row">
+									<div class="col-md-4">
+										<input id="txtCustomFile" type="text" style="width:425px" disabled class="form-control file-input">
+									</div>
+									<div class="col-md-4" style="left: 41px;width: 70px;">
+										<button class="btn btn-primary" style="height:26px; padding: 2px 10px !important;" id="btnCustomFileInput" type="file" data-i18n="browse"></button>
+										<input id="txtCustomFileInput" type="file" data-bind="event:{change:handleCustomFileSelect}" class="form-control file-inputs" style="cursor:pointer" data-i18n="[title]browse" accept=".csv">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-heading v-list-h" id="selectAttributesDiv">
+						<div class="row">
+							<div class="col-md-8">
+								<h4 class="m0" data-i18n="select_attr_label"></h4>
+							</div>
+							<div class="col-md-4 tar">
+							</div>
+						</div>
+					</div>
+					<div class="panel-body" id="attributesControlDiv">
+						<table class="table table-noborder m0 table-bigcontrol">
+							<tr>
+								<td>
+									<div style="width: 312px">
+										<select tabindex="0" id="deviceAttributDDL" class="chosen-select" data-bind="chosen:AttributeData, optionsValue:'AttributeName', optionsText:'DisplayName', value:selectedOption,optionsCaption: '-Select-'"></select>
+									</div>
+								</td>
+								<td style="width: 30%" data-bind="visible:checkoperator">
+									<div id="divMonoSearchOperatorAdv" data-bind="visible:DeviceSearchAttributeOperators().length == 1" style="text-align:center">
+										<input class="form-control inFontSizeDeviceNAdvance" type="text" tabindex="0" data-bind="value:monoOperatorAdv" style="height:29px;" disabled />
+									</div>
+									<div id="divSearchOperatorsAdv" data-bind="visible:DeviceSearchAttributeOperators().length > 1">
+										<select id="ddlAttrName" tabindex="0" class="chosen-select form-control" data-bind="chosen:DeviceSearchAttributeOperators, optionsValue:'DeviceSearchOperatorId', optionsText:'Operator',value:selectedOperator,optionsCaption: '-Select Operator-'"></select>
+									</div>
+								</td>
+								<td style="width: 30%" data-bind="visible:multiComboType">
+									<select id="ddlMultiCombo" tabindex="0" class="chosen-select form-control" multiple data-bind="event:{change:onChangeMultiSelection},chosen:multiComboData, optionsValue:'Id',  optionsText:'Value'"></select>
+								</td>
+								<td style="width: 30%" data-bind="visible:comboType">
+									<select id="ddlCombo" tabindex="0" class="chosen-select" data-bind="chosen:comboData, optionsValue:'ControlValue', optionsText:'Value',value:selectedcomb,optionsCaption: '-Select value-'"></select>
+								</td>
+								<td style="width: 30%" data-bind="visible:textType">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-6">
+												<input class="form-control inFontSizeDeviceNAdvance" placeholder="Name" id="txtAttrValue" tabindex="0" data-bind="textInput: attributeValue" type="text" style="width: 150px" />
+												<div id="txtAttrValueErrorTip" class="error_tooltip" data-bind="visible:false" style="left: 45%; top: -5%"></div>
+												<span id="appNameErrorTip" class="error_tooltip" data-i18n="comma_is_not_supported" data-bind="visible:false" style="left:55%;top:-5%"></span>
+											</div>
+											<div class="col-md-6" id="divFileSelect" style="display: none; margin-left: 0px">
+												<button id="btnBrowseFile" class="btn btn-primary" tabindex="0" type="file" data-i18n="browse" style="height: 26px; padding: 2px 10px !important;"></button>
+												<input id="inputSelectFile" type="file" data-bind="event:{change:handleFileSelect}" class="form-control file-inputs" style="cursor:pointer" data-i18n="[title]select_csv_file" accept=".csv">
+											</div>
+											<div class="col-md-6" data-bind="visible:applicationType" style="float: right">
+												<input class="form-control inFontSizeDeviceNAdvance" placeholder="Version" id="txtappversion" tabindex="0" data-bind="textInput: attributeVersion, event: { focusout: validateIsCommaExistForAppVer }" type="text" maxlength="50" style="width: 150px" />
+												<span id="appVersionErrorTip" class="error_tooltip" data-i18n="comma_is_not_supported" data-bind="visible:false" style="left:76%;top:-5%"></span>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="width: 50%" data-bind="visible:dateType">
+									<div>
+										<div style="margin-right: 20px; float: left;">
+											<div id="fromLabelDiv" style="padding-top: 7px; padding-right: 4px; font-size: 14px; float: left;">
+												<label>From:</label>
+											</div>
+											<input class="form-control adFrmDate inFontSizeDeviceNAdvance" id="txtAttrFromDate" tabindex="0" style="width: 150px; display: inline-block;" type="text" maxlength="50" placeholder="From Date">
+										</div>
+										<div data-bind="visible:showTodatetxt" style="float: right">
+											<div style="padding-top: 7px; padding-right: 4px; font-size: 14px; float: left;">
+												<label>To:</label>
+											</div>
+											<input class="form-control adToDate inFontSizeDeviceNAdvance" placeholder="To Date" id="txtAttrToDate" tabindex="0" type="text" style="width: 150px; display: inline-block;" />
+										</div>
+									</div>
+								</td>
+								<td style="width: 10%" data-bind="with:items,visible:checkaddAttr">
+									<a class="btn btn-round" style="background-color: #337ab7; padding: 3px 6px !important;" id="btnAddAttr" tabindex="0" title="Add Attribute" data-bind="click:$parent.addAttrToCriteria"><i class="icon-plus" style="color:white"></i></a>
+									<a class="btn btn-round" style="background-color: #337ab7; padding: 3px 6px !important; " id="btnClearAttr" tabindex="0" title="Clear Attribute" data-bind="click:$parent.clearAttr"><i class="icon-bin2" style="color:white"></i></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt20" id="searchCriteriaDiv">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="col-sm-12 panel-heading v-list-h">
+						<span class="m0" style="font-size:14px;" data-i18n="search_criteria"></span>
+						<span data-bind="visible:hierarchyFullPath().length>0">(check/uncheck checkbox to Include/Exclude child hierachies)</span>
+					</div>
+					<div id="CriteriaDiv">
+						<div class="panel-body" id="hierarchyCriteriaDiv" data-bind="visible:hierarchyFullPath().length>0">
+							<div class="row">
+								<div class="col-md-1 pr0" style="width: 98px;">
+									<div class="p8" data-i18n="criteri_hirarchy_lable"></div>
+								</div>
+								<div class="col-md-10 hierarchys" id="selectedHierarchies" data-bind="foreach:hierarchyFullPath">
+									<div data-bind="attr:{'title':'hierarchy = '+HierarchyFullPath}" style="margin-top: 3px;">
+										<span class="advance-search-criteria-txt" data-bind="text:HierarchyFullPath"></span>
+										<label class="checkbox" style="margin-left:10px;margin-top:0px;" data-bind="attr:{id:'labelCheckbox'+HierarchyId},visible:IsChildExists" title="Exclude child hierarchies">
+											<input type="checkbox" style="margin-top:0px;" id="childHCheckbox" tabindex=" 0" data-bind="checked:IncludeChildren,event:{change:function(){$parent.includeChildHierarchies($data)}}, css: { disabled: $parent.isNotSearchAdmin}">
+										</label>
+										<a style="margin-left:0px;"><i class="icon-cross" tabindex="0" data-bind="click:function(){$parent.removeHierarchyPathFromCriteria($data)}"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body" id="attributesCritertaDiv" data-bind="visible:attrbuteCriteriaArr().length>0">
+							<div class="row">
+								<div class="col-md-1 pr0" style="width: 98px;">
+									<div class="p8" data-i18n="criteri_attribute_lable"></div>
+								</div>
+								<div class="col-md-10 hierarchys" id="selectedAttributes" data-bind="foreach:attrbuteCriteriaArr">
+									<div data-bind="attr:{'title':'Attribute = '+toolTip}" style="margin-top: 3px">
+										<span data-bind="text:DisplayName"></span>
+										<a><i class="icon-cross" tabindex="0" data-bind="click:$parent.removeAttrfromCriteria"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body" id="groupsCriteriaDiv" data-bind="visible:criteriaGroups().length>0">
+							<div class="row">
+								<div class="col-md-1 pr0">
+									<div class="p8" data-i18n="criteri_group_lable"></div>
+								</div>
+								<div class="col-md-10 hierarchys" id="selectedGroups" data-bind="foreach:criteriaGroups">
+									<div data-bind="attr:{'title':'GroupName = '+GroupName}" style="margin-top: 3px">
+										<span data-bind="text:GroupName"></span>
+										<a><i class="icon-cross" tabindex="0" data-bind="click:$parent.removeGroupsfromCriteria"></i></a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="panel-body" data-bind="visible:criteriaGroups().length<=0 && attrbuteCriteriaArr().length<=0 && hierarchyFullPath().length<=0">
+							<div class="row">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-top:15px!important;">
+		<div class="col-md-8" data-bind="visible:isVisible">
+			<form class="form-inline">
+				<div class="form-group">
+					<label data-i18n="save_search_label"></label>
+					<input tabindex="0" type="text" id="txtSearchName" maxlength="50" data-bind="textInput: checkTxtSearchName, executeOnEnter: function(){saveAdvancedSearch('groupsGrid',$parent.unloadAdvancedSearch)}" class="form-control" placeholder="Name">
+				</div>
+				<div class="form-group ml10 mr10">
+					<label class="radio-inline" tabindex="0">
+						<input tabindex="0" type="radio" name="accessTypeGroup" id="rbtPrivate" data-bind="click:selectSavedSearchType,checked:checkAccessType" value="Private" disabled>
+						<span data-i18n="rbprivate"></span>
+					</label>
+					<label class="radio-inline" tabindex="0">
+						<input tabindex="0" type="radio" name="accessTypeGroup" id="rbtPublic" data-bind="click:selectSavedSearchType,checked:checkAccessType" value="Public" disabled>
+						<span data-i18n="rbpublic"></span>
+					</label>
+					<label class="checkbox-inline" style="margin-left: 30px">
+						<input type="checkbox" id="chkDefaultSearch" data-bind="click:setAsDefaultSearch">
+						<span data-i18n="use_as_default_search"></span>
+					</label>
+				</div>
+				<button type="button" disabled tabindex='0' id="btnSave" data-bind="click:function(){saveAdvanceSearchOnPopup()}" data-i18n="save" class="btn btn-primary mr5"></button>
+			</form>
+		</div>
+		<div class="col-md-4 tar  pull-right">
+			<button type="button" tabindex="0" disabled id="btnApplyFilterChart" data-bind="click : function(){applyAdvanceForChart($parent.applyAdvancedSearchForChart)},visible:applyForChart" data-i18n="apply_filter" class="btn btn-primary apply-filter"></button>
+			<button type="button" tabindex="0" disabled id="btnApplyFilter" data-bind="click : function(){applyAdvanceFilter($parent)},visible:applyForGrid" data-i18n="apply_filter" class="btn btn-primary apply-filter"></button>
+			<button type="button" tabindex="0" disabled id="btnClear" class="btn btn-default mr5" data-i18n="clear" data-bind="click:function(){clearAdvancedSearch()}"></button>
+			<button type="button" data-dismiss="modal" aria-hidden="true" tabindex="0" id="btnClose" class="btn btn-default mr5" data-i18n="close" data-bind="click:$parent.unloadAdvancedSearch"></button>
+		</div>
+	</div>
+	<div class="row" style="padding-bottom:15px;">
+		<div class="form-group" style="text-align: center; display: none">
+			<label data-i18n="Device_TimeZone"></label>
+		</div>
+	</div>
+</div>
+<!---modal popup-->
+<div class="modal" id="AdInformationPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i id="AdInfoicon" class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 id="AdInfoHead" class="modal-title c-blue">Information</h4>
+							<p id="AdInfoMessage">Are you sure you want to delete "Lorem Ipsum is simply dummy text of the printing.pnd" this file</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="AdInfoBtnOk" tabindex="0" data-bind="click:hideinfo" class="btn btn-primary">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!------->
+<div class="modal" id="advancedSearchConfirmationPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p>
+								<span data-bind="text:selectionConfirmation"></span>&nbsp;<span></span>&nbsp;<span></span>&nbsp;<br>
+								<span></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="advancedSearchConfirmationPopup_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:confirmChangeSelectionTab">Yes</button>
+					<button id="advancedSearchConfirmationPopup_No" type="button" data-i18n="btn_NO" class="btn btn-default" data-bind="click:closedConfirmantion">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!----confrimation delete search----->
+<div class="modal" id="deleteSavedSearchConfirmation" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p>
+								<span data-i18n="quicksearch_delete_confirmation_message"></span>&nbsp;<span></span>&nbsp;<span></span>&nbsp;<br>
+								<span id="sNameForDelete"></span>
+								<span>?</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="deleteSearchConfirmationPopup_Yes" class="btn btn-success" data-i18n="btn_YES" data-bind="click:deleteAdvancedSearch">Yes</button>
+					<button type="button" id="deleteSearchConfirmationPopup_No" data-i18n="btn_NO" class="btn btn-default" data-bind="click:closedDeleteConfirmantion">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--update save search-->
+<div class="modal" id="updateSaveSearchConfirmationPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p>
+								<span data-i18n="update_saved_search_confimation_message"></span>&nbsp;<span id="savedSeachNameDescription"></span>&nbsp;<span>?</span>&nbsp;<br>
+								<span></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="updateSaveSearchConfirmationPopup_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:confirmUpdateSavedSearch">Yes</button>
+					<button id="updateSaveSearchConfirmationPopup_No" type="button" data-i18n="btn_NO" class="btn btn-default" data-bind="click:declineUpdateSavedSeach">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal in" id="searchInProgress" style="z-index:99999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<div style="padding:4px;">
+								<h4 class="modal-title c-blue">Information</h4>
+								<span id="infoMessageSearchProgress" data-i18n="search_in_progress"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="infoBtnCancel" tabindex="0" data-bind="click:cancelSearch" class="btn btn-primary">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal in" id="informationPopupForSelectedColumns" style="z-index:99999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<div style="padding:4px;">
+								<h4 class="modal-title c-blue">Information</h4>
+								<span data-i18n="device_search_max_columns_select"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" tabindex="0" data-bind="click:closeInfo" class="btn btn-primary">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

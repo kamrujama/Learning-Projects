@@ -1,0 +1,31 @@
+﻿<div class="modal-dialog modal-lgs" id="modelEditUsers">
+    <div class="modal-content">
+        <div class="modal-header" id="modelEditUsersHeader">
+            <button type="button" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="add_user_to_role" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="panel-body ">
+                <div class="pull-right btn-mg">
+                    <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridForUnAssignedUsersForRole')}"><i class="icon-reset-filter"></i></a>
+                    <!-- <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForUnAssignedUsersForRole')}"><i class="icon-export-excel"></i></a> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="gridArea" class="grid-area">
+                            <div id="jqxgridForUnAssignedUsersForRole"></div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        
+            <button type="button" id="btn_uploadLibrary" tabindex="0" class="btn btn-primary" data-bind="click:function(){addUsersToRole($parent.observableModelPopup,'jqxgridForUnAssignedUsersForRole',$parent.getDetailsForUser)}" data-i18n="save"></button>
+            <button type="button" class="btn btn-default" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>
+

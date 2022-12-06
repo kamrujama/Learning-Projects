@@ -1,0 +1,156 @@
+﻿<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li>
+        <a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}">
+        <a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="pull-left btn-mgl">                            
+                            <a tabindex="0" class="btn btn-default" id="btnRefresh" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridHierarchyAssignment')}"><i class="icon-spinner9"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="btnEditRef" role="button" data-i18n="[title]edit_reference_set_assignment" data-bind="click: function () {openPopup('modelEditHierarchyAssignment','jqxgridHierarchyAssignment')}"><i class="icon-pencil"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="btnUnAssign" role="button" data-i18n="[title]unassign_reference_sets" data-bind="click: function () { openPopup('modelUnassignReferenceSet', 'jqxgridHierarchyAssignment') }"><i class="icon-cross"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a tabindex="0" class="btn btn-default" id="btnResetResizedColumnsHierarchyRFS" data-i18n="[title]reset_resized_columns" data-bind="click: function () {resetColumns('jqxgridHierarchyAssignment')}"><i class="icon-restoredefault"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="btnSaveResizedColumnsDetailsHierarchyRFS" data-i18n="[title]save_resized_columns" data-bind="click: function () {resizeColumns('jqxgridHierarchyAssignment')}"><i class="icon-checkmark"></i></a>
+                            <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]reset_report" data-bind="click:function(){clearfilter('jqxgridHierarchyAssignment')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" id="btnShowHide" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridHierarchyAssignment')}"><i class="icon-hide-column"></i></a>
+                            <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridHierarchyAssignment')}"><i class="icon-export-excel"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="grid-area">
+                            <div id="jqxgridHierarchyAssignment"></div>
+                            <div id="pagerDivHierarchyAssignment">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal" id="modelHierarchyAssignmentID" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->
+<!-- Modal start-->
+<div class="modal" id="modalShowHideHierarchyID" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopupShowHide'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->
+<!-- click on view result popup model --->
+<div class="modal bs-example-modal-lg" id="modelPopupHierarchyAssignmentID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" id="modelPopupHierarchyAssignmentIDHeader">
+                    <button type="button" class="close" tabindex="0" data-bind="click: closeModelAssginment" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="testhead" class="modal-title" data-i18n="hierarchy_reference_set_details"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1 pr0" style="width:99px">
+                            <h4 data-i18n="criteri_hirarchy_lable" class="b"></h4>
+                        </div>
+                        <div class="col-md-11" style="width:793px">
+                            <span style="font-size: 14px; margin-top: 9px; margin-left: -15px;" class="hierarchy-path-txt" id="hierarchyPath" data-bind="text:hierarchyPath"></span>
+                        </div>
+                    </div>
+                    <div class="tabpanelMainContent">
+                        <ul id="editReferenceSetTabHeader" class="nav nav-tabs" role="tablist">
+                            <li id="viewHierarchyReferencesetTab" class="tablinks active" role="presentation"><a id="viewHierarchyReferencesetData" href="#detailsArea" aria-controls="detailsArea" role="tab" data-toggle="tab" data-i18n="view_reference_set_hierarchy_tab" data-bind="click:function(){onChangeTab( 'viewHierarchyReferenceset')}"></a></li>
+                            <li id="viewParameterTemplatesTab" class="tablinks" role="presentation"><a id="" href="#detailsArea" aria-controls="detailsArea" role="tab" data-toggle="tab" data-i18n="view_paramenter_template_tab" data-bind="click:function(){onChangeTab('viewParameterTemplates')}"></a></li>
+                        </ul>
+                    </div>
+                    <div id="viewHierarchyReferenceset" class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                            <div class="col-sm-12" style="padding:0px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="exportBtns" class="pull-right btn-mg">
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilterModel('jqxGridModalHierarchyAssignment')}"><i class="icon-reset-filter"></i></a>
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxGridModalHierarchyAssignment')}"><i class="icon-hide-column"></i></a>
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcelModel('jqxGridModalHierarchyAssignment')}"><i class="icon-export-excel"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!--grid area start-->
+                                        <div class="grid-area" style="padding-bottom: 0px">
+                                            <div id="jqxGridModalHierarchyAssignment"></div>
+
+                                            <!--grid area end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="viewParameterTemplates" class="tab-content" style="display: none">
+                        <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                            <div class="col-sm-12" style="padding:0px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="exportBtns" class="pull-right btn-mg">
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilterModel('qualifiedParamenterTemplateDetailsGrid')}"><i class="icon-reset-filter"></i></a>
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','qualifiedParamenterTemplateDetailsGrid')}"><i class="icon-hide-column"></i></a>
+                                            <a class="btn btn-default" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcelModel('qualifiedParamenterTemplateDetailsGrid')}"><i class="icon-export-excel"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!--grid area start-->
+                                        <div class="grid-area" style="padding-bottom: 0px">
+                                            <div id="qualifiedParamenterTemplateDetailsGrid"></div>
+                                            <!--grid area end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" tabindex="0" class="btn btn-primary" data-i18n="btn_OK" data-bind="click: closeModelAssginment"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model end--->

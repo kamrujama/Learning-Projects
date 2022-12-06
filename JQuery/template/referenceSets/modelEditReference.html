@@ -1,0 +1,435 @@
+﻿<div class="modal-dialog modal-big referenceset-model" id="mdlEdtRefSet">
+    <div class="modal-content">
+        <div class="modal-header" id="mdlEdtRefSetHeader">
+            <button type="button" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="edit_reference_set" data-bind="visible:$parent.isSaveCall"></h4>
+            <h4 class="modal-title" data-i18n="copy_reference" data-bind="visible:$parent.isCopyCall"></h4>
+        </div>
+        <div class="modal-body vf-modal-body">
+            <div class="tabpanelMainContent hide">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li id="generalContentTab" class="tablinks active disabled" style="opacity:1" role="presentation"><a id="selectGeneralContentData" href="#generalArea" aria-controls="generalArea" role="tab" data-toggle="tab" data-i18n="software_assignment_general_tab" data-bind="click:function(){onChangeTab( 'generalContent')}"></a></li>
+                    <li id="operationsContentTab" class="tablinks disabled" style="opacity:1" role="presentation"><a id="" href="#operationsArea" aria-controls="opertaionsArea" role="tab" data-toggle="tab" data-i18n="software_assignment_operations_tab" data-bind="click:function(){onChangeTab('operationsContent')}"></a></li>
+                    <li id="modelsContentTab" class="tablinks disabled" style="opacity:1" role="presentation"><a id="" href="#modelsArea" aria-controls="modelsArea" role="tab" data-toggle="tab" data-i18n="software_assignment_models_tab" data-bind="click:function(){onChangeTab('modelsContent')}"></a></li>
+                    <li id="deviceAttributesContentTab" class="tablinks disabled" style="opacity:1" role="presentation"><a id="" href="#deviceAttributesArea" aria-controls="deviceAttributesArea" role="tab" data-toggle="tab" data-i18n="software_assignment_device_attributes_tab" data-bind="click:function(){onChangeTab('deviceAttributesContent')}"></a></li>
+                </ul>
+            </div>
+            <div>
+                <ul id="treeBreadcrumbRFS" data-bind="foreach:breadCrumbReferenceSet">
+                    <li>
+                        <span data-bind="attr: { id: id },text:menuName"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-12" style="padding:0px;">
+                <div id="generalContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                        <div class="row" style="border: 1px groove;height:360px; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;padding-top:20px; background-color:#f5f5f5;border-color:#ddd">
+                            <div class="col-md-8">
+                                <div class="col-md-3 pr0">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" data-i18n="referenceSetName">
+                                        </label>
+                                        <span class="required">*</span>
+                                        <i class="icon-lock" data-i18n="[title]rf_lock_msg" data-bind="visible:($parent.isSaveCall() &&  isLocked)"></i>
+                                        <i class="icon-unlocked" data-i18n="[title]rf_unlock_msg" data-bind="visible:($parent.isSaveCall() && !isLocked)"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 pr0">
+                                    <div class="form-group" data-bind="visible:$parent.isCopyCall">
+                                        <input type="text" id="referenceName" tabindex="0" maxlength="50" style="font-size: 14px;" data-bind="value:referenceName" class="form-control" placeholder="">
+                                        <span data-bind="validationMessage:referenceName" class="error-v animated fadeIn"></span>
+                                    </div>
+                                    <div class="form-group" data-bind="visible:$parent.isSaveCall">
+                                        <input id="referenceNameEdit" tabindex="0" maxlength="50" style="font-size: 14px;" data-bind="enable:false,value:referenceNameValue" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pr0">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" data-i18n="referenceSet_description">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 pr0">
+                                    <div class="form-group">
+                                        <textarea id="referenceDescription" style="font-size: 14px;" rows="6" cols="50" data-bind="value:referenceDescription" class="form-control" placeholder="" maxlength="255"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pr0" data-bind="visible:$parent.isSaveCall">
+                                </div>
+                                <div class="col-md-9 pr0" data-bind="visible:$parent.isSaveCall">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="statusCheckbox" tabindex="0" data-bind="checked:statusChk,event:{change:activeChange}" value=""><span data-i18n="active_lbl"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pr0" id="parentReferenceSetTitleEditRFS" style="display: none">
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <label for="exampleInputEmail1" data-i18n="parent_reference_set">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 pr0">
+                                    <div class="v-chosen" id="parentReferenceSetddlEditRFS" style="display:none">
+                                        <select id="ddlParentReferenceSetsEdit" class="chosen-select form-control" data-bind="event:{change:onChangeParentReferenceSet},chosen: parentReferenceSets, optionsText: 'Name',
+                                                optionsValue: 'Name',optionsCaption: '-Select-'" data-placeholder="Select Parent Referenceset"></select>
+                                    </div>
+                                    <div id="parentReferenceSetlabelEditRFS" style="display:none">
+                                        <h4 class="b" data-bind="text:parentReferenceSetName"></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="padding:0px;">
+                <div id="operationsContent" class="tab-content hide">
+                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                        <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                            <h4 data-i18n="ref_select_package" style="font-size: 14px; font-weight: 900"></h4>
+                            <div class="col-md-5 pr0" style="width:44%">
+                                <div class="panel-group mb0" id="accordionPackageandKeys">
+                                    <div class="panel panel-accordion" id="accordionSoftwarePackagesEditRFS">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a id="AccordionPackages" data-toggle="collapse" data-parent="#accordionPackageandKeys" href="#PKcollapseOne" data-i18n="availablePackage"></a>
+                                                <div class="accordion-arrow">
+                                                    <i class="indicator icon-angle-up"></i>
+                                                    <a class="btn pull-right" style="margin-right:24px;color:white" role="button" data-bind="click: function () { clearfilter('jqxgridAvailablePackage') }" data-i18n="[title]show_all_data"><i class="icon-reset-filter" style="font-size:14px;"></i></a>
+                                                </div>
+                                            </h4>
+                                        </div>
+                                        <div id="PKcollapseOne" class="panel-collapse collapse in">
+                                            <div class="panel-body p0">
+                                                <div class="grid-area" id="AvailablePackageDiv" style="padding: 0px">
+                                                    <div id="jqxgridAvailablePackage"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-accordion" id="accordionKeyProfilesEditRFS">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a id="AccordionKeys" data-toggle="collapse" data-parent="#accordionPackageandKeys" href="#PKcollapseTwo" data-i18n="availablekeys_label"></a>
+                                                <div class="accordion-arrow">
+                                                    <i class="indicator icon-angle-down"></i>
+                                                    <a class="btn pull-right" style="margin-right:24px;color:white" role="button" data-bind="click: function () { clearfilter('jqxgridAvailableKeys') }" data-i18n="[title]show_all_data"><i class="icon-reset-filter" style="font-size:14px;"></i></a>
+                                                </div>
+                                            </h4>
+                                        </div>
+                                        <div id="PKcollapseTwo" class="panel-collapse collapse">
+                                            <div class="panel-body p0">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="grid-area" id="AvailableKeyDiv" style="padding-top: 0px;">
+                                                            <div id="jqxgridAvailableKeys"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:6%">
+                                <div class="btnv" style="padding-top: 120px">
+                                    <div><a id="btnForMoveRight" tabindex="0" class="btn btn-default mb0" data-bind="click:rightPackages"><b class="icon-angle-right"></b></a></div>
+                                    <div><a id="btnForMoveleft" tabindex="0" class="btn btn-default mb0" data-bind="click:leftPackages"><b class="icon-angle-left"></b></a></div>
+                                    <div><a id="btnForAllMoveright" class="btn btn-default btn-padd" data-bind="click: allPackagesMoveRight"><b class="icon-angle-right"></b><b class="icon-angle-right"></b></a></div>
+                                    <div><a id="btnForAllMoveleft" class="btn btn-default btn-padd" data-bind="click: allPackagesMoveLeft"><b class="icon-angle-left"></b><b class="icon-angle-left"></b></a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 pl0 pr0" style="width:44%">
+                                <div class="panel panel-custom">
+                                    <div class="panel-heading" style="background:#666;padding:6px;color:#fff">
+                                        <label class="m0" style="font-size:16px" data-i18n="selectedPackageReferenceSet"></label>
+                                        <div class="btn-mg"><a class="btn" tabindex='0' style="color:white" role="button" data-i18n="[title]Reset_filter" data-bind="click:function(){clearTablefilter('selectpackagestable')}"><i class="icon-reset-filter"></i></a></div>
+                                    </div>
+                                    <div class="panel-body p0 table-h1 " style="display: block;height: 360px; overflow-y: auto; width: 100%">
+                                        <table id="selectpackagestable" class="table table-striped m0" style="border: 1px solid #ddd !important;table-layout:fixed">
+                                            <tr>
+                                                <th style="width:4%;"><input type="checkbox" tabindex='0' data-bind="event:{change:SelectAllSelectedPackages},checked:allselectedpackagesSelected" id="selectallselectedpackages" value="" disabled></th>
+                                                <th id="colTypeEditRFS" style="font-weight: normal"><span data-i18n="type_nm"></span><a id="1filterselectpackagestable" class="icon-default" tabindex='0' style="float: right" data-bind="click:function(){customfilter($element,movedArray)}"><i class="icon-filter " title="filter"></i></a></th>
+                                                <th id="colDescriptionEditRFS" style="font-weight: normal;width:58%"><span data-i18n="description_nm"></span><a id="2filterselectpackagestable" class="icon-default" tabindex='0' style="float: right" data-bind="click:function(){customfilter($element,movedArray)}"><i class="icon-filter " title="filter"></i></a></th>
+                                                <th id="colActionEditRFS" style="font-weight: normal;width:25%"><span data-i18n="advanced_options_action"></span></th>
+                                            </tr>
+                                            <tbody id="tbodyselectpackagestable" data-bind="foreach:movedArray">
+                                                <tr style="height:32px;" data-bind="attr:{id:'SelectedPackrow'+$index()}">
+                                                    <td style="width:4%;"><input type="checkbox" tabindex='0' data-bind="attr:{id:'selectedpackagecb'+$index()},event:{change:function(){$parent.SelectSelectedPackageRow($data,$index())}},checked:packageSelected"></td>
+                                                    <td class="vf-text-overflow"> <span data-bind="text:Type,attr:{id:'typespan'+$index()}"></span></td>
+                                                    <td class="vf-text-overflow"><span data-bind="text:Details,attr:{id:'detailspan'+$index()}"></span></td>
+                                                    <td data-bind="visible:isAllowed"><button type="button" tabindex="0" class="btn btn-default" data-bind="click: function () {$parent.advancedOptions($data,$index())}">Advanced Options</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div data-bind="visible:movedArray().length<=0" style="color: rgb(143, 143, 143); font-size:20px; text-align: center; margin-top: 100px;">No Data Found</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:6%">
+                                <div class="btnv" style="padding-top: 120px">
+                                    <div><a id="moveUpBtn" tabindex="0" class="btn btn-default angletop" data-bind="click:moveItemsUP" href="#"><b class="icon-angle-right "></b></a></div>
+                                    <div><a id="moveDownBtn" tabindex="0" class="btn btn-default anglebottom" data-bind="click:moveItemsDown" href="#"><b class="icon-angle-right"></b></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="padding:0px;">
+                <div id="modelsContent" class="tab-content hide">
+                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                        <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                            <div class="panel panel-custom">
+                                <div class="panel-heading">
+                                    <h4 class="m0" data-i18n="selct_models" style="margin-left:3px !important;"></h4>
+                                </div>
+                                <div class="panel-body p0">
+                                    <div class="col-md-12" style="height:360px;overflow:auto" data-bind="visible:modelData().length>0,foreach:modelData">
+                                        <div class="col-md-4 col-lg-2">
+                                            <div class="form-group" id="columnDiv">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <!--<input type="checkbox" data-bind="event:{change:$parent.modelChange($data,$index())},attr: { id: 'modelCheck-' + ModelId, checked: IsSelected }, value: ModelName, checked: IsSelected">-->
+                                                        <input type="checkbox" onchange="onModelSelection()" data-bind="attr: { id: 'modelCheck-' + ModelId, checked: IsSelected }, value: ModelName, checked: IsSelected">
+                                                        <span data-bind="text:ModelName"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="height:360px;overflow:auto" data-bind="visible:modelData().length<=0">
+                                        <div style="color: rgb(143, 143, 143); font-size:20px; text-align: center; margin-top: 100px;" data-i18n="Common_Models_Does_Not_Exist"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="padding:0px;">
+                <div id="deviceAttributesContent" class="tab-content hide">
+                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                        <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                            <div class="panel panel-custom">
+                                <div class="panel-heading">
+                                    <h4 class="m0" data-i18n="deviceAttributes"></h4>
+                                    <div class="btn-mg">
+                                        <label class="m0" data-i18n="ref_add_attribute"></label>
+                                        <a id="addAttrib" class="btn m0" role="button" data-bind="click:showAttDLL" data-i18n="[title]add_attribute_reference"><i class="icon-plus"></i></a>
+                                        <div style="float: right; width: 160px;" class="small-chosen" data-bind="visible:visibleAttDLL">
+                                            <select id="deviceAttributDDL" tabindex="0" class="chosen-select" data-bind="chosen:AttributeData, optionsValue:'DisplayName', optionsText:'DisplayName',value:selectedOption,optionsCaption: '-Select-'"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body p0" style="display: block; height: 335px; overflow-y: auto; width: inherit;">
+                                    <table class="table table-striped m0" style="margin-top: 0px">
+                                        <tr>
+                                            <th data-i18n="Attribute_Name" style="font-weight: normal"></th>
+                                            <th data-i18n="Operator_set_attribute" style="font-weight: normal"></th>
+                                            <th data-i18n="ref_attribute_value" style="font-weight: normal"></th>
+                                            <th data-i18n="ref_remove" style="font-weight: normal"></th>
+                                        </tr>
+                                        <tbody id="itemTbody" data-bind="foreach:items">
+                                            <tr>
+                                                <td><span data-bind="text:DisplayName,attr:{id:'attributeName'+$index()}"></span></td>
+                                                <td>
+                                                    <select tabindex="0" data-bind="attr:{id:'contorlId'+$index()},foreach:DeviceSearchAttributeOperators" class="form-control table-inc inFontSizeDeviceNAdvance">
+                                                        <option data-bind="vlaue:DeviceSearchOperatorId,text:Operator"></option>
+                                                    </select>
+                                                </td>
+                                                <td data-bind="visible:ControlType">
+                                                    <select tabindex="0" data-bind="attr:{id:'comboAttrValue'+$index()}" onchange="checkval(this)" class="form-control table-inc">
+                                                        <option>Contains</option>
+                                                        <option>Equel to</option>
+                                                        <option>No equel to</option>
+                                                    </select>
+                                                </td>
+                                                <td data-bind="visible:ControlType==false">
+                                                    <span data-bind="visible:IsMultifield==true">Name:</span>
+                                                    <input data-bind="attr:{id:'txtAttrValue'+$index()}" tabindex="0" onchange="checkval(this)" onkeydown="checkval(this)" onkeyup="checkval(this)" maxlength="255" type="text" style="width: 125px" />
+                                                    <span data-bind="visible:IsMultifield==true">&nbsp;&nbsp;Version:</span>
+                                                    <input data-bind="attr:{id:'txtAttrVersion'+$index()},visible:IsMultifield==true" onchange="checkval(this)" onkeydown="checkval(this)" onkeyup="checkval(this)" maxlength="255" type="text" style="width: 125px" />
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-default" tabindex="0" role="button" data-bind="click:$parent.removeItems" title="Remove"><i class="icon-bin"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnBackEditRFS" tabindex="0" class="btn btn-default hide" data-bind="click:function(){backToPrevious()}" data-i18n="rfs_back_btn"></button>
+            <button type="button" id="btnNextEditRFS" tabindex="0" class="btn btn-default" data-bind="click:function(){moveToNext()}" data-i18n="rfs_next_btn"></button>
+            <button type="button" id="btnSaveRFS" tabindex="0" disabled class="btn btn-primary" data-bind="click:function(){showWarning($parent.observableModelPopup,'ReferenceSetGrid',false)}" data-i18n="save_Reference_Set" style="display: none"></button>
+            <button type="button" id="btnCopyRFS" tabindex="0" class="btn btn-primary" data-bind="click:function(){showWarning($parent.observableModelPopup,'ReferenceSetGrid',false)}" data-i18n="save_Reference_Set" style="display:none"></button>
+            <button type="button" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="rfs_cancel_btn"></button>
+        </div>
+    </div>
+</div>
+<!--model foegrid Application--->
+<div class="modal" id="ApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" style="width: 829px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" tabindex="0" class="close" data-bind="click:closeAppView" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <span data-i18n="applications_of_package"></span>
+                    <span id="packageNameApplnReferenceSet"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right btn-mg" id="showHideRestBtn">
+                                <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilterApplication('jqxApplicationView')}"><i class="icon-reset-filter"></i></a>
+                                <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelApplication('jqxApplicationView')}"><i class="icon-export-excel"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-area">
+                        <div id="jqxApplicationView"></div>
+                    </div>
+                    <div class="grid-area">
+                        <div id="jqxBundleView"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" tabindex="0" class="btn btn-primary" data-bind="click:closeAppView" data-i18n="btn_OK"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end------>
+<!--model foegrid childApplication--->
+<div class="modal" id="childApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" style="width: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" tabindex="0" data-bind="click:closeApplicationView" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="H1">Application Tree</h4>
+                    <h1 data-bind="text:checksample"></h1>
+                </div>
+                <div class="modal-body">
+                    <div class="grid-area" style="display: block; height: 300px; overflow-y: auto">
+                        <div id="PADTreeGrid"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" tabindex="0" class="btn btn-default" data-bind="click:closeApplicationView">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end------>
+<!-- Model start -->
+<div class="modal" id="forceEditReferenceSetConfirmation" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-sm m-alarts" id="draggSelectedID">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col-md-2 pr0">
+                        <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                    </div>
+                    <div class="col-md-10 pl8">
+                        <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                        <span data-i18n="Reference_set_assigned_to_device_of_this_model"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="setRefereceSetModel_Yes" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click: function(){setReferenceSet($parent.observableModelPopup,'ReferenceSetGrid',true)}"></button>
+                    <button type="button" id="setRefereceSetModel_No" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelForceEditReferenceSetConfirmation"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editReferenceSetConfo" data-keyboard="true" data-backdrop="static" tabindex="-1" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-warning c-red"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-red" data-i18n="warning_title"></h4>
+                            <span data-i18n="Reference_Set_update_warning"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="editReferenceSetConfo_Yes" tabindex="0" class="btn btn-danger" data-bind="click: function(){setReferenceSet($parent.observableModelPopup,'ReferenceSetGrid',false)}">Yes</button>
+                    <button type="button" id="editReferenceSetConfo_No" tabindex="0" class="btn btn-default" data-bind="click:cancelEditReferenceSetConfo">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editReferenceSetWarning" data-backdrop="static" tabindex="-1" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-warning c-red"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-red" data-i18n="warning_title"></h4>
+                            <span data-i18n="add_edit_reference_set_warning"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="packagesTableDiv" class="panel-body p0" style="max-height: 150px;margin: 10px;overflow-y: auto;">
+                    <table class="table table-striped m0" style="border: 1px solid #ddd !important;table-layout:fixed">
+                        <tr>
+                            <th style="width:70%"><span><b data-i18n="pt_templatepackage"></b></span></th>
+                            <th><span><b data-i18n="pt_templateversion"></b></span></th>
+                        </tr>
+                        <tbody data-bind="foreach:selectedPackages">
+                            <tr class="vf-text-overflow" style="height:32px;">
+                                <td class="vf-text-overflow"><span data-bind="text:PackageName,attr:{title:PackageName}"></span></td>
+                                <td class="vf-text-overflow"><span data-bind="text:FileVersion,attr:{title:FileVersion}"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnEditRFS_Yes_Save" tabindex='0' type="button" class="btn btn-danger" data-bind="click: function () {setReferenceSet($parent.observableModelPopup,'ReferenceSetGrid',false)},visible:$parent.isSaveCall">Yes</button>
+                    <button id="btnEditRFS_Yes_Copy" tabindex='0' type="button" class="btn btn-danger" data-bind="click: function () {addReferenceSet($parent.observableModelPopup, 'ReferenceSetGrid')},visible:$parent.isCopyCall">Yes</button>
+                    <button id="btnEditRFS_No" tabindex='0' type="button" class="btn btn-default" data-bind="click: function () {cancelWarning()}">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal" id="editreferenceSetParentViewModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopupParentViewEditRef'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

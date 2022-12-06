@@ -1,0 +1,29 @@
+﻿
+<div class="modal-dialog modal-lgs" id="modelRoleAddSecGrp">
+    <div class="modal-content">
+        <div class="modal-header" id="modelRoleAddSecGrpHeader">
+            <button type="button" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 id="addSecurityGroupLabel" class="modal-title" ></h4>
+        </div>
+        <div class="modal-body">
+           <div class="panel-body v-list-panel">
+                <div class="pull-right btn-mg">
+                    <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridForUnAssignedSecurityGroupForRole')}"><i class="icon-reset-filter"></i></a>
+                    <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForUnAssignedSecurityGroupForRole')}"><i class="icon-export-excel"></i></a>
+                </div>
+                <div class="col-md-12">
+                    <div id="gridArea" class="grid-area">
+                        <div id="jqxgridForUnAssignedSecurityGroupForRole"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            
+            <button type="button" id="btn_uploadLibrary" tabindex="0" class="btn btn-primary" data-bind="click:function(){addSecurityGroupsToRole($parent.observableModelPopup,'jqxgridForUnAssignedSecurityGroupForRole',$parent.getDetails)}" data-i18n="save"></button>
+            <button type="button" class="btn btn-default" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>

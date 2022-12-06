@@ -1,0 +1,43 @@
+﻿<div class="modal-dialog" id="modelEditSecGrp">
+    <div class="modal-content" id="editSecurityAllID">
+        <div class="modal-header" id="modelEditSecGrpHeader">
+            <button type="button" class="close" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="edit_security_group"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label data-i18n="Security_group_name_lbl">
+                </label>
+                <span class="required">*</span>
+                <input id="editSecurityNameID" tabindex="0" data-bind="value:securityGroupName" type="text" class="form-control" maxlength="50" disabled>
+                <span id="editSecurityNameVaidationID" data-bind="validationMessage:SecurityGroupName" class="error-v animated fadeIn"></span>
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="sec_grp_desc">
+                </label>
+                <input id="editRoleDescriptionID" data-bind="value:description" type="text" class="form-control" tabindex="0" maxlength="255">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="role_user_profile">
+                </label>
+                <span class="required">*</span>
+                <div class="v-chosen">
+                    <select id="roleTypeId" tabindex="0" class="chosen-select form-control" data-placeholder="Select Roles" multiple data-bind="event:{change:onChangeRole},chosen:getRoledataArray, optionsText: 'RoleName',
+                                                 optionsValue: 'RoleId',value: rolesCsv"></select>
+                </div>
+                <span id="roleType" class="error-v animated fadeIn"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+            <button type="button" id="btn_editSecurity" tabindex="0" class="btn btn-primary" data-i18n="save" data-bind="click: function () {editRoles($parent.observableModelPopup,'jqxgridSecurityGroups')}" disabled></button>
+        </div>
+    </div>
+</div>
+
+
+

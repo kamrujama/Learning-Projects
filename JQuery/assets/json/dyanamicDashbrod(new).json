@@ -1,0 +1,1941 @@
+﻿{
+  "DashboardWidgets": [
+    {
+      "Widget": {
+        "id": "CW_TOTAL_DEVICE_COUNT",
+        "Name": "Total devices",
+        "progress": false,
+        "class": "green-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_UPDATED_DEVICE_COUNT",
+        "Name": "Updated devices",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_REPORTED_DEVICE_COUNT",
+        "Name": "Lost devices",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_LOST_DEVICE_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_OPEN_ALERTS_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+
+    {
+      "Widget": {
+        "id": "CW_NOT_REBOOTED_DEVICES_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_PENDING_REGISTRATION_DEVICES_COUNT",
+        "Name": "Lost devices",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_FUTURE_SCHEDULED_DEVICES_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_LOW_RAM_DEVICES_COUNT",
+        "Name": "Lost devices",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_LOW_FLASH_DEVICES_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+
+    {
+      "Widget": {
+        "id": "CW_FAILED_DOWNLOAD_DEVICES_COUNT",
+        "Name": "Lost devices",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_OUT_OF_SYNC_DEVICES_COUNT",
+        "Name": "Device reported last week",
+        "progress": true,
+        "class": "purple-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+    {
+      "Widget": {
+        "id": "CW_MISSING_VRK_DEVICES_COUNT",
+        "Name": "Missing VRK Device",
+        "progress": true,
+        "class": "gray-bg",
+        "chart": "null",
+        "Feature": "Device"
+      }
+    },
+
+    {
+
+      "Widget": {
+        "id": "SW_ALERT_CHART",
+        "__type": "SW_ALERT_CHART",
+        "Name": "ALERT CHART",
+        "imgSource": "assets/images/chartImg/lineChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "lineChart",
+          "description": "Number of Alerts",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "EventReceivedDate",
+            "YFields": {
+              "YField": [
+                {
+                  "fieldName": "HighAlertCount",
+                  "fieldText": "High",
+                  "color": "#ED0C0C"
+                },
+                {
+                  "fieldName": "MediumAlertCount",
+                  "fieldText": "Medium",
+                  "color": "#ED800C"
+                },
+                {
+                  "fieldName": "LowAlertCount",
+                  "fieldText": "Low",
+                  "color": "#00AEEF"
+                }
+
+              ]
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_ALERT_CHART",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "1024-01-01"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "1024-01-01"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "Software"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": [
+                  {
+                    "Date": "11-01-2015",
+                    "contentReplacedFailedCount": "0",
+                    "contentReplacedCount": "25",
+                    "downloadFailedCount": "15",
+                    "downloadStartedCount": "20",
+                    "downloadSuccessfulCount": "0",
+                    "installFailedCount": "0",
+                    "installSuccessfulCount": "0",
+                    "scheduledSentCount": "0"
+                  }
+                ]
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Device",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "true",
+            "APIDetails": {
+              "Name": "SW_ALERT_DRILL",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": [
+                    {
+                      "Name": "contentReplacedFailedCount",
+                      "count": 10
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "SW_ALERT_RESULT",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DOWNLOAD_CHART",
+        "__type": "SW_DOWNLOAD_CHART",
+        "Name": "DOWNLOAD CHART",
+        "imgSource": "assets/images/chartImg/stackChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "stackbarChart",
+          "description": "Number of Downloads",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "Date",
+            "YFields": {
+              "YField": [
+                {
+                  "fieldName": "ContentReplacedCount",
+                  "fieldText": "Content Replaced",
+                  "color": "#009933"
+                },
+                {
+                  "fieldName": "ContentReplaceFailedCount",
+                  "fieldText": "Content Replace Failed",
+                  "color": "#ff8080"
+                },
+                {
+                  "fieldName": "DownloadFailedCount",
+                  "fieldText": "Download Failed",
+                  "color": "#cc0000"
+                },
+                {
+                  "fieldName": "DownloadStartedCount",
+                  "fieldText": "Download Started",
+                  "color": "#3f93ab"
+                },
+                {
+                  "fieldName": "DownloadSuccessfulCount",
+                  "fieldText": "Download Successful",
+                  "color": "#01ff55"
+                },
+                {
+                  "fieldName": "InstallFailedCount",
+                  "fieldText": "Install Failed",
+                  "color": "#ff4d4d"
+                },
+                {
+                  "fieldName": "InstallSuccessfulCount",
+                  "fieldText": "Install Successful",
+                  "color": "#006622"
+                },
+                {
+                  "fieldName": "InstallPostponedCount",
+                  "fieldText": "Install Postponed",
+                  "color": "#87bbca"
+                },
+                {
+                  "fieldName": "ScheduledCount",
+                  "fieldText": "Scheduled",
+                  "color": "#0c6078"
+                },
+                {
+                  "fieldName": "ScheduleSentCount",
+                  "fieldText": "Schedule Sent",
+                  "color": "#107896"
+                },
+                {
+                  "fieldName": "ScheduleConfirmedCount",
+                  "fieldText": "Schedule Confirmed",
+                  "color": "#159DC4"
+                },
+                {
+                  "fieldName": "FailedCount",
+                  "fieldText": "Failed",
+                  "color": "#ff1a1a"
+                },
+                {
+                  "fieldName": "SchedulingCount",
+                  "fieldText": "Scheduling",
+                  "color": "#fbecd1"
+                },
+                {
+                  "fieldName": "CancelledCount",
+                  "fieldText": "Cancelled",
+                  "color": "#3d2b1f"
+                }
+
+              ]
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DOWNLOAD_CHART",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "All"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Device",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#00aeef", "#E30000", "#008ED1", "#FFFF00", "#FFA500", "#00FF00", "#A600E8", "#F241C6" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "SW_DOWNLOAD_DRILL",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "SW_DOWNLOAD_RESULT",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_REPORT_CHART",
+        "__type": "SW_REPORT_CHART",
+        "Name": "REPORT CHART",
+        "imgSource": "assets/images/chartImg/barChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "description": "Number of Devices",
+          "drill": "false",
+          "dataFeilds": {
+            "XField": "Date",
+            "YFields": {
+              "YField": "DeviceCount"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_REPORT_CHART",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "Widget": {
+        "id": "SW_DEVICES_BY_MODEL",
+        "__type": "SW_DEVICES_BY_MODEL",
+        "Name": "DEVICES BY MODEL",
+        "imgSource": "assets/images/chartImg/barChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "donutChart",
+          "description": "Number of Devices",
+          "drill": "false",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DEVICES_BY_MODEL",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DEVICE_BY_STATUS",
+        "__type": "SW_DEVICE_BY_STATUS",
+        "Name": "DEVICE BY STATUS",
+        "imgSource": "assets/images/chartImg/barChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "description": "Number of Devices",
+          "drill": "false",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DEVICE_BY_STATUS",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DEVICE_BY_MEDIA",
+        "__type": "SW_DEVICE_BY_MEDIA",
+        "Name": "DEVICE BY MEDIA",
+        "imgSource": "assets/images/chartImg/barChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "description": "Number of Devices",
+          "drill": "false",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DEVICE_BY_MEDIA",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_ALERT_DRILL",
+        "Name": "SW_ALERT_DRILL",
+        "Feature": "Device",
+        "chart": {
+          "type": "pieChart",
+          "drill": "true",
+          "colorScheme": "alertScheme",
+          "colorArr": [
+            {
+              "HighAlertCount": "#ED0C0C",
+              "LowAlertCount": "#00AEEF",
+              "MediumAlertCount": "#ED800C"
+            }
+          ],
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_ALERT_DRILL",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "Software"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "fields": [ "HighAlertCount", "LowAlertCount", "MediumAlertCount" ],
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DOWNLOAD_DRILL",
+        "Name": "SW_DOWNLOAD_DRILL",
+        "Feature": "Device",
+        "chart": {
+          "type": "pieChart",
+          "drill": "false",
+          "colorScheme": "dwonloadScheme",
+          "colorArr": [
+            {
+              "ContentReplacedCount": "#009933",
+              "ContentReplaceFailedCount": "#ff8080",
+              "DownloadFailedCount": "#cc0000",
+              "DownloadStartedCount": "#3f93ab",
+              "DownloadSuccessfulCount": "#01ff55",
+              "InstallFailedCount": "#ff4d4d",
+              "InstallSuccessfulCount": "#006622",
+              "InstallPostponedCount": "#87bbca",
+              "ScheduledCount": "#0c6078",
+              "ScheduleSentCount": "#107896",
+              "ScheduleConfirmedCount": "#159DC4",
+              "SchedulingCount": "#fbecd1",
+              "FailedCount": "#ff1a1a",
+              "CancelledCount": "#3d2b1f"
+            }
+          ],
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count",
+              "colorfield": "color"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DOWNLOAD_DRILL",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "All"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "fields": [
+                "ContentReplacedCount",
+                "ContentReplaceFailedCount",
+                "DownloadFailedCount",
+                "DownloadStartedCount",
+                "DownloadSuccessfulCount",
+                "InstallFailedCount",
+                "InstallSuccessfulCount",
+                "InstallPostponedCount",
+                "ScheduledCount",
+                "ScheduleSentCount",
+                "ScheduleConfirmedCount",
+                "SchedulingCount",
+                "FailedCount",
+                "CancelledCount"
+              ],
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_ALERT_RESULT",
+        "Name": "SW_ALERT_RESULT",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_ALERT_RESULT",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "AlertSeverity",
+                    "PValue": "Low"
+                  },
+                  {
+                    "PName": "AlertStatus",
+                    "PValue": "Open"
+                  }
+                ]
+
+              }
+            },
+            "Columns": [
+              {
+                "name": "UniqueDeviceId",
+                "map": "DeviceDetail>UniqueDeviceId",
+                "type": "",
+                "filterType": "",
+                "visible": "false",
+                "dateconversion": "false"
+              },
+              {
+                "name": "AlertTypeId",
+                "map": "AlertTypeId",
+                "type": "",
+                "filterType": "",
+                "visible": "false",
+                "dateconversion": "false"
+              },
+              {
+                "name": "SerialNumber",
+                "map": "DeviceDetail>SerialNumber",
+                "type": "",
+                "filterType": "text",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "DeviceId",
+                "map": "DeviceDetail>DeviceId",
+                "type": "",
+                "filterType": "text",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "HierarchyFullPath",
+                "map": "DeviceDetail>HierarchyFullPath",
+                "type": "",
+                "filterType": "text",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+
+              {
+                "name": "ModelName",
+                "map": "DeviceDetail>ModelName",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture",
+                "dateconversion": "false"
+              },
+
+              {
+                "name": "ComputedDeviceStatus",
+                "map": "DeviceDetail>ComputedDeviceStatus",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture",
+                "dateconversion": "false"
+              },
+              {
+                "name": "EventReceivedDate",
+                "map": "EventReceivedDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "EventRaisedDate",
+                "map": "EventRaisedDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "Severity",
+                "map": "Severity",
+                "type": "",
+                "filterType": "multi",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "AlertType",
+                "map": "AlertType",
+                "type": "",
+                "filterType": "multi",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "Description",
+                "map": "Description",
+                "type": "",
+                "filterType": "text",
+                "visible": "true",
+                "dateconversion": "false"
+              },
+              {
+                "name": "DeviceAlertId",
+                "map": "DeviceAlertId",
+                "type": "",
+                "filterType": "",
+                "visible": "false",
+                "dateconversion": "false"
+              }
+            ],
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DOWNLOAD_RESULT",
+        "Name": "SW_DOWNLOAD_RESULT",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DOWNLOAD_RESULT",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "All"
+                  },
+                  {
+                    "PName": "DownloadStatus",
+                    "PValue": ""
+                  }
+                ]
+              }
+            },
+            "Columns": [
+              {
+                "name": "JobDevicesId",
+                "map": "JobDevicesId",
+                "type": "",
+                "filterType": "",
+                "visible": "false"
+              },
+              {
+                "name": "UniqueDeviceId",
+                "map": "DeviceDetail>UniqueDeviceId",
+                "type": "",
+                "filterType": "",
+                "visible": "false"
+              },
+              {
+                "name": "SerialNumber",
+                "map": "DeviceDetail>SerialNumber",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "DeviceId",
+                "map": "DeviceDetail>DeviceId",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "HierarchyFullPath",
+                "map": "DeviceDetail>HierarchyFullPath",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "ModelName",
+                "map": "DeviceDetail>ModelName",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+              {
+                "name": "ComputedDeviceStatus",
+                "map": "DeviceDetail>ComputedDeviceStatus",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+              {
+                "name": "JobName",
+                "map": "JobName",
+                "type": "",
+                "filterType": "text",
+                "visible": "ture"
+              },
+              {
+                "name": "Status",
+                "map": "Status",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+
+              {
+                "name": "PackageName",
+                "map": "PackageName",
+                "type": "",
+                "filterType": "text",
+                "visible": "ture"
+              },
+              {
+                "name": "Description",
+                "map": "Description",
+                "type": "",
+                "filterType": "text",
+                "visible": "ture"
+              },
+              {
+                "name": "ScheduledDownloadDate",
+                "map": "ScheduledDownloadDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true"
+              },
+              {
+                "name": "StartDate",
+                "map": "StartDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true"
+              },
+              {
+                "name": "DownloadDuration",
+                "map": "DownloadDuration",
+                "type": "String",
+                "filterType": "",
+                "visible": "true"
+              },
+              {
+                "name": "FileName",
+                "map": "FileName",
+                "type": "",
+                "filterType": "text",
+                "visible": "ture"
+              },
+              {
+                "name": "FileSize",
+                "map": "FileSize",
+                "type": "",
+                "filterType": "text",
+                "visible": "ture"
+              },
+              {
+                "name": "TaskCreatedDate",
+                "map": "TaskCreatedDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true"
+              }
+
+
+
+
+            ],
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DONWLOAD_STATUS_CHART",
+        "__type": "SW_DONWLOAD_STATUS_CHART",
+        "Name": "SW_DONWLOAD_STATUS_CHART",
+        "imgSource": "assets/images/chartImg/stackChart.png",
+        "Feature": "Device",
+        "chart": {
+          "type": "stackbarChart",
+          "description": "Number of Downloads",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "Date",
+            "YFields": {
+              "YField": [
+                {
+                  "fieldName": "FailedCount",
+                  "fieldText": "Failed",
+                  "color": "#E30000"
+                },
+                {
+                  "fieldName": "SuccessfulCount",
+                  "fieldText": "Successful",
+                  "color": "#FFFF00"
+                }
+              ]
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DONWLOAD_STATUS_CHART",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "PackageType",
+                    "PValue": "Software"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "SW_DOWNLOAD_STATUS_DRILL",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "SW_DOWNLOAD_STATUS_RESULTS",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DOWNLOAD_STATUS_DRILL",
+        "Name": "SW_DOWNLOAD_STATUS_DRILL",
+        "Feature": "Device",
+        "chart": {
+          "type": "pieChart",
+          "drill": "false",
+          "colorScheme": "dwonloadStatusScheme",
+          "colorArr": [
+            {
+              "FailedCount": "#ED0C0C",
+              "SuccessfulCount": "#FFFF33"
+            }
+          ],
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DOWNLOAD_STATUS_DRILL",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "DownloadStatus",
+                    "PValue": "Software"
+                  }
+                ]
+              }
+            },
+            "Response": {
+              "widgetid": "#id",
+              "fields": [ "FailedCount", "SuccessfulCount" ],
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Widget": {
+        "id": "SW_DOWNLOAD_STATUS_RESULTS",
+        "Name": "SW_DOWNLOAD_STATUS_RESULTS",
+        "Feature": "Device",
+        "chart": {
+          "type": "barChart",
+          "drill": "true",
+          "dataFeilds": {
+            "XField": "Name",
+            "YFields": {
+              "YField": "Count"
+            }
+          },
+          "APIDetails": {
+            "Name": "GetWidgetById",
+            "params": {
+              "token": "token",
+              "getWidgetByIdReq": {
+                "Identifier": "SW_DOWNLOAD_STATUS_RESULTS",
+                "WidgetParams": [
+                  {
+                    "PName": "From",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "To",
+                    "PValue": "01-01-2015"
+                  },
+                  {
+                    "PName": "DownloadStatus",
+                    "PValue": "Software"
+                  }
+                ]
+              }
+            },
+            "Columns": [
+              {
+                "name": "JobDevicesId",
+                "map": "JobDevicesId",
+                "type": "",
+                "filterType": "",
+                "visible": "false"
+              },
+              {
+                "name": "UniqueDeviceId",
+                "map": "DeviceDetail>UniqueDeviceId",
+                "type": "",
+                "filterType": "",
+                "visible": "false"
+              },
+              {
+                "name": "SerialNumber",
+                "map": "DeviceDetail>SerialNumber",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "DeviceId",
+                "map": "DeviceDetail>DeviceId",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "HierarchyFullPath",
+                "map": "DeviceDetail>HierarchyFullPath",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "ModelName",
+                "map": "DeviceDetail>ModelName",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+              {
+                "name": "ComputedDeviceStatus",
+                "map": "DeviceDetail>ComputedDeviceStatus",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+              {
+                "name": "JobName",
+                "map": "JobName",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "Status",
+                "map": "Status",
+                "type": "",
+                "filterType": "multi",
+                "visible": "ture"
+              },
+              {
+                "name": "PackageName",
+                "map": "PackageName",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "Description",
+                "map": "Description",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "ScheduledDownloadDate",
+                "map": "ScheduledDownloadDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true"
+              },
+              {
+                "name": "StartDate",
+                "map": "StartDate",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "DownloadDuration",
+                "map": "DownloadDuration",
+                "type": "String",
+                "filterType": "",
+                "visible": "true"
+              },
+              {
+                "name": "FileName",
+                "map": "FileName",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "FileSize",
+                "map": "FileSize",
+                "type": "",
+                "filterType": "text",
+                "visible": "true"
+              },
+              {
+                "name": "TaskCreatedDate",
+                "map": "TaskCreatedDate",
+                "type": "",
+                "filterType": "date",
+                "visible": "true"
+              }
+
+
+
+            ],
+            "Response": {
+              "widgetid": "#id",
+              "array": {
+                "Object": {
+
+                }
+              }
+            }
+          },
+          "DrilDownChart": {
+            "id": "alert",
+            "Name": "Alerts",
+            "type": "pieChart",
+            "colorArr": { "color": [ "#ED0C0C", "#FFFF33", "#ED800C", "#f7931e", "#fbb03b" ] },
+            "drill": "false",
+            "Feature": "Device",
+            "APIDetails": {
+              "Name": "GetDashboardDetailedData",
+              "params": {
+                "token": "token",
+                "widgetid": "#id",
+                "Object": {
+
+                }
+              },
+              "Response": {
+                "widgetid": "#id",
+                "array": {
+                  "Object": { "count": " " }
+                }
+              }
+            }
+          }
+        },
+        "GridDetails": {
+          "APIDetails": {
+            "Name": "getAlertsGridData",
+            "params": {
+              "param1": "token",
+              "reportType": "Monthly",
+              "param2": "searchObject"
+            }
+          },
+          "Columns": {
+            "column": [
+              {
+                "datafeild": "type",
+                "lable": "AlrtType",
+                "width": "200",
+                "filterType": "default"
+              },
+              {
+                "datafeild": "name",
+                "lable": "alertName",
+                "width": "200",
+                "filterType": "none"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

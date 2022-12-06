@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background-color: #ececec;
+      }
+      .btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        height: 20vh;
+        width: 40vw;
+        margin: 30px auto;
+        transition: all 0.5s;
+      }
+      .box {
+        margin: 5px;
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        transition: all 0.5s;
+      }
+      .box:hover {
+        /* transform: scale(1.1) rotate3d(1, 1, 1, 45deg); */
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      #btn {
+        background-color: aqua;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        font-weight: lighter;
+        border-radius: 10px;
+        outline: none;
+        border: 0px;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .container {
+        height: 50vh;
+        width: 70vw;
+        margin: 30px auto;
+        position: relative;
+        /* padding: 10px; */
+        box-sizing: border-box;
+        border-radius: 20px;
+        /* background-color: darkcyan; */
+        background-color: #ececec;
+        overflow: hidden;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12);
+          filter: blur(3px);
+          transition: all 0.5s;
+      }
+      .container:hover{
+        filter: blur(0px);
+      }
+
+      .image {
+        position: absolute;
+        background-color: #ececec;
+        height: 500px;
+        width: 500px;
+        top: -40%;
+        left: -25%;
+        padding: 0px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 20px solid #ececec;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12),
+          inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+          inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+      }
+      .image img {
+        height: 200px;
+        width: 200px;
+        margin-left: 35%;
+        border: 10px solid #ececec;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12),
+          inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+          inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        transition: all 0.5s;
+      }
+      .image img:hover{
+        filter: blur(0px);
+
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin-left: 40%;
+      }
+
+      h2 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 2.2rem;
+        letter-spacing: 0.2rem;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* color: whitesmoke; */
+        width: max-content;
+        padding: 5px 10px;
+        border-radius: 10px;
+        text-shadow: 0 0 8px #316472;
+        color: transparent;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12);
+        transition: all 0.5s;
+      }
+      h2:hover {
+        color: black;
+      }
+      h4 {
+        font-size: 1.3rem;
+        margin-top: 5px;
+        /* color: whitesmoke; */
+        letter-spacing: 0.2rem;
+        /* border: 4px solid #ececec; */
+        /* background-color:darkcyan; */
+        font-weight: lighter;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        width: max-content;
+        padding: 5px 10px;
+        border-radius: 10px;
+        text-shadow: 0 0 8px #316472;
+        color: transparent;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12);
+        transition: all 0.5s;
+      }
+      h4:hover {
+        color: black;
+      }
+      .main-list {
+        margin-top: -18px;
+        list-style: none;
+        padding: 0;
+        /* width: 300px; */
+      }
+
+      .list {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        margin-bottom: -10px;
+      }
+      .list i {
+        height: 30px;
+        width: 30px;
+        font-size: 0.9rem;
+        /* color: whitesmoke; */
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        border: 2px solid #ececec;
+        text-shadow: 0 0 8px #316472;
+        color: transparent;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12),
+          inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+          inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+        transition: all 0.5s;
+      }
+      .list i:hover {
+        color: black;
+      }
+      .paragraph {
+        margin-left: 10px;
+        font-size: 1.1rem;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        letter-spacing: 2px;
+        font-weight: lighter;
+        border-radius: 5px;
+        padding: 3px 5px;
+        /* border: 3px solid #ececec; */
+        text-shadow: 0 0 8px #316472;
+        color: transparent;
+        transition: all 0.5s;
+      }
+      .paragraph:hover {
+        color: black;
+      }
+
+      .social-links {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        right: 10px;
+        top: 10px;
+      }
+      .social-links i {
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        border: 5px solid #ececec;
+        border-radius: 50%;
+        background-color: #ececec;
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12);
+        transition: all 0.5s;
+        text-shadow: 0 0 8px #316472;
+        color: transparent;
+        /* color: white; */
+      }
+      .social-links i:hover {
+        box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+          10px 10px 15px rgba(70, 70, 70, 0.12),
+          inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+          inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="btns">
+      <div
+        id="box-1"
+        class="box"
+      >
+        1
+      </div>
+      <div
+        id="box-2"
+        class="box"
+      >
+        2
+      </div>
+      <div
+        id="box-3"
+        class="box"
+      >
+        3
+      </div>
+      <div
+        id="box-4"
+        class="box"
+      >
+        4
+      </div>
+      <div
+        id="box-5"
+        class="box"
+      >
+        5
+      </div>
+      <div class="btn">
+        <button id="btn">Click</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="image">
+        <img src="my-profile.jpeg" />
+      </div>
+      <div class="details">
+        <h2>Kamrujama Ansari</h2>
+        <h4>Software Engineer</h4>
+        <div class="contact">
+          <ul class="main-list">
+            <li class="list">
+              <i class="fas fa-phone"></i>
+              <p class="paragraph">+91 765 191 4183</p>
+            </li>
+
+            <li class="list">
+              <i class="fa-regular fa-envelope"></i>
+              <p class="paragraph">ansarikamrujama4@gmail.com</p>
+            </li>
+            <li class="list">
+              <i class="fa-regular fa-address-book"></i>
+              <p class="paragraph">Mahespur Nepal</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="social-links">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-google"></i>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $('#btn').click(function () {
+          $('#box-1').click(function () {
+            $('#box-1').css('background-color', 'skyblue')
+          })
+
+          $('#box-1').mouseleave(function () {
+            $('#box-1').css('background-color', 'white')
+          })
+
+          $('#box-1').dblclick(function () {
+            $('#box-1').css('color', 'red')
+          })
+
+          $('#box-1').mouseenter(function () {
+            $(this).css('background-color', 'maroon')
+          })
+
+          $('#box-1').contextmenu(function () {
+            $(this).css('background-color', 'grey')
+          })
+
+          $('.btns').css('border', '2px solid blue')
+          $('.btns').css('border-radius', '5px')
+          // $(".box:first").css("border","2px solid blue")
+          // $(".box:odd").css("border","2px solid blue")
+          $('.box:even').css('border', '2px solid blue')
+          // $(".box:lt(3)").css("border","2px solid blue")
+          // $(".box:gt(2)").css("border","2px solid blue")
+          // $(".box:eq(3)").css("border","2px solid blue")
+        })
+
+        $('.btns').mouseleave(function () {
+          $('.box:even').css('border-color', 'white')
+          $('.btns').css('border-color', 'white')
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+﻿<div class="modal-dialog modal-mm m-alarts">
+    <div class="modal-content" id="cancelActionID">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-2 pr0">
+                    <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                </div>
+                <div class="col-md-10 pl8">
+                    <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                    <span data-i18n="are_you_sure_you_want_to_cancel_the_action_job_for_the_selected_device(s)" style="word-wrap: break-word;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        
+            <button type="button" id="btnCancelAction_Yes" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click: cancelActionJob"></button>
+            <button type="button" id="btnCancelActionID" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate','modelCancelActionJobStatus')}" data-dismiss="modal"></button>
+        </div>
+    </div>
+</div>

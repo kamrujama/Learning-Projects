@@ -1,0 +1,139 @@
+﻿<div class="modal-dialog modal-big" id="mdlEditParamAssgnmnt">
+    <div class="modal-content">
+        <div class="modal-header" id="mdlEditParamAssgnmntHeader">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="add_Reference_Set"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-5 pr0">
+                    <div class="panel panel-custom">
+                        <div class="panel-heading">
+                            <h4 class="m0" data-i18n="availablePackage"></h4>
+                            <div class="btn-mg">
+                                <a class="btn"  role="button" data-bind="click: function () {clearfilter('jqxgridAvailablePackage')}" title="Reset Filter"><i class="icon-reset-filter"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="panel-body p0">
+                            <div class="grid-area" id="AvailablePackageDiv">
+                                    <div id="jqxgridAvailablePackage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="btnv">
+                        <div><a id="btnForMoveRight" class="btn btn-default mb0" data-bind="click:rightPackages"><b class="icon-angle-right"></b></a></div>
+                        <div><a id="btnForMoveleft" class="btn btn-default mb0" data-bind="click:leftPackages"><b class="icon-angle-left"></b></a></div>
+                        <div><a id="btnForAllMoveleft" class="btn btn-default btn-padd" data-bind="click:allPackagesMove"><b class="icon-angle-left"></b><b class="icon-angle-left"></b></a></div>
+                    </div>
+                </div>
+                <div class="col-md-5 pl0 pr0">
+                    <div class="panel panel-custom">
+                        <div class="panel-heading">
+                            <h4 class="m0" data-i18n="selectedPackage"></h4>
+                        </div>
+                        <div class="panel-body p0" style="display: block;height: 210px;overflow-y: auto;width: 480px;">
+                           <table class="table table-striped m0"  >
+                                        <tr>
+                                            <th>Package Name</th>
+                                            <th>File Version</th>
+                                        </tr>
+                                    <tbody id="tbodySelectedpack" data-bind="foreach:movedArray">
+                                        <tr data-bind="click:function(){$parent.SelectSelectedPackageRow($data,$index())},attr:{id:'SelectPackrow'+$index()}">
+                                            <td><span  data-bind="text:PackageName,attr:{id:'packagespan'+$index()}"></span></td>
+                                            <td><span data-bind="text:FileVersion,attr:{id:'versionspan'+$index()}"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="btnv">
+                        <div><a class="btn btn-default angletop" data-bind="click:moveItemsUP" href="#"><b class="icon-angle-right "></b></a></div>
+                        <div><a class="btn btn-default anglebottom" data-bind="click:moveItemsDown" href="#"><b class="icon-angle-right"></b></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+           
+            <button type="button" disabled id="addBtn" class="btn btn-primary"  data-bind="click:function(){addReferenceSet($parent.observableModelPopup,'jqxgridModels')}" data-i18n="add"></button>
+             <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}"  data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>
+
+<!--model foegrid Application--->
+    <div class="modal" id="ApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center" style="width: 829px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bind="click:closeAppView" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                        <span data-i18n="applications_of_package"></span>
+                        <span id="packageNameApplnReferenceSet"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right btn-mg" id="showHideRestBtn">
+                                    <a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilterApplication('jqxApplicationView')}"><i class="icon-reset-filter"></i></a>
+                                    <a class="btn btn-default" id="btnExportToexcel" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelApplication('jqxApplicationView')}"><i class="icon-export-excel"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-area">
+                            <div id="jqxApplicationView"></div>
+                        </div>
+                        <div class="grid-area">
+                            <div id="jqxBundleView"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" data-bind="click:closeAppView" data-i18n="btn_OK"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    <!--end------>
+
+
+
+   <!--model foegrid childApplication--->
+    <div class="modal" id="childApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center" style="width: 700px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bind="click:closeApplicationView" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="H1">Application Tree</h4>
+                        <h1 data-bind="text:checksample"></h1>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="grid-area" style="display: block;height: 300px;overflow-y: auto">
+                            <div id="PADTreeGrid"></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bind="click:closeApplicationView">Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    <!--end------>

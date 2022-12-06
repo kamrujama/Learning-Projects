@@ -1,0 +1,54 @@
+﻿<div class="modal-dialog modal-big" id="modal">
+	<div class="modal-content">
+		<div class="modal-header" id="mdlEdtRefSetHeader">
+			<button type="button" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-bind="text:titleText"></h4>
+		</div>
+
+		<div class="modal-body">
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<div class="row" style="margin: 0px">
+						<div class="col-md-12 pl0 pr0">
+							<div class="panel panel-custom">
+								<div class="panel-heading" style="background:#666;padding:6px;color:#fff">
+									<label class="m0" style="font-size:16px" data-i18n="selectedPackageReferenceSet"></label>
+								</div>
+								<div class="panel-body p0 table-h1 " style="display: block;height: 360px; overflow-y: auto; width: 100%">
+									<table id="selectpackagestable" class="table table-striped m0" style="border: 1px solid #ddd !important;table-layout:fixed">
+										<tr>
+											<th id="colTypeRFS" style="font-weight: normal"><span data-i18n="type_nm"></span></th>
+											<th id="colDescriptionRFS" style="font-weight: normal;width:58%"><span data-i18n="description_nm"></span></th>
+											<th id="colActionRFS" style="font-weight: normal;width:25%"><span data-i18n="advanced_options_action"></span></th>
+										</tr>
+										<tbody id="tbodyselectpackagestable" data-bind="foreach:movedArray">
+											<tr style="height:32px;" data-bind="attr:{id:'SelectedPackrow'+$index()}">
+												<td class="vf-text-overflow"> <span data-bind="text:Type,attr:{id:'typespan'+$index()}"></span></td>
+												<td class="vf-text-overflow"><span data-bind="text:Details,attr:{id:'detailspan'+$index()}"></span></td>
+												<td data-bind="visible:isAllowed"><button type="button" tabindex="0" class="btn btn-default" data-bind="click: function () {$parent.advancedOptions($data,$index())}">Advanced Options</button></td>
+											</tr>
+										</tbody>
+									</table>
+									<div data-bind="visible:movedArray().length<=0" style="color: rgb(143, 143, 143); font-size:20px; text-align: center; margin-top: 100px;">No Data Found</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer"></div>
+</div>
+<div class="modal" id="modalReferenceSetAdvancedOptions" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div>
+				<div data-bind='component:observableModelPopupAdvancedOptions'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

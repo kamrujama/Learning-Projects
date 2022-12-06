@@ -1,0 +1,25 @@
+﻿<div class="vertical-tab">
+
+    <div class="row">
+        <div class="device-profile-sub-tab">
+            <!-- ko if: communicationHistoryTabs.length == 0 -->
+            <ul id="communicationHistoryTabHeader" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a id="communicationHistoryForDeviceProfile" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="history" data-bind="click:function(){showCommunicationHistory('communicationHistoryForDeviceProfile')}"></a></li>
+                <li role="presentation"><a id="contactDetailsForDeviceProfile" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="contact" data-bind="click:function(){showCommunicationHistory('contactDetailsForDeviceProfile')}"></a></li>
+            </ul>
+            <!-- /ko -->
+            <!-- ko ifnot: communicationHistoryTabs.length == 0 -->
+            <ul id="communicationHistoryTabHeader" class="nav nav-tabs" role="tablist" data-bind="foreach: communicationHistoryTabs">
+                <li role="presentation" data-bind="css: { 'active': name === 'history_data' }, attr: { id: name + 'tabDiv' }, click: function () { $parent.showCommunicationHistory(id) }"> <a href="#templateArea" data-bind="attr: { id:id }, text: displayName" aria-controls="templateArea" role="tab" data-toggle="tab"></a></li>
+            </ul>
+            <!-- /ko -->
+        </div>
+        <div class="device-profile-sub-div">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="templateArea">
+                    <div data-bind='component: observableCommunicationHistory'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

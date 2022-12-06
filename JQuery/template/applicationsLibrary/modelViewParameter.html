@@ -1,0 +1,105 @@
+﻿<div class="modal-dialog modal-lgs" id="mdlViewParameter">
+    <div class="modal-content">
+        <div class="modal-header" id="mdlViewParamHeader">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="viewparamHead"></h4>
+            <h1 id="viewParamAppName"></h1>
+        </div>
+        <div id="resultSectionViewParameter" class="modal-body">
+            <div class="tabpanelMainContent">
+                <a class="btn btn-default moveTabLeft" id="moveLeft" data-i18n="[title]Move left" data-bind="click:moveLeft"><i class="icon-angle-left"></i></a>
+                <a class="btn btn-default moveTabRight" id="moveRight" data-i18n="[title]Move right" data-bind="click:moveRight"><i class="icon-angle-right"></i></a>
+                <div role="tabpanel" class="tabpanelDiv">
+                    <ul class="nav nav-tabs-custom" id="templateTabs" data-bind="foreach:templateXML" role="tablist">
+                        <li role="presentation" data-bind="css:{'active':$index()==0}"><a data-bind="attr:{'href':'#templateTabNO'+$index()}" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span  data-bind="text:DisplayName,title:DisplayName"></span></a>
+                        </li>
+                    </ul>
+                </div>            
+            </div>
+
+            <script id="ContainerElement" type="text/html">
+                <div style="margin-left: 0px" data-bind="foreach:$data">
+                    <fieldset style="border: 1px solid; margin: 2px; padding: 2px; width: auto;margin-left:auto">
+                                <legend style="border-bottom: 0px; width: auto; font-size: 15px" data-bind="text:DisplayName"></legend>
+                        <!--<span data-bind="text:paramLevel"></span>-->
+                                <div class="row">
+                                    <div class="col-md-6" data-bind="foreach:Param">
+                                        <div class="form-group">
+                                            <label data-bind="text:DisplayName">URL</label>
+                                            :
+                                                <div class="row">
+                                                    <div>
+                                                        <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                            <input type="text" class="form-control" maxlength="15" readonly="true" data-bind="value:Default">
+                                                        </div>
+                                                    </div>
+                                                   <!-- <div class="col-md-1 pl0">
+                                                        <span data-bind="text:$parents[0].paramLevel"></span>
+                                                        <a class="btn btn-default btn-in" data-bind="click:function(){$parents[$parents[0].paramLevel].checkcall($data)}" title="Edit"><i  class="icon-pencil"></i></a>
+                                                    </div>-->
+                                                </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div data-bind="template: { name: 'ContainerElement', foreach: Container }">
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                </div>
+
+
+            </script>
+            <!-- Tab panes -->
+             <div class="tab-content" data-bind="foreach:templateXML">
+                <div role="tabpanel" class="tab-pane" data-bind="attr:{id:'templateTabNO'+$index()},css:{'active':$index()==0}">
+                    <div class="p10">
+                        <div data-bind="foreach:Container">
+                            <!-- <fieldset style="border: 1px solid; margin: 2px; padding: 2px; width: 700px">
+                                <legend style="border-bottom: 0px; width: auto; font-size: 15px" data-bind="text:Name"></legend>-->
+                            <div class="row">
+                                <div class="col-md-6" data-bind="foreach:Param">
+                                    <div class="form-group">
+                                        <label data-bind="text:DisplayName">URL</label>
+                                        :
+                                                <div class="row">
+                                                    <div>
+                                                        <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                            <input type="text" class="form-control" maxlength="15" readonly="true" data-bind="value:Default">
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-1 pl0">
+                                                        <a class="btn btn-default btn-in" data-bind="click:function(){$parents[2].checkcall($data)}" title="Edit"><i  class="icon-pencil"></i></a>
+                                                    </div>-->
+                                                </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div>
+
+                                <div data-bind="template: { name: 'ContainerElement', foreach: Container }">
+                                </div>
+
+                            </div>
+                            <!--</fieldset>-->
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="btn_OK"></button>
+        </div>
+    </div>
+</div>

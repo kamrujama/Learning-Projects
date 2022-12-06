@@ -1,0 +1,546 @@
+{
+  "menuData": [
+    {
+      "id": "dashboard",
+      "controlerId": "dashboard",
+      "parentId": "dashboard",
+      "name": "dashboard",
+      "icon": "icon-dashboard",
+      "children": []
+    },
+    {
+      "id": "deviceSearch",
+      "controlerId": "device",
+      "parentId": "deviceSearch",
+      "name": "deviceSearch",
+      "icon": "icon-device-search-filter",
+      "children": []
+    },
+    {
+      "id": "deviceProfile",
+      "controlerId": "device",
+      "parentId": "deviceProfile",
+      "name": "deviceProfile",
+      "icon": "icon-device-profile",
+      "children": []
+    },
+    {
+      "id": "merchants",
+      "controlerId": "merchants",
+      "parentId": "merchants",
+      "name": "merchants",
+      "icon": "icon-manage-devices",
+      "children": []
+    },
+    {
+      "id": "device",
+      "controlerId": "device",
+      "parentId": "device",
+      "name": "device",
+      "icon": "icon-device-managment",
+      "children": [
+        {
+          "id": "addDevices",
+          "parentId": "device",
+          "childParentId": "addDevices",
+          "controlerId": "device",
+          "name": "addDevices",
+          "Subchild": []
+        },
+        {
+          "id": "deletedDevices",
+          "parentId": "device",
+          "childParentId": "deletedDevices",
+          "controlerId": "device",
+          "name": "deletedDevices",
+          "Subchild": []
+        },
+        {
+          "id": "alerts",
+          "controlerId": "alerts",
+          "parentId": "device",
+          "childParentId": "alerts",
+          "name": "alerts",
+          "Subchild": [
+            {
+              "id": "alertsOpen",
+              "controlerId": "alerts",
+              "parentId": "device",
+              "childParentId": "alerts",
+              "subChildParentId": "alertsOpen",
+              "name": "alertsOpen",
+              "subChildChildern": []
+            },
+            {
+              "id": "alertsHistory",
+              "controlerId": "alerts",
+              "parentId": "device",
+              "childParentId": "alerts",
+              "subChildParentId": "alertsHistory",
+              "name": "alertsHistory",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "deviceDiagnostics",
+          "controlerId": "diagnostics",
+          "parentId": "device",
+          "childParentId": "mpdiagnostics",
+          "name": "mpdiagnostics",
+          "Subchild": [
+            {
+              "id": "scheduleActions",
+              "controlerId": "downloadLibrary",
+              "parentId": "device",
+              "childParentId": "mpdiagnostics",
+              "subChildParentId": "schedule",
+              "name": "mpscheduleActions",
+              "subChildChildern": []
+            },
+            {
+              "id": "actionStatus",
+              "controlerId": "diagnostics",
+              "parentId": "device",
+              "childParentId": "mpdiagnostics",
+              "subChildParentId": "actionStatus",
+              "name": "mpDiagnosticsJobStatus",
+              "subChildChildern": []
+            },
+            {
+              "id": "diagnosticReport",
+              "controlerId": "diagnostics",
+              "parentId": "device",
+              "childParentId": "mpdiagnostics",
+              "subChildParentId": "diagnosticReport",
+              "name": "mpDetailedDiagnosticsJobStatus",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "exports",
+          "controlerId": "exports",
+          "parentId": "device",
+          "childParentId": "exports",
+          "name": "exports",
+          "Subchild": []
+        }
+      ]
+    },
+    {
+      "id": "marketplace",
+      "controlerId": "device",
+      "parentId": "device",
+      "name": "marketplace",
+      "icon": "icon-building",
+      "children": [
+        {
+          "id": "marketplaceapps",
+          "controlerId": "marketplaceapps",
+          "parentId": "marketplaceapps",
+          "childParentId": "marketplaceapps",
+          "name": "marketplaceapps",
+          "Subchild": []
+        },
+        {
+          "id": "manageRefernceSet",
+          "controlerId": "referenceSets",
+          "parentId": "marketplace",
+          "childParentId": "mpmanageRefernceSet",
+          "name": "mpmanageRefernceSet",
+          "Subchild": [
+            {
+              "id": "referenceSet",
+              "controlerId": "referenceSets",
+              "parentId": "marketplace",
+              "childParentId": "mpmanageRefernceSet",
+              "subChildParentId": "referenceSet",
+              "name": "mpreferenceSet",
+              "subChildChildern": []
+            },
+            {
+              "id": "hierarchyReference",
+              "controlerId": "referenceSets",
+              "parentId": "marketplace",
+              "childParentId": "mpmanageRefernceSet",
+              "subChildParentId": "hierarchyReference",
+              "name": "mphierarchyReference",
+              "subChildChildern": []
+            },
+            {
+              "id": "deviceReference",
+              "controlerId": "referenceSets",
+              "parentId": "marketplace",
+              "childParentId": "mpmanageRefernceSet",
+              "subChildParentId": "deviceReference",
+              "name": "mpdeviceReference",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "deviceAppBundles",
+          "controlerId": "downloads",
+          "parentId": "marketplace",
+          "childParentId": "downloads",
+          "name": "deviceAppBundles",
+          "Subchild": [
+            {
+              "id": "downloadLibrary",
+              "controlerId": "downloadLibrary",
+              "parentId": "marketplace",
+              "childParentId": "deviceAppBundles",
+              "subChildParentId": "downloadLibrary",
+              "name": "mpdownloadLibrary",
+              "subChildChildern": []
+            },
+            {
+              "id": "applicationsLibrary",
+              "controlerId": "applicationsLibrary",
+              "parentId": "marketplace",
+              "childParentId": "deviceAppBundles",
+              "subChildParentId": "applicationsLibrary",
+              "name": "mpapplicationsLibrary",
+              "subChildChildern": []
+            },
+            {
+              "id": "scheduleDownload",
+              "controlerId": "downloadLibrary",
+              "parentId": "marketplace",
+              "childParentId": "deviceAppBundles",
+              "subChildParentId": "schedule",
+              "name": "mpscheduleDownloads",
+              "subChildChildern": []
+            },
+            {
+              "id": "downloadJob",
+              "controlerId": "downloadLibrary",
+              "parentId": "marketplace",
+              "childParentId": "deviceAppBundles",
+              "subChildParentId": "downloadJob",
+              "name": "mpdownloadJob",
+              "subChildChildern": []
+            },
+            {
+              "id": "downloadDetail",
+              "controlerId": "downloadLibrary",
+              "parentId": "marketplace",
+              "childParentId": "deviceAppBundles",
+              "subChildParentId": "downloadDetail",
+              "name": "mpdownloadDetail",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "remoteKeys",
+          "controlerId": "downloads",
+          "parentId": "marketplace",
+          "childParentId": "downloads",
+          "name": "remoteKeys",
+          "Subchild": [
+            {
+              "id": "vrkBundleLibrary",
+              "controlerId": "vrkBundleLibrary",
+              "parentId": "marketplace",
+              "childParentId": "remoteKeys",
+              "subChildParentId": "vrkBundleLibrary",
+              "name": "mpvrkBundleLibrary",
+              "subChildChildern": []
+            },
+            {
+              "id": "modelAddVRKBundle",
+              "controlerId": "vrkBundleLibrary",
+              "parentId": "marketplace",
+              "childParentId": "remoteKeys",
+              "subChildParentId": "modelAddVRKBundle",
+              "name": "modelAddVRKBundle",
+              "subChildChildern": []
+            },
+            {
+              "id": "vrkDownloadJob",
+              "controlerId": "vrkBundleLibrary",
+              "parentId": "marketplace",
+              "childParentId": "remoteKeys",
+              "subChildParentId": "vrkDownloadJob",
+              "name": "mpvrkDownloadJob",
+              "subChildChildern": []
+            },
+            {
+              "id": "vrkDownloadDetail",
+              "controlerId": "vrkBundleLibrary",
+              "parentId": "marketplace",
+              "childParentId": "remoteKeys",
+              "subChildParentId": "vrkDownloadDetail",
+              "name": "mpvrkDownloadDetail",
+              "subChildChildern": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "controlerId": "contentLibrary",
+      "parentId": "content",
+      "name": "media",
+      "icon": "icon-content-managment",
+      "children": [
+        {
+          "id": "contentLibrary",
+          "controlerId": "contentLibrary",
+          "parentId": "media",
+          "childParentId": "contentLibrary",
+          "name": "mediacontentLibrary",
+          "Subchild": []
+        },
+        {
+          "id": "scheduleDelivery",
+          "controlerId": "downloadLibrary",
+          "parentId": "media",
+          "childParentId": "schedule",
+          "name": "scheduleDelivery",
+          "Subchild": []
+        },
+        {
+          "id": "contentJobStatusReport",
+          "controlerId": "contentLibrary",
+          "parentId": "media",
+          "childParentId": "contentJobStatusReport",
+          "name": "mpcontentJobStatusReport",
+          "Subchild": []
+        },
+        {
+          "id": "contentDetailedStatusReport",
+          "controlerId": "contentLibrary",
+          "parentId": "media",
+          "childParentId": "contentDetailedStatusReport",
+          "name": "mpcontentDetailedStatusReport",
+          "Subchild": []
+        }
+      ]
+    },
+    {
+      "id": "reportsandcharts",
+      "controlerId": "reports",
+      "parentId": "reports",
+      "name": "reportsandcharts",
+      "icon": "icon-report",
+      "children": [
+        {
+          "id": "charts",
+          "controlerId": "devicecharts",
+          "parentId": "reportsandcharts",
+          "childParentId": "charts",
+          "name": "charts",
+          "Subchild": [
+            {
+              "id": "contentChartStatus",
+              "controlerId": "contentChart",
+              "parentId": "reportsandcharts",
+              "childParentId": "charts",
+              "subChildParentId": "contentChartStatus",
+              "name": "contentChartStatus",
+              "subChildChildern": []
+            },
+            {
+              "id": "chartDownloadStatus",
+              "controlerId": "deviceCharts",
+              "parentId": "reportsandcharts",
+              "childParentId": "charts",
+              "subChildParentId": "chartDownloadStatus",
+              "name": "chartDownloadStatus",
+              "subChildChildern": []
+            },
+            {
+              "id": "chartReportingDevices",
+              "controlerId": "deviceCharts",
+              "parentId": "reportsandcharts",
+              "childParentId": "charts",
+              "subChildParentId": "chartReportingDevices",
+              "name": "chartReportingDevices",
+              "subChildChildern": []
+            },
+            {
+              "id": "chartAlerts",
+              "controlerId": "deviceCharts",
+              "parentId": "reportsandcharts",
+              "childParentId": "charts",
+              "subChildParentId": "chartAlerts",
+              "name": "chartAlerts",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "subscriptionList",
+          "controlerId": "reports",
+          "parentId": "reportsandcharts",
+          "childParentId": "subscriptionList",
+          "name": "subscriptionList",
+          "Subchild": []
+        }
+      ]
+    },
+    {
+      "id": "administration",
+      "controlerId": "administration",
+      "parentId": "administration",
+      "name": "administration",
+      "icon": "icon-administrator",
+      "children": [
+        {
+          "id": "userManagement",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "userManagement",
+          "name": "userManagement",
+          "Subchild": [
+            {
+              "id": "users",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "userManagement",
+              "subChildParentId": "users",
+              "name": "users",
+              "subChildChildern": []
+            },
+            {
+              "id": "roles",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "userManagement",
+              "subChildParentId": "roles",
+              "name": "roles",
+              "subChildChildern": []
+            },
+            {
+              "id": "security",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "userManagement",
+              "subChildParentId": "security",
+              "name": "security",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "estate",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "estate",
+          "name": "estate",
+          "Subchild": [          
+            {
+              "id": "hierarchies",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "estate",
+              "subChildParentId": "hierarchies",
+              "name": "hierarchies",
+              "subChildChildern": []
+            },
+            {
+              "id": "groupEstablishment",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "estate",
+              "subChildParentId": "groupEstablishment",
+              "name": "groupEstablishment",
+              "subChildChildern": []
+            },
+            {
+              "id": "systemConfiguration",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "estate",
+              "subChildParentId": "systemConfiguration",
+              "name": "systemConfiguration",
+              "subChildChildern": []
+            },
+            {
+              "id": "ipRangesConfig",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "estate",
+              "subChildParentId": "ipRangesConfig",
+              "name": "ipRangesConfig",
+              "subChildChildern": []
+            },
+            {
+              "id": "deviceSubStatus",
+              "controlerId": "administration",
+              "parentId": "administration",
+              "childParentId": "estate",
+              "subChildParentId": "deviceSubStatus",
+              "name": "deviceSubStatus",
+              "subChildChildern": []
+            }
+          ]
+        },
+        {
+          "id": "auditReport",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "auditReport",
+          "name": "auditReport",
+          "Subchild": []
+        },
+        {
+          "id": "adminalerts",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "adminalerts",
+          "name": "adminalerts",
+          "Subchild": []
+        },
+        {
+          "id": "contentconfig",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "contentconfig",
+          "name": "contentconfig",
+					"Subchild": [
+						{
+							"id": "standardFile",
+							"controlerId": "administration",
+							"parentId": "administration",
+							"childParentId": "contentconfig",
+							"subChildParentId": "standardFile",
+							"name": "standardFile",
+							"subChildChildern": []
+						},
+						{
+							"id": "deviceLocation",
+							"controlerId": "administration",
+							"parentId": "administration",
+							"childParentId": "contentconfig",
+							"subChildParentId": "deviceLocation",
+							"name": "deviceLocation",
+							"subChildChildern": []
+						},
+						{
+							"id": "tags",
+							"controlerId": "administration",
+							"parentId": "administration",
+							"childParentId": "contentconfig",
+							"subChildParentId": "tags",
+							"name": "tags",
+							"subChildChildern": []
+						}
+					]
+        },
+        {
+          "id": "licenseDetails",
+          "controlerId": "administration",
+          "parentId": "administration",
+          "childParentId": "licenseDetails",
+          "name": "licenseDetails",
+          "Subchild": []
+        }
+      ]
+    }
+  ]
+}

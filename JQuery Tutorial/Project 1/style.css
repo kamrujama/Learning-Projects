@@ -1,0 +1,91 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: azure;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: all 0.5s ease-in-out;
+}
+
+.container{
+    width: 80vw;
+    margin: 30px auto;
+    background-color: azure;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
+
+.boxes{
+    display: flex;
+}
+.box{
+    height: 100px;
+    width: 100px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+.box-1{
+    background-color: aqua;
+}
+.box-2{
+    background-color: rgb(36, 90, 41);
+}
+.box-3{
+    background-color: rgb(216, 136, 30);
+}
+.box-4{
+    background-color: rgb(228, 74, 13);
+}
+.box-5{
+    background-color: blue;
+}
+.box-5{
+    background-color: green;
+    cursor: pointer;
+}
+
+.box-6{
+    background-color: rgb(232, 241, 94);
+}
+.box-7{
+    background-color: rgb(36, 36, 34);
+}
+
+.lightbox{
+    background-color: rgb(247, 95, 95);
+    color: whitesmoke;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+.lightbox p{
+    width: 50vw;
+    margin: 10px auto;
+}
+.lightbox input{
+    margin: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+.lightbox input{
+    height: 40px;
+    outline:none;
+    border: 0px;
+    padding-left: 15px;
+    color: whitesmoke;
+    letter-spacing: 5px;
+    background-color: brown;
+}
+
+.submit{
+    background-color: rgb(13, 132, 223);
+    line-height: 40px;
+    text-align: center;
+    padding-right: 15px;
+    transition: all 0.5s ease-in-out;
+}
+.submit:hover{
+    background-color:  rgb(13, 132, 223);;
+}

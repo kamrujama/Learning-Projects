@@ -1,0 +1,95 @@
+﻿<div class="modal-dialog" id="mdlAddDeviceManually">
+    <div class="modal-content" id="addManually">
+        <div class="modal-header" id="mdlAddDeviceManuallyHeader">
+            <button type="button"id="addDeviceman_CloseBtn" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="add_device_manually"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" data-i18n="serial"></label>
+                <input id="serialID" type="text" class="form-control" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" data-i18n="device_id"></label>
+                <input id="deviceID" type="text" class="form-control" maxlength="50" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" data-i18n="model"></label>
+                <span class="required">*</span>
+                <div class="v-chosen">
+                    <select id="modelDeviceID" class="chosen-select form-control"  data-bind="optionsCaption:'Select Model(s)', event:{change:onChangeModel},chosen: $root.models, optionsText: 'ModelName', 
+                                                 optionsValue: 'ModelId', value: modelDevice">
+                    </select>
+                </div>
+                <span id="validationModelID" class="error-v animated fadeIn"></span>
+            </div>
+            <!--<div class="form-group">
+                <label for="exampleInputEmail1" data-i18n="protocol"></label>
+                <span class="required">*</span>
+                <div class="v-chosen">
+                    <select id="protocolID" class="chosen-select form-control"  data-bind="event:{change:onChangeProtocol},chosen:GetConfigurableValuesForProtocol, optionsText: 'ConfigName', 
+                                                 optionsValue: 'ConfigValue', value: selectedProtocol">
+                    </select>
+                </div>
+                <span id="validationProtocolID" class="error-v animated fadeIn"></span>
+            </div>-->
+            <div class="form-group">
+                <label for="exampleInputEmail1" data-i18n="Hierarchy"></label>
+                <span class="required">*</span>
+                <div id="inputGroupHierarchy" class="input-group" >
+                    <input id="hierarchyValue" type="text" class="form-control" data-bind="enable:false">
+                    <a class="input-group-addon" id="hierarchyId" data-i18n="Select_Hierarchy" data-bind="click: function () {openPopup('modalHierarchy')}"></a>
+                </div>
+                <span id="hierarchyValidationID" class="error-v animated fadeIn" data-bind="validationMessage:hierarchyName"></span>
+            </div>
+
+            <div class="form-group" id="formAssignment" >
+                <label for="exampleInputEmail1" id="lblAssignment"></label>
+                <div id="inputGroupAssignment" class="input-group">
+                    <input type="text" id="txtSoftwareAssignment" class="form-control" placeholder="" data-bind="enable:false">
+                    <a id="anchorAssignmentID" class="input-group-addon" data-i18n="selectedAssignmentsGrid" data-bind="click: function () {openPopup('modelSoftwareAssignment')}"></a>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="addDeviceman_YesBtn" class="btn btn-primary" data-i18n="Add_btn" data-bind="click: function() {addDeviceManually($parent.observableModelPopup, $parent.addDatatoGrid,unloadTempPopup)}" ></button>
+            <button type="button" id="addDeviceman_CancelBtn" class="btn btn-default" data-i18n="cancel" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}"></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal bs-example-modal-lg fade in" id="deviceModelFormanually" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopupForManually'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hierarchy model start--->
+<div class="modal bs-example-modal-lg fade in" id="hierarchyModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-big">
+            <div class="modal-content" id="hierarchyModelContent">
+                <div class="modal-header" id="hierarchyModelHeader">
+                    <button type="button" class="close" data-bind="click:cancelHierarchy" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1" data-i18n="Select_Hierarchy"></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="if: hierarchyTemplateFlag">
+                        <div data-bind='component:observableHierarchy'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hierarchy model end--->

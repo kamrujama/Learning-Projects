@@ -1,0 +1,290 @@
+﻿<div class="row" id="editMerchantsView">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12"><h4 class="vf-admin-heading" data-i18n="edit_merchant" id="myModalLabel"></h4></div>
+                    <div class="tabpanelMainContent">
+                        <ul id="editMerchant" class="nav nav-tabs" role="tablist">
+                            <li class="tablinks active" role="presentation"><a id="merchantBusinessInfoTab" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="merchant_business_information" data-bind="click:function(){tabChangeCheckforChanges('merchantBusinessInfo', 'jqxgridMerchantUsers')}"></a></li>
+                            <li class="tablinks hide" role="presentation"><a id="merchantVenuesTab" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="merchant_venues" data-bind="click:function(){tabChangeCheckforChanges('merchantVenues', 'jqxgridMerchantUsers')}"></a></li>
+                            <li class="tablinks hide" role="presentation" id="liMerchantUsers"><a id="merchantUsersTab" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="merchant_users" data-bind="click:function(){tabChangeCheckforChanges('merchantUsers', 'jqxgridMerchantUsers')}"></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Business Information -->
+                    <div id="merchantBusinessInfo" class="tab-content">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="NameDiv" class="form-group">
+                                        <label data-i18n="merchant_businessname"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessName" tabindex="0" data-bind="value:businessName, event: { focusout: validateBusinessName }" class="form-control" maxlength="50">
+                                        <span data-i18n="new_merchant_name_info"></span>
+                                        <span id="merchantEditNameErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_businessName" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="Industrycodediv" class="form-group">
+                                        <label data-i18n="merchant_industry_code"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="industryCode" tabindex="0" data-bind="value:industryCode, event: { focusout: validateIndustryCode }" class="form-control" maxlength="50">
+                                        <span data-bind="validationMessage:industryCode" class="error-v animated fadeIn"></span>
+                                        <span id="merchantEditIndustryCodeErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_industry_code" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="merchantidentifierdiv" class="form-group">
+                                        <label data-i18n="merchant_identifier"></label>
+                                        <span class="required">*</span>
+                                        <input disabled type="text" id="identifier" tabindex="0" data-bind="value:identifier" class="form-control" maxlength="50">
+                                        <span data-bind="validationMessage:identifier" class="error-v animated fadeIn"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="countryDiv" class="form-group">
+                                        <label data-i18n="merchant_country"></label>
+                                        <input type="text" disabled id="businessCountry" tabindex="0" value="United States" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="Street1Div" class="form-group">
+                                        <label data-i18n="merchant_street1"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessStreet1" tabindex="0" data-bind="value:businessStreet1" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="Street2Div" class="form-group">
+                                        <label data-i18n="merchant_street2"></label>
+                                        <input type="text" id="businessStreet2" tabindex="0" data-bind="value:businessStreet2" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="towncitydiv" class="form-group">
+                                        <label data-i18n="merchant_town_city"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessTownCity" tabindex="0" data-bind="value:businessTownCity" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="statediv" class="form-group">
+                                        <label data-i18n="merchant_state_provience"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessState" tabindex="0" data-bind="value:businessState" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="postalcodeDiv" class="form-group">
+                                        <label data-i18n="merchant_postal_code"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessPostalCode" tabindex="0" data-bind="value:businessPostalCode, event: { focusout: validatePostalCode }" class="form-control" maxlength="50">
+                                        <span id="merchantEditPostalCodeErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_zipCode" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" style="padding-right: 0px">
+                                    <div id="contactnumberdiv" class="form-group">
+                                        <label data-i18n="merchant_country_code"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" disabled id="businessContactCode" tabindex="0" class="form-control" value="+1">
+                                    </div>
+                                </div>
+                                <div class="col-md-5" style="padding-left: 0px">
+                                    <div id="contactnumberdiv" class="form-group">
+                                        <label data-i18n="merchant_Contact_Number"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessContactNumber" tabindex="0" data-bind="value:businessContactNumber, event: { focusout: validateContactNumber }" class="form-control" maxlength="20">
+                                        <span id="merchantEditContactNumErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_contactNumber" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="emaildiv" class="form-group">
+                                        <label data-i18n="merchant_email"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="businessEmail" tabindex="0" data-bind="value:businessEmail, event: { focusout: validateBusinessEmail }" class="form-control" maxlength="225">
+                                        <span id="merchantEditEmailErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_businessEmail" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="websitediv" class="form-group">
+                                        <label data-i18n="merchant_Website"></label>
+                                        <input type="text" id="businessWebsite" tabindex="0" data-bind="value:businessWebsite, event: { focusout: validateBusinessWebsite }" class="form-control">
+                                        <span id="merchantEditWebsiteErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_businessWebsite" data-bind="visible:false"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row hide" id="commerceEnabledDiv">
+                                <div class="col-md-6">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="chkCommerceEnabled" data-bind="event: { change: changeCommerceEnabled }, checked: isCommerceEnabled">
+                                            <span data-i18n="merchants_commerce_enabled" style="font-weight: bold; font-size: 14px"></span>
+                                            <label data-i18n="cp_enabled_desc" style="padding: 0px"></label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="editMerchantLogoDiv" style="padding-left: 0px">
+                            <div class="form-group" style="margin-bottom:0px!important">
+                                <div>
+                                    <label class="mt0" data-i18n="merchant_logo" style="font-size: 14px;"></label>
+                                </div>
+                                <div>
+                                    <span data-i18n="merchant_logo_info"></span><br />
+                                    <button type="button" tabindex="0" id="btnEditMerchantLogo" class="btn btn-sm btn-primary" data-bind="click:function(){browseFile()}">Browse</button>
+                                </div>
+                                <div style="margin-top:20px;">
+                                    <img id="logoPreviewEditMerchant" style="width: 160px; height: 160px" src="assets/images/no_image.jpg">
+                                    <input id="logoEditMerchant" type="file" name="image" style="display:none" class="img" src="assets/images/no_image.jpg" />
+                                </div>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style="margin-left:20px">
+                                <span data-i18n="field_marked_with_are_mandatory" style="color: red;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Venues -->
+                    <div id="merchantVenues" class="tab-content" style="display: none">
+                    </div>
+
+                    <!-- Users -->
+                    <div id="merchantUsers" class="tab-content" style="display: none">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="pull-left btn-mgl">
+                                                <a tabindex="0" class="btn btn-default" id="btnRefreshUsers" role="button" data-i18n="[title]refresh_merchants_list" data-bind="click:function(){refreshGrid('jqxgridMerchantUsers')}"><i class="icon-spinner9"></i></a>
+                                                <a tabindex="1" class="btn btn-default" id="btnAddMerchantUser" role="button" data-i18n="[title]add_merchant_user" data-bind="click: function () {openPopup('modelAddMerchantUsers','jqxgridMerchantUsers')},css:{'disabled':checkRights('Merchant', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="pull-right btn-mg">
+                                                <a class="btn btn-default" id="btnRestFilterUsers" tabindex="5" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridMerchantUsers')}"><i class="icon-reset-filter"></i></a>
+                                                <a class="btn btn-default" id="btnShowHideUsers" tabindex="6" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridMerchantUsers')}"><i class="icon-hide-column"></i></a>
+                                                <a class="btn btn-default" id="btnExportToexcelUsers" tabindex="7" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel('jqxgridMerchantUsers')}"><i class="icon-export-excel"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="grid-area" id="merchantUsersDiv">
+                                                <div id="jqxgridMerchantUsers"></div>
+                                                <div id="pagerDivMerchantUsers">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 tar" style="padding-right: 30px">
+                            <button type="button" tabindex="0" id="editBtn" disabled class="btn btn-primary" data-i18n="edit_merchant_label" data-bind="click:function(){saveMerchant('jqxgridMerchant', $parent.observableModelPopup)}"></button>
+                            <button type="button" tabindex="1" id="btnMerchantCancel" class="btn btn-default mr5" data-bind="click: function () {cancelClick($parent.observableModelPopup)}" data-i18n="cancel"></button>
+                            <button type="button" tabindex="2" id="btnMerchantNext" class="btn btn-default mr5 hide" data-bind="click: function () {nextClick('merchantUsers', 'jqxgridMerchantUsers')}" data-i18n="next"></button>
+                            <button type="button" tabindex="3" id="btnMerchantPrev" class="btn btn-default mr5 hide" data-bind="click: function () {previousClick('merchantBusinessInfo', 'jqxgridMerchantUsers')}" data-i18n="previous"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+<!-- Modal start-->
+<div class="modal" id="modelShowHide" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopupShowHide'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="merchantUsersView" style="display: none">
+    <div data-bind="if: templateFlag">
+        <div data-bind='component:observableModelPopup'>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal end-->
+
+<div class="modal" id="saveChangeConfirmation" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span data-i18n="changes_discarded"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="saveMerchantChanges_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){discardChanges}"></button>
+                    <button id="saveMerchantChanges_No" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelSaveConfirmation"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="merchantUserActionConfirmation" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="merchantUserActionMsg"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="merchantUserAction_Yes" type="button" class="btn btn-danger" data-i18n="btn_YES" data-dissmiss="modal" data-bind="click:function(){merchantUserAction('jqxgridMerchantUsers')}"></button>
+                    <button id="merchantUserAction_No" type="button" class="btn btn-default mr5" data-i18n="btn_NO" data-dissmiss="modal" data-bind="click:cancelMerchantUserAction"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

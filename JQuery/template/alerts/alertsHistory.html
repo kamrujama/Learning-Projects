@@ -1,0 +1,158 @@
+﻿<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-12" data-bind='component:observableCriteria'></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a class="btn btn-default" role="button" id="btnRestFilter" tabindex="0" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilter('jqxgridAlertHistory')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" role="button" id="btnShowHide" tabindex="0" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridAlertHistory')}"><i class="icon-hide-column"></i></a>
+                            <a class="btn btn-default" role="button" id="btnExportToexcel" tabindex="0" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridAlertHistory')}"><i class="icon-export-excel"></i></a>
+                            <a class="btn btn-default" role="button" id="btnRefresh" tabindex="0" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridAlertHistory')}"><i class="icon-spinner9"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="criteriabtnDiv" style="display:none">
+                            <div class="panel panel-default mt10">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="m0" data-i18n="search_criteria"></h4>
+                                        </div>
+                                        <div class="col-md-6 tar">
+                                            <div id="expandQuickLinkDiv" data-bind="click:expandCriteria" style="float: right;">
+                                                <a class="btn btn-default btn-xs" role="button" tabindex="0" data-i18n="[title]collapse"><i class="icon-angle-up"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="deviceCriteriaDiv"  class="truncate p10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div id="jqxgridAlertHistory" style="width: 100%"></div>
+                            <div id="pagerDivAlertHistory"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="viewAlertModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:alertModelPopup'>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal end-->
+
+<div class="modal bs-example-modal-lg" id="AdvanceSearchModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-big" id="mdlAdvForAlertHistory">
+            <div class="modal-content modalContentReposition" id="mdlAdvForAlertHistoryContent">
+                <div class="modal-header" id="mdlAdvForAlertHistoryHeader">
+                    <button type="button" tabindex="0" class="close" data-dismiss="modal" data-bind="click:unloadAdvancedSearch" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1" data-i18n="advance_search"></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="if: AdvanceTemplateFlag">
+                        <div data-bind='component:observableAdvancedSearchModelPopup'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="modelViewAlertHistoryRender">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content" id="modelViewAlertHistoryRenderContent">
+                <div class="modal-header" id="modelViewAlertHistoryRenderHeader">
+                    <button type="button" tabindex="0" class="close" data-dismiss="modal" data-bind="click: function () {unloadTempPopup('unloadTemplate',0)}" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" data-i18n="view_alert"></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="Alert_date_devicePro"></span>
+                            <h6 class="m0" id="recievedDate"></h6>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="model"></span>
+                            <h6 class="m0" id="modelName"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt10">
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="Alert_type_history"></span>
+                            <h6 class="m0" id="alertType"></h6>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="severity"></span>
+                            <h6 class="m0" id="severity"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt10">
+
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="serial"></span>
+                            <h6 class="m0" id="serialNumber"></h6>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="device_id"></span>
+                            <h6 class="m0" id="deviceId"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt20">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label data-i18n="note"></label>
+                                <textarea id="PreviousNotes" tabindex="0" readonly maxlength="255" class="form-control" rows="3" style="font-size:12px;height:100px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" tabindex="0" data-bind="click: function () {unloadTempPopup('unloadTemplate',0)}" class="btn btn-default" data-dismiss="modal" data-i18n="Back_Alert_History"></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

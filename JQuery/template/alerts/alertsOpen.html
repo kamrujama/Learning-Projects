@@ -1,0 +1,196 @@
+<!-- content header start -->
+
+<h1 class="page-header  mb10" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div  class="col-md-8">
+                        <div class="col-md-12" data-bind='component:observableCriteria'></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="alertBtnDiv" class="pull-right btn-mg">
+
+                            <a tabindex="0" class="btn btn-primary" id="disabledBtn" role="button" data-i18n="[title]close_selected_alerts" data-bind="click: function () {closeAlert('jqxgridAlertsOpen')},css:{'disabled':!checkRights('Alerts', 'IsModifyAllowed')} "><i class="icon-checkmark"></i></a>
+                            <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridAlertsOpen')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" id="btnShowHide" tabindex="0" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridAlertsOpen')}"><i class="icon-hide-column"></i></a>
+                            <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel(true,'jqxgridAlertsOpen')}"><i class="icon-export-excel"></i></a>
+                            <!--<a class="btn btn-default" id="btnRefresh" role="button" data-i18n="[title]refresh_data" data-bind="click:GetAlertResultsDetails"><i class="icon-spinner9"></i></a>-->
+                            <a class="btn btn-default" id="btnRefresh" tabindex="0" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridAlertsOpen')}"><i class="icon-spinner9"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div id="criteriabtnDiv" style="display:none">
+                            <div class="panel panel-default mt10">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="m0" data-i18n="search_criteria"></h4>
+                                        </div>
+                                        <div class="col-md-6 tar">
+                                            <div id="expandQuickLinkDiv" data-bind="click:expandCriteria" style="float: right;">
+                                                <a class="btn btn-default btn-xs" tabindex="0" role="button" data-i18n="[title]collapse"><i class="icon-angle-up"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="deviceCriteriaDiv"  class="truncate p10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div id="jqxgridAlertsOpen"></div>
+                            <div id="pagerDivAlertsOpen">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="alertModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:alertModelComponent'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->
+<!--confirmation popup for without header all check box for delete operation-->
+<div class="modal" id="allSelectedID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <p data-i18n="all_alerts_of_selected_criteria"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCloseAlertYes" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click: function(){closeAlertPopup('jqxgridAlertsOpen')}"></button>
+                    <button type="button" id="btnCloseAlertNo" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-dismiss="modal"></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-->
+<!-- For Advance Model Pop up-->
+<div class="modal " id="AdvanceSearchModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-big" id="mdlAdvancedForOpenAlert">
+            <div class="modal-content modalContentReposition" id="mdlAdvancedForOpenAlertContent">
+                <div class="modal-header" id="mdlAdvancedForOpenAlertHeader">
+                    <button type="button" tabindex="0" class="close" data-dismiss="modal" data-bind="click:unloadAdvancedSearch" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1" data-i18n="advance_search"></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="if: AdvanceTemplateFlag">
+                        <div data-bind='component:observableAdvancedSearchModelPopup'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!------open model popup for edit open alerts ---->
+<div class="modal bs-example-modal-lg" id="modelEditOpenAlertID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content" id="modelEditOpenAlertIDContent">
+                <div class="modal-header" id="modelEditOpenAlertIDHeader">
+                    <button type="button" id="modelEditOpenAlertID_CloseBtn" tabindex="0" class="close" data-bind="click: function () {unloadTempPopup('unloadTemplate')}" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" data-i18n="edit_alert"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="Alert_date_devicePro"></span>
+                            <h6 class="m0" id="eventReceivedDate" data-bind="text:eventReceivedDate"></h6>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="model"></span>
+                            <h6 class="m0" id="modelName" data-bind="text:modelName"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt10">
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="Alert_type_history"></span>
+                            <h6 class="m0" id="alertName" data-bind="text: alertName"></h6>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="severity"></span>
+                            <h6 class="m0" id="severity" data-bind="text: severity"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt10">
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="serial"></span>
+                            <h6 class="m0" id="serialNumber" data-bind="text: serialNumber"></h6>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-muted" data-i18n="device_id"></span>
+                            <h6 class="m0" id="deviceId" data-bind="text: deviceId"></h6>
+                        </div>
+                    </div>
+                    <div class="row mt20" id="showPreviousNote">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span data-i18n="Previous_notes"></span>
+                                <textarea id="previousNotes" tabindex="0" maxlength="255" class="form-control m0" rows="3" data-bind="value:previousNotes" style="font-size:12px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt10">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span data-i18n="Add_new_notes"></span>
+                                <textarea id="newNotes" tabindex="0" maxlength="255" class="form-control" rows="3" style="font-size:12px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" tabindex="0" class="btn btn-primary" data-bind="click: saveAlert,css:{'disabled':!checkRights('Alerts', 'IsModifyAllowed')} " data-i18n="save"></button>
+                    <button type="button" tabindex="0" class="btn btn-primary" data-bind="click: function(){modelcloseAlert('jqxgridAlertsOpen')},css:{'disabled':!checkRights('Alerts', 'IsModifyAllowed')} " data-i18n="save_and_closed_alert"></button>
+                    <button id="modelEditOpenAlertID_CancelBtn" tabindex="0" type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

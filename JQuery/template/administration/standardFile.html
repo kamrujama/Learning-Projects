@@ -1,0 +1,79 @@
+﻿<!-- content header start -->
+<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a  tabindex="0" class="btn btn-default" id="btnRefresh" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridFileNameOnDevice')}"><i class="icon-spinner9"></i></a>
+                        <a  tabindex="0" class="btn btn-default" id="btnAddStandardFile" role="button" data-i18n="[title]placement_add" data-bind="click: function() {openPopup('modelAddStandardFile','jqxgridFileNameOnDevice')},css:{'disabled':!checkRights('Content Library', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                        <a  tabindex="0" class="btn btn-default" id="btnDeleteStandardFile" role="button" data-i18n="[title]placement_delete" data-bind="click:function(){deleteDevice('jqxgridFileNameOnDevice')},css:{'disabled':!checkRights('Content Library', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a tabindex="0" class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridFileNameOnDevice')}"><i class="icon-reset-filter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div  id="gridArea" class="grid-area pb0">
+                            <div id="jqxgridFileNameOnDevice"></div>
+                           
+                            <!--grid area end-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="modelFileNameId" tabindex="-1" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->
+<!--confirmation popup for without header all check box for delete operation-->
+<div class="modal" id="deleteDeviceID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <p id="standardMsgId"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button id="btnStandardFileYes" tabindex="0" type="button" class="btn btn-danger" data-dismiss="modal" data-i18n="confirmation_yes" data-bind="click:function(){deleteFileNameOnDevice('jqxgridFileNameOnDevice')}"></button>
+                    <button type="button" tabindex="0" id="btnStandardFileNo" class="btn btn-default" data-dismiss="modal" data-i18n="confirmation_no"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

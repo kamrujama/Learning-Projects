@@ -1,0 +1,22 @@
+﻿<div class="modal-dialog" style="width:450px;">
+	<div class="modal-content" tabindex="-1">
+		<div class="modal-header" id="modelAddTagsHeader">
+			<button type="button" id="modelAddTagsClose" tabindex="0" class="close" data-dismiss="modal" data-i18n="[title]close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-i18n="add_tag"></h4>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+				<label data-i18n="tag_name">
+				</label>
+				<span class="required">*</span>
+				<input data-bind="textInput:tagName" id="txtTagName" tabindex="0" type="text" class="form-control" maxlength="50">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="btnAddTag" tabindex="0" class="btn btn-primary" data-i18n="Add_btn" data-bind="click: function () {addTag($parent.observableModelPopup,'jqxgridTags')}" disabled></button>
+			<button type="button" id="btnCancelTag" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+		</div>
+	</div>
+</div>

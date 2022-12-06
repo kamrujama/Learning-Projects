@@ -1,0 +1,226 @@
+<div class="row" id="editRoleScreen">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="vf-admin-heading" data-i18n="Edit_role" id="myModalLabel"></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label data-i18n="role_name_label"></label>
+                                    <span class="required">*</span>
+                                    <input type="text" id="roleNameId" tabindex="0" maxlength="50" style="width: 350px" data-bind="value:roleName" class="form-control">
+                                    <span data-bind="validationMessage:roleName" class="error-v animated fadeIn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label data-i18n="role_desc_label"></label>
+                                    <input type="text" id="descriptionId" style="width: 350px"  tabindex="0" data-bind="value:description" class="form-control" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><span data-i18n="field_marked_with_are_mandatory" style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6 tar">
+                                <button type="button" id="addBtn" tabindex="0" disabled class="btn btn-primary" data-i18n="save" data-bind="click:function(){setRole($parent.observableModelPopup)}"></button>
+                                <button type="button" class="btn btn-default" tabindex="0" data-dismiss="modal" data-bind="click:function(){cancelClick($parent.observableModelPopup)},css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsModifyAllowed')}" data-i18n="cancel"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt20">
+                    <div class="col-md-6 pr0" id="userSection">
+                        <div class="panel panel-default mb0">
+                            <div class="panel-heading v-list-h" style="font-size:16px">Users</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="pull-left btn-mgl">
+                                            <a class="btn btn-default" id="addUserBtnUser" tabindex="0" role="button" data-i18n="[title]Add_User" data-bind="click: function () {openPopup('modelEditRoleUser')},css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                                            <a class="btn btn-default" id="deleteBtnUser" tabindex="0" role="button" data-i18n="[title]delete_user_frm_role" data-bind="click: function() {removeUserFromRoleBtnClick('jqxgridForUserDetails')},css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="pull-right btn-mg">
+                                            <a class="btn btn-default" id="btnRestFilterUser" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridForUserDetails')},enable:userSectionEnable"><i class="icon-reset-filter"></i></a>
+                                            <!-- <a class="btn btn-default" id="btnExportToexcelUser" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForUserDetails')},enable:userSectionEnable"><i class="icon-export-excel"></i></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="gridArea" class="grid-area">
+                                            <div id="jqxgridForUserDetails"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 pr0" id="securityGroupSection">
+                        <div class="panel panel-default mb0">
+                            <div class="panel-heading v-list-h" style="font-size:16px">Security Groups</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="pull-left btn-mgl">
+                                            <a class="btn btn-default" id="addSecurityGroupBtn" tabindex="0" role="button" data-i18n="[title]assign_sec_groups" data-bind="click: function () {openPopup('modelRoleAddSecurityGroups','jqxgridForSecurityGroupsDetails')},css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                                            <a class="btn btn-default" id="deleteBtnSecGroup" tabindex="0" role="button" data-i18n="[title]delete_sec_groups" data-bind="click: function() {removeSecurityGroupFromRoleBtnClick('jqxgridForSecurityGroupsDetails')},css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="pull-right btn-mg">
+                                            <a class="btn btn-default" id="btnRestFilterSecGroup" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridForSecurityGroupsDetails')}"><i class="icon-reset-filter"></i></a>
+                                            <!-- <a class="btn btn-default" id="btnExportToexcelSecGroup" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForSecurityGroupsDetails')}"><i class="icon-export-excel"></i></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="gridAreaForSecurityGoup" class="grid-area">
+                                            <div id="jqxgridForSecurityGroupsDetails"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 pr0">
+                        <div class="panel panel-default mb0">
+                            <div class="panel-heading v-list-h" style="font-size:16px">Rights</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="rightsBtns" class="pull-left btn-mgl">
+                                            <a class="btn btn-default" id="addUserBtn" tabindex="0" role="button" data-i18n="[title]Add_rights_to_Role" data-bind="click: function () {openPopup('modelAddRights','jqxgridForRightsDetails')},enable:rightsSection,css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                                            <a class="btn btn-default" role="button" tabindex="0" data-i18n="[title]Edit_rights" data-bind="click: function () {openPopup('modelEditRights','jqxgridForRightsDetails')},enable:rightsSection,css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsModifyAllowed')}"><i class="icon-pencil"></i></a>
+                                            <a class="btn btn-default" id="deleteBtn" tabindex="0" role="button" data-i18n="[title]remove_rights_from_role_label" data-bind="click: function() {deleteRightsClick('jqxgridForRightsDetails')},enable:rightsSection,css:{'disabled':!checkRightsForCancel('Roles and Users', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="pull-right btn-mg">
+                                            <!-- <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForRightsDetails')},enable:rightsSection"><i class="icon-export-excel"></i></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="rightsGrid">
+                                    <div class="col-md-12">
+                                        <div id="gridAreaForRightsDetails" class="grid-area">
+                                            <div id="jqxgridForRightsDetails"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal" id="downloadModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal start-->
+
+
+<div class="modal" id="userDeleteModel_Role_Child" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="deleteUser"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="userDeleteModel_Role_Child_Yes_Btn" type="button" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){removeUsersFromRole('jqxgridForUserDetails')}"></button>
+                    <button id="userDeleteModel_Role_Child_No_Btn" type="button" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:function(){cancelReset()}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="securityGroupDeleteModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="deleteSecurityGroups"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" tabindex="0" data-i18n="btn_YES" data-bind="click:function(){removeSecuritygroupFromRole('jqxgridForSecurityGroupsDetails')}"></button>
+                    <button type="button" class="btn btn-default" tabindex="0" data-i18n="btn_NO" data-bind="click:function(){cancelReset()}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="rightsDeleteModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="deleteRights"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="rightsDeleteModel_BTN_Yes" type="button" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){removeRightsFromRole('jqxgridForRightsDetails')}"></button>
+                    <button id="rightsDeleteModel_BTN_NO" type="button" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:function(){cancelReset()}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

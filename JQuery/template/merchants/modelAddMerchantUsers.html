@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12"><h4 class="vf-admin-heading" data-i18n="add_merchant_user" id="myModalLabel"></h4></div>
+                    <div class="col-md-6">
+                        <div id="firstnameDiv" class="form-group">
+                            <label data-i18n="merchant_firstname"></label>
+                            <span class="required">*</span>
+                            <input type="text" id="userFirstName" tabindex="0" data-bind="value:userFirstName, event: { focusout: validateUserFirstName }" class="form-control" maxlength="35">
+                            <span data-bind="validationMessage:userFirstName" class="error-v animated fadeIn"></span>
+                            <span id="merchantUserAddFirstNameErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_user_first_name" data-bind="visible:false"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="lastnamediv" class="form-group">
+                            <label data-i18n="merchant_lastname"></label>
+                            <span class="required">*</span>
+                            <input type="text" id="userLastName" tabindex="0" data-bind="value:userLastName, event: { focusout: validateUserLastName }" class="form-control" maxlength="35">
+                            <span data-bind="validationMessage:userLastName" class="error-v animated fadeIn"></span>
+                            <span id="merchantUserAddLastNameErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_user_last_name" data-bind="visible:false"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="emailuserdiv" class="form-group">
+                            <label data-i18n="merchant_user_email"></label>
+                            <span class="required">*</span>
+                            <input type="text" id="userEmail" tabindex="0" data-bind="value:userEmail, event: { focusout: validateUserEmail }" class="form-control" maxlength="100">
+                            <span data-i18n="merchant_user_email_info"></span>
+                            <span id="merchantUserAddEmailErrorTip" class="error_tooltip" data-i18n="Please_enter_valid_businessEmail" data-bind="visible:false"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="margin-bottom:0px!important">
+                            <label class="mt0" id="roleLabel" data-i18n="merchant_user_role" style="font-size: 14px;"></label>
+                            <input type="text" disabled id="userRole" tabindex="0" value="Merchant Admin" class="form-control" maxlength="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span data-i18n="field_marked_with_are_mandatory" style="color: red;"></span>
+                    </div>
+                    <div class="col-md-12 tar">
+                        <button type="button" tabindex="13" id="addMerchantUser" disabled class="btn btn-primary" data-i18n="merchant_submit" data-bind="click:function(){addMerchantUser('jqxgridMerchantUsers', $parent.observableModelPopup)}"></button>
+                        <button type="button" tabindex="14" class="btn btn-default mr5" data-bind="click: function () {cancelClick($parent.observableModelPopup)}" data-i18n="merchant_cancel"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content end -->
+    <!-- Modal start-->
+    <div class="modal bs-example-modal-lg" id="deviceModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="vertical-align-center">
+                <div data-bind="if: templateFlag">
+                    <div data-bind='component:observableModelPopup'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->

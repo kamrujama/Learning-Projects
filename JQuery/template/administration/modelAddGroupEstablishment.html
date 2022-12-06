@@ -1,0 +1,29 @@
+﻿<div class="modal-dialog" id="modelAddGropEstabishmnt">
+    <div class="modal-content" id="addEstablishmentID">
+        <div class="modal-header" id="modelAddGropEstabishmntHeader">
+            <button type="button" id="closeBtnGroupPopUp" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="add_Group"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label data-i18n="Group_Name_headertext"></label>
+                <span class="required" style="padding-left: 5px;">*</span>
+                <input class="form-control" id="groupName" tabindex="0" maxlength="50">
+                <span id="groupNamemsg" data-bind="validationMessage:GroupName" class="error-v animated fadeIn"></span>
+            </div>
+            <div class="form-group">
+                <label data-i18n="content_description"></label>
+                <textarea class="form-control" rows="3" id="description" tabindex="0" maxlength="255"></textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="addGroupBtn" tabindex="0" class="btn btn-primary" disabled data-bind="click: function () {addGroup($parent.observableModelPopup,$parent.isGridVisible)}" data-i18n="add"></button>
+            <button type="button" id="cancelBtnGroup" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>
+
+

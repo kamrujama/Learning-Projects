@@ -1,0 +1,42 @@
+<div class="modal-dialog" id="modalCloneDevice">
+	<div class="modal-content">
+		<div class="modal-header" id="modalCloneDeviceHeader">
+			<button type="button" class="close" id="btnCloseCloneDevice" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-i18n="copy_options"></h4>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="exampleInputEmail1" data-i18n="new_serial_number"></label>
+				<input type="text" class="form-control" id="txtNewSerialNumber" maxlength="50">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1" data-i18n="new_device_id"></label>
+				<input type="text" class="form-control" id="txtNewDeviceId" maxlength="50" />
+			</div>
+			<div class="form-group">
+				<label class="checkbox-inline">
+					<input type="checkbox" id="chkCopyDownloadOptions" checked />
+					<span data-i18n="copy_download_options" />
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="checkbox-inline">
+					<input type="checkbox" id="chkCopySoftware" data-bind="event: { change: onChangeCopySoftware }" checked />
+					<span data-i18n="copy_software" />
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="checkbox-inline" style="margin-left: 20px">
+					<input type="checkbox" id="chkCopyParameters" checked />
+					<span data-i18n="copy_parameters" />
+				</label>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="btnCloneDevice" class="btn btn-primary" data-i18n="copy" data-bind="click: function() {cloneDevice($parent.observableModelPopup, 'Devicejqxgrid')}"></button>
+			<button type="button" id="btnCancelClone" class="btn btn-default" data-i18n="cancel" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}"></button>
+		</div>
+	</div>
+</div>

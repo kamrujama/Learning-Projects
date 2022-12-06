@@ -1,0 +1,329 @@
+<div class="grid-area" id="schduleGrid">   
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1" data-i18n="job_name">
+                </label>
+                <span class="required">*</span>
+                <input type="text" id="jobNameTxt" tabindex="0" class="form-control" maxlength="50">
+                <span data-bind="validationMessage:jobName" id="isJobNamevalidationMessage" class="error-v animated fadeIn"></span>
+            </div>
+        </div>
+        <div class="col-md-3 pl0">
+            <div class="form-group">
+                <label for="exampleInputPassword1" data-i18n="tags">
+                </label>
+                <input type="text" id="tagTxt" tabindex="0" class="form-control" maxlength="50">
+            </div>
+        </div>
+    </div>
+    <div class="panel-group mb0" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-accordion"  id="accordionPackagePanel">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" tabindex="0" href="#collapseOne" data-i18n="selectedContents" aria-expanded="true" aria-controls="collapseOne"></a>
+                    <div class="accordion-arrow">
+                        <i class="indicator icon-angle-down"></i>
+                    </div>
+                </h4>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">               
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-5 pr0">
+                            <div class="panel panel-custom">
+                                <div class="panel-heading">
+                                    <h4 class="m0" data-i18n="availableContents"></h4>
+                                    <div class="btn-mg">
+                                        <a class="btn" role="button" tabindex="0" data-i18n="[title]Reset_filter" data-bind="click:function(){clearfilter('jqxgridAvailablePackage')}"><i class="icon-reset-filter"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body p0">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="AvailablePackageDiv">
+                                                <div id="jqxgridAvailablePackage"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 tac" style="padding-top:120px">
+                            <div class="btnv">
+                                <div><a id="btnForMoveRight" tabindex="0" class="btn btn-default mb0" data-bind="click:rightPackages" style="padding-bottom: 2px !important;"><b class="icon-angle-right"></b></a></div>
+                                <div><a id="btnForMoveleft" tabindex="0" class="btn btn-default mb0" data-bind="click:leftPackages" style="padding-bottom: 2px !important;"><b class="icon-angle-left"></b></a></div>
+                                <!--<div><a id="btnForAllMoveleft" tabindex="0" class="btn btn-default btn-padd" data-bind="click:allPackagesMove" style="padding-bottom: 2px !important;"><b class="icon-angle-left"></b><b class="icon-angle-left"></b></a></div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-5 pr0">
+                            <div class="panel panel-custom hide">
+                                <div class="panel-heading">
+                                    <h4 class="m0" data-i18n="selectedContents"></h4>
+                                </div>
+                                <div class="panel-body p0" style="display: block; height: 170px; overflow-y: auto; width: 100%">
+                                    <table class="table table-striped m0">
+                                        <tr>
+                                            <th data-i18n="content_name" style="font-weight: normal"></th>
+                                            <th data-i18n="content_file" style="font-weight: normal"></th>
+                                        </tr>
+                                        <tbody id="tbodySelectedpack" data-bind="foreach:movedArray">
+                                            <tr data-bind="click:function(){$parent.SelectSelectedPackageRow($data,$index())},attr:{id:'SelectPackrow'+$index()}">
+                                                <td><span data-bind="text:PackageName,attr:{id:'packagespan'+$index()}"></span></td>
+                                                <td><span data-bind="text:FileName,attr:{id:'versionspan'+$index()}"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-custom">
+                                <div class="panel-heading">
+                                    <h4 class="m0" data-i18n="selectedContents"></h4>
+                                    <div class="btn-mg"><a class="btn" tabindex='0' role="button" data-i18n="[title]Reset_filter" data-bind="click:function(){clearTablefilter('selectpackagestable')}"><i class="icon-reset-filter"></i></a></div>
+                                </div>
+                                <div class="panel-body p0" style="display: block; height: 400px; overflow-y: auto; width: 100%">
+                                    <table id="selectpackagestable" class="table table-striped m0" style="border: 1px solid #ddd !important;">
+                                        <tr>
+                                            <th style="width:4%;"><input type="checkbox" tabindex='0' data-bind="event:{change:SelectAllSelectedPackages},checked:allselectedpackagesSelected" id="selectallselectedpackages" value="" disabled></th>
+                                            <th id="1headerselectpackagestable" style="font-weight: normal"><span data-i18n="content_name"></span><a id="1filterselectpackagestable" class="icon-default" tabindex='0' style="float: right" data-bind="click:function(){customfilter($element,movedArray)}"><i class="icon-filter " title="filter"></i></a></th>
+                                            <th id="2headerselectpackagestable" style="font-weight: normal"><span data-i18n="content_file"></span><a id="2filterselectpackagestable" class="icon-default" tabindex='0' style="float: right" data-bind="click:function(){customfilter($element,movedArray)}"><i class="icon-filter " title="filter"></i></a></th>
+                                        </tr>
+                                        <tbody id="tbodyselectpackagestable" data-bind="foreach:movedArray">
+                                            <tr style="height:32px;" data-bind="attr:{id:'SelectedPackrow'+$index()}">
+                                                <td style="width:4%;"><input type="checkbox" tabindex='0' data-bind="attr:{id:'selectedpackagecb'+$index()},event:{change:function(){$parent.SelectSelectedPackageRow($data,$index())}},checked:packageSelected"></td>
+                                                <td class="vf-text-overflow"> <span data-bind="text:PackageName,attr:{id:'packagespan'+$index()}"></span></td>
+                                                <td class="vf-text-overflow"><span data-bind="text:FileName,attr:{id:'versionspan'+$index()}"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div data-bind="visible:movedArray().length<=0" style="color: rgb(143, 143, 143); font-size:20px; text-align: center; margin-top: 100px;">No Data Found</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 tac" style="padding-top:120px">
+                            <div class="btnv">
+                                <div><a class="btn btn-default angletop" id="btnMoveItemUp" tabindex="0" data-bind="click:moveItemsUP" href="#" style="padding-top:6px !important; padding-bottom:6px !important;"><b class="icon-angle-right "></b></a></div>
+                                <div><a class="btn btn-default anglebottom" id="btnMoveItemDown" tabindex="0" data-bind="click:moveItemsDown" style="padding-top:6px !important; padding-bottom:6px !important;" href="#"><b class="icon-angle-right"></b></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+    <div class="panel-group mb0" id="accordion1" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-accordion"  id="accordionSchedulePanel">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-i18n="select_schedule_content"></a>
+                    <div class="accordion-arrow">
+                        <i class="indicator icon-angle-up"></i>
+                    </div>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">             
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="mt0 b" data-i18n="download_on"></h5>
+                            <div class="radio">
+                                <label tabindex="0">
+                                    <input type="radio" tabindex="0" name="inlineRadioOptions" data-bind="checked:chkDownloadOn,click:rbDownloadNextMaintenanceClick" id="rdoMaintainanceWindow" value="Maintenance window" checked>
+                                    <span data-i18n="maintenance_window"></span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label tabindex="0">
+                                    <input type="radio" tabindex="0" name="inlineRadioOptions" data-bind="checked:chkDownloadOn,click:rbDownloadNextContactclick" id="rdoNextContent" value=" Next content">
+                                    <span data-i18n="next_contact"></span>
+                                </label>
+                            </div>
+                            <form class="form-inline m0">
+                                <div class="form-group mb10">
+                                    <label class="radio-inline" tabindex="0">
+                                        <input type="radio" tabindex="0" name="downloadRadioOptions" data-bind="checked:chkDownloadOn,click:rbDownloadDateTimeclick" id="rdoDateId" value="Date">
+                                        <span data-i18n="date"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group mb10 pl10">
+                                    <input type="text" id="downloadDatePicker" tabindex="0" data-bind="enable:dateDownload" class="form-control" placeholder="MM-DD-YYYY" style="width: 100px;">
+                                </div>
+                                <div class="form-group mb10 pl5">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" id="downloadHours" tabindex="0" data-bind="enable:dateDownload" style="width: 46px;" class="form-control" value="1" data-rule="hour12">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"><i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb10">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" id="downloadMinutes" tabindex="0" data-bind="enable:dateDownload" style="width: 40px;" class="form-control" value="1" data-rule="minute">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"><i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb10">
+                                    <select class="form-control" id="downloadName" tabindex="0" data-bind="enable:dateDownload" onchange="selectedDDLValue()" data-theme="a" data-mini="true" name="downloadName">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="m0 b" data-i18n="apply_on"></h5>
+                            <div class="radio">
+                                <label tabindex="0">
+                                    <input type="radio" name="applyRadioBtn" tabindex="0" data-bind="checked:chkApplyOn,click:immediatelyAfterDownloadClick" id="rdoImmediatelyAfterDownload" value="Immediately after download" checked>
+                                    <span data-i18n="immediately_after_download"></span>
+                                </label>
+                            </div>
+                            <form class="form-inline m0">
+                                <div class="form-group mb10">
+                                    <label class="radio-inline" tabindex="0">
+                                        <input type="radio" tabindex="0" name="applyRadioBtn" data-bind="checked:chkApplyOn,click:rbApplyDateTimeclick" id="rdoApplyDate" value="Date">
+                                        <span data-i18n="date"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group mb10 pl10">
+                                    <input type="text" id="applyDatePicker" tabindex="0" data-bind="enable:dateApply" class="form-control" placeholder="MM-DD-YYYY" style="width: 100px;">
+                                </div>
+                                <div class="form-group mb10 pl5">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" tabindex="0" id="applyHours" data-bind="enable:dateApply,event:{change:function(){applyOnDateChecOnChange('applyHours')}}" style="width: 46px; padding-top: 0px !important;" class="form-control" value="1" data-rule="hour12">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"><i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb10">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" id="applyMinutes" tabindex="0" data-bind="enable:dateApply,event:{change:function(){applyOnDateChecOnChange('applyMinutes')}}" style="width: 46px; padding-top: 0px !important;" class="form-control" value="1" data-rule="minute">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"><i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb10">
+                                    <select class="form-control" id="applyName" tabindex="0" data-bind="enable:dateApply,event:{change:function(){applyOnDateChecOnChange('applyHours')}}"
+                                            data-theme="a" data-mini="true" name="applyName">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+
+                                </div>
+                            </form>
+                            <h5 class="m0 b" data-i18n="expire_on"></h5>
+                            <div class="radio">
+                                <label tabindex="0">
+                                    <input type="radio" tabindex="0" name="rdoExpiryBtns" data-bind="checked:chkExpiryOn,click:expiryNoneClick" id="rdoExpiryNone" value="None" checked>
+                                    <span data-i18n="expiry_none"></span>
+                                </label>
+                            </div>
+                            <form class="form-inline m0">
+                                <div class="form-group mb10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="rdoExpiryBtns" data-bind="checked:chkExpiryOn,click:rbExpiryDateTimeclick" id="rdoExpiryDate" value="Date">
+                                        <span data-i18n="date"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group mb10 pl10">
+                                    <input type="text" id="expiryDatePicker" tabindex="0" data-bind="enable:dateExpiry" class="form-control" placeholder="MM-DD-YYYY" style="width: 100px;">
+                                </div>
+                                <div class="form-group mb10 pl5">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" id="expiryHours" tabindex="0" data-bind="enable:dateExpiry,event:{change:function(){expireOnDateChecOnChange('expiryHours')}}" style="width: 46px; padding-top: 0px !important;" class="form-control" data-rule="hour12">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"> <i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb10">
+                                    <div class="input-group spinner" data-trigger="spinner">
+                                        <input type="text" id="expiryMinutes" tabindex="0" data-bind="enable:dateExpiry,event:{change:function(){expireOnDateChecOnChange('expiryMinutes')}}" style="width: 46px; padding-top: 0px !important;" class="form-control" value="1" data-rule="minute">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up" style="font-size:10px;"><i class="icon-angle-up"></i></a>
+                                            <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down" style="font-size:10px;"><i class="icon-angle-down"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group mb10">
+                                    <select class="form-control" id="expiryName" tabindex="0" data-bind="enable:dateExpiry,event:{change:function(){expireOnDateChecOnChange('expiryHours')}}" data-theme="a" data-mini="true" name="expiryName">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" id="previousBtn" tabindex="0" class="btn btn-default" data-bind="click:previousClick"><i class="icon-arrow-left2"></i><span data-i18n="back" style="margin-left: 4%"></span></button>
+    </div>
+    <div class="col-md-6 tar">
+        <button type="button" id="submitBtn" tabindex="0" data-bind="click:submitClick" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+<!--</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>-->
+<!-- content end -->
+<!-- Model-->
+<div class="modal" id="downloadModelconfocontent" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="active"></span>
+                            <span id="inActive" data-i18n="create_job_IncludeInactive_content"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="scheduleContentConfoYes" type="button" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click:submitBtnClicked"></button>
+                    <button id="scheduleContentConfoNo" type="button" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="modal bs-example-modal-lg" id="viewAlertModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:alertModelPopup'></div>
+            </div>
+        </div>
+    </div>
+</div>

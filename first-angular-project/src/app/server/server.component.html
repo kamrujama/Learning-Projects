@@ -1,0 +1,40 @@
+<h2>Welcome to Server Component</h2>
+<p>
+  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem accusamus
+  dolor eius quis omnis in, molestiae facilis ut? Placeat, sint.
+</p>
+
+<label class="my-2">Enter Server Name : </label>
+<input type="text" [(ngModel)]="serverName" class="form-control" />
+<hr />
+<!-- Server name in button -->
+<div class="form-group">
+  <button class="btn btn-primary mx-2" (click)="addServer()">Add Server</button>
+  <button class="btn btn-danger" (click)="deleteServer()">Delete Server</button>
+</div>
+
+<hr />
+<div
+  style="display: flex; flex-wrap: wrap"
+  *ngIf="createdServer; else noServer"
+>
+  <button
+    class="btn btn-{{ bgName }} mx-2 my-2"
+    *ngFor="let server of servers; let i = index"
+    (click)="deleteServerRandomly(i)"
+  >
+    {{ server }}
+  </button>
+</div>
+
+<button class="btn btn-success">{{count}}</button>
+
+<div class="container">
+  <label for="">Option 1</label><input type="checkbox" (change)="increment($event)" id="checkbox">
+  <label for="">Option 2</label><input type="checkbox" (change)="increment($event)" id="checkbox">
+  <label for="">Option 3</label><input type="checkbox" (change)="increment($event)" id="checkbox">
+</div>
+
+<ng-template #noServer>
+  <button class="btn btn-primary">No Server Yet</button>
+</ng-template>

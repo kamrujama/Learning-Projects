@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>On - Off</title>
+
+    <style>
+        body{
+            background-color: #ececec;
+            text-align: center;
+        }
+
+        .container{
+            height: 150px;
+            width: 500px;
+            margin: 10px auto;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, .1),
+            -10px -10px 10px rgba(255, 255, 255, 1),
+            inset 10px 10px 10px rgba(0, 0, 0, .1),
+            inset -10px -10px 10px rgba(255, 255, 255, 1);
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>On - Off JQuery</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem
+        excepturi atque quibusdam voluptates porro deserunt nam aliquid iste
+        nemo nulla?
+      </p>
+    </div>
+    <button class="removeClass">Add Events</button>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        $(document).ready(function(){
+            $(".container").on({
+                "click" : function(){
+                $(this).css({"background-color":"black","color":"white"})
+                },
+
+                "mouseout" : function(){
+                    $(this).css("background-color","gray").mou
+                },
+                "mouseenter" : function(){
+                    $(this).css("color","maroon")
+                }
+            })
+
+            $(".removeClass").click(function(){
+                $(".container").off("mouseenter mouseout")
+            })
+        })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,337 @@
+﻿<div class="row">
+	<div class="col-md-12">
+
+		<div>
+
+			<!-- Nav tabs -->
+			<!-- Tab panes -->
+
+			<div role="tabpanel" class="tab-pane active" id="diagnostic-profile">
+				<div id="profiletab" class="vertical-tab">
+
+					<div class="row" id="devDetailVericalTab">
+						<div class="device-profile-sub-tab">
+							<ul id="profiletabHeader" class="nav nav-tabs" role="tablist" data-bind="foreach: Details">
+								<li role="presentation" class="" data-bind="css: { 'active': id === 'datagridHardwareProfile' }, click: $parent.showdetails"><a data-bind="    attr: { id: id, 'href': '#' + id + 'Div' }, text: displayvalue" role="tab" data-toggle="tab"></a></li>
+							</ul>
+						</div>
+						<div class="device-profile-sub-div" id="ShowDetailsMainDiv">
+							<div class="row" style="margin-left:-13px!important;">
+								<div class="col-md-12" id="showHideResetExportDiv" style="margin-bottom: 5px; display: block">
+									<div class="pull-right btn-mg" style="padding-bottom: 0px;">
+										<a class="btn btn-default" role="button" data-i18n="[title]show_all_data" data-bind="click: function () { clearfilterDeviceDetailGrid() }"><i class="icon-reset-filter"></i></a>
+										<a class="btn btn-default" id="btnShowHide" role="button" data-i18n="[title]show_hide" data-bind="click: function () { openPopup('modelShowHideCol') }"><i class="icon-hide-column"></i></a>
+										<a class="btn btn-default" id="btnExport" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToExcelDeviceDetailgrids() }, visible: VHQFlag"><i class="icon-export-excel"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="row" style="margin-left:-13px!important;">
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="datagridHardwareProfileDiv">
+										<div id="datagridHardwareProfileGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridSimCardDiv">
+										<div id="datagridSimCardGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridPortsDiv">
+										<div id="datagridPortsGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridEncryptionKeyDiv">
+										<div id="datagridEncryptionKeyGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridJSONKeyDiv">
+										<div id="datagridJSONKeyGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="softwareDiv">
+										<div id="softwareGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="ParametersDiv">
+										<div id="ParametersGridDiv" data-bind='component: observableParamConponent'></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridCertificateDiv">
+										<div id="datagridCertificateGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridJSONCertificatesDiv">
+										<div id="datagridJSONCertificatesGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridCustomIdentifierDiv">
+										<div id="datagridCustomIdentifierGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="Verishield_ProtectDiv">
+										<div id="Verishield_ProtectGridDiv"></div>
+										<div id="Verishield_Protect">
+											<div class="form-group">
+												<div class="row" style="padding-top: 20px; padding-bottom: 10px;">
+													<div class="col-md-4">
+														<!--<label data-i18n="vclDetail">VCL Detail:</label>-->
+														<span style="font-size:16px; font-weight:bold;">VCL Detail:</span>
+													</div>
+													<span class="pull-right" data-bind="visible: vlcDetailCheckDataforTxtbox" style="margin-right:30px;">
+														<a title="Export To Excel" class="btn btn-default" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToExcelVeriShieldProtectVclDetailInfo() }, visible: VHQFlag"><i class="icon-export-excel"></i></a>
+													</span>
+												</div>
+												<div id="vlcDetailCheckDataforTxtbox" data-bind="visible: vlcDetailCheckDataforTxtbox">
+													<textarea class="form-control" id="txtvclDetail" maxlength="255" rows="5" data-bind="value: vclDetails" readonly></textarea>
+													<div data-bind="foreach: VCLDiagPage">
+														<div>
+															<label data-bind="text: Title"></label>
+															<div class="col-md-12">
+																<div class="pull-right btn-mg" style="padding-bottom: 12px;">
+																	<a class="btn btn-default" id="A3" role="button" data-i18n="[title]show_all_data"><i class="icon-reset-filter"></i></a>
+
+																</div>
+
+															</div>
+															<div data-bind="attr: { id: 'VCLDiagPageGrid' + Title }">
+																<span data-bind="text: Title"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="VCLDiagPageDiv" style="height: 231px; display: block; overflow: auto" data-bind="visible: VCLDiagPageDivDataIsCheck">
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane " id="datagridDownloadAutomationDiv">
+										<div class="panel-group mb0" id="accordionInstalledPackageandKeys">
+											<div class="panel panel-accordion">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a id="AccordionInstalledPackages" data-toggle="collapse" data-parent="#accordionInstalledPackageandKeys" href="#InstalledPKcollapseOne" data-i18n="rs_packages"></a>
+														<div class="accordion-arrow">
+															<i class="indicator icon-angle-up"></i>
+														</div>
+													</h4>
+												</div>
+												<div id="InstalledPKcollapseOne" class="panel-collapse collapse in">
+													<div class="panel-body p0">
+														<div class="row">
+															<div class="col-md-12">
+																<div class="grid-area" id="installedPackageDiv" style="padding-top: 0px;">
+																	<div id="datagridDownloadAutomationGridDiv"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="panel panel-accordion">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a id="AccordionFileStatus" data-toggle="collapse" data-parent="#accordionInstalledPackageandKeys" href="#InstalledPKcollapseTwo" data-i18n="file_status"></a>
+														<div class="accordion-arrow">
+															<i class="indicator icon-angle-down"></i>
+														</div>
+													</h4>
+												</div>
+												<div id="InstalledPKcollapseTwo" class="panel-collapse collapse">
+													<div class="panel-body p0">
+														<div class="row">
+															<div class="col-md-12">
+																<div class="grid-area" id="fileStatusDiv" style="padding-top: 0px;">
+																	<div id="datagridFileStatusGridDiv"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="panel panel-accordion">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a id="AccordionInstalledKeys" data-toggle="collapse" data-parent="#accordionInstalledPackageandKeys" href="#InstalledPKcollapseThree" data-i18n="rs_keys"></a>
+														<div class="accordion-arrow">
+															<i class="indicator icon-angle-down"></i>
+														</div>
+													</h4>
+												</div>
+												<div id="InstalledPKcollapseThree" class="panel-collapse collapse">
+													<div class="panel-body p0">
+														<div class="row">
+															<div class="col-md-12">
+																<div class="grid-area" id="installedKeyDiv" style="padding-top: 0px;">
+																	<div id="installedkeysGridDiv"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row" id="showNoDataMessage">
+										<div class="col-md-12">
+											<div data-i18n="no_data_to_display"></div>
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="datagridIOModulesDiv">
+										<div id="datagridIOModulesGridDiv"></div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane " id="ConnectivityDiv">
+										<div class="row" style="padding-bottom: 10px;" id="WifiProfilediv">
+
+											<div style="font-size:16px; font-weight:bold;margin-bottom:5px;margin-left:18px;">Wifi Profile Data</div>
+
+										</div>
+										<div id="datagridConnectivityWiFiGridDiv"></div>
+
+										<div class="row" style="padding-bottom: 10px;" id="BluetoothProfileDiv">
+											<div class="row">
+												<div class="col-md-12">
+													<div style="font-size: 16px; font-weight: bold; margin-bottom: -39px; margin-left: 18px;"><br />BlueTooth Profile Data</div>
+
+													<div class="pull-right btn-mg" style="padding-bottom: 9px; padding-top: 5px; padding-right: 30px">
+														<a class="btn btn-default" id="A4" role="button" data-i18n="[title]show_all_data" data-bind="click: function () { clearUiGridFilter('datagridConnectivityBluetoothGridDiv') }"><i class="icon-reset-filter"></i></a>
+														<a class="btn btn-default" id="A5" role="button" data-i18n="[title]show_hide" data-bind="click: function () { openPopupBluetoothProfile('modelShowHideCol') }"><i class="icon-hide-column"></i></a>
+														<a class="btn btn-default" id="A6" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToExcelBluetoothgrid() }, visible: VHQFlag"><i class="icon-export-excel"></i></a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="datagridConnectivityBluetoothGridDiv"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<div class="modal bs-example-modal-sm" id="profilDeviceDetailApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-bind="click: function () { $parent.unloadTempPopup('unloadTemplate') }" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title"><span data-i18n="applications_of_bundle"></span><span id="devProfSofStatViewModelHead"></span></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right btn-mg">
+								<a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]reset" data-bind="click: function () { clearFilterSoftwareStatusModelView('jqxDevProfDetailBundle') }"><i class="icon-reset-filter"></i></a>
+								<a class="btn btn-default" id="btnExportToexcel" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToExcelSoftwareStatusModelView('jqxDevProfDetailBundle') }, visible: VHQFlag"><i class="icon-export-excel"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="grid-area">
+						<div id="jqxDevProfDetailBundle"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-i18n="btn_OK" data-bind="click: function () { $parent.unloadTempPopup('unloadTemplate') }"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="deviceDatail" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div data-bind="if: templateFlag">
+				<div data-bind='component: observableModelPopup'>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal end-->
+<!--<div class="modal bs-example-modal-sm" id="applicationDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="col-md-12">
+		<div class="panel panel-white">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="grid-st">
+							<div class="grid-area">
+								<div id="jqxgridApplicationDetails" style="width: 100%;"></div>
+								<div id="pagerDivjqxgridApplicationDetails"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+		   </div>
+		</div>
+	</div>
+</div>-->
+
+<div class="modal bs-example-modal-sm" id="applicationDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" style="width: 650px; height: 450px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-bind="click: function () { $parent.unloadTempPopup('unloadTemplate') }" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title"><span id="applicationDetailsHeaderText"></span></h4>
+				</div>
+				<div class="modal-body">
+					<div class="grid-area">
+						<div id="jqxgridApplicationDetails"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-i18n="btn_OK" data-bind="click: function () { $parent.unloadTempPopup('unloadTemplate') }"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="IsEnableConfirmMsg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p>
+								<span id="confirmation"></span>&nbsp;<span></span>&nbsp;<span></span>&nbsp;<br>
+								<span></span>
+							</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="scheduleConfirmationPopUp_YES" class="btn btn-success" data-i18n="btn_YES">Yes</button>
+					<button type="button" id="scheduleConfirmationPopUp_NO" data-i18n="btn_NO" class="btn btn-default">No</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

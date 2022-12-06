@@ -1,0 +1,95 @@
+﻿<div class="modal-dialog modal-lg" id="mdlAddGrpAssgnmt">
+    <div class="modal-content" id="mdlAddGrpAssgnmtContent">
+        <div class="addGroup">
+            <div class="agInside" id="agInside">
+                <div class="modal-header" id="agInsideHeader">
+                    <button type="button" data-bind="click:agCancel" class="close agCancel">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" data-i18n="add_group_Assignment"></h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <span id="validateMessage" class="error-v animated fadeIn"></span>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="group_name_add_group"></label>
+                            <span class="required">*</span>
+                            <input id="groupName" data-bind="value:groupsName" type="text" maxlength="50" class="form-control">
+                            <span data-bind="validationMessage:groupsName" class="error-v animated fadeIn"></span>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="content_description"></label>
+                            <textarea id="description" data-bind="value:description" maxlength="255" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-i18n="Add_btn" data-bind="click: function () { addGroupClick('jqxgridAddGroup', $parent.observableModelPopup) }" class="btn btn-primary"></button>
+                    <button type="button" data-bind="click:agCancel" data-i18n="cancel" class="btn btn-default agCancel"></button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-header" id="modelHeaderSoftUpgrade">
+            <button type="button" class="close" data-dismiss="modal" data-bind="click:function(){$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="deviceSeachTitle" data-i18n="add_group_assignments_to_selected_devices"></h4>
+            <h4 class="modal-title" id="deviceProfileTitle" data-i18n="select_groups"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" data-i18n="add_group_Assignment" id="addGroup" data-bind="click:openAddGroup,visible:addGroupBtnVisible,css:{'disabled':!checkRights('Groups and Hierarchies', 'IsModifyAllowed')}" class="btn btn-success"></button>
+                    <h4 class="modal-title" id="groupDeviceId" data-i18n="groups"></h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-mg tar">
+                        <a class="btn btn-default" data-bind="click:function(){clearfilter('jqxgridAddGroup')}" role="button" data-i18n="[title]Reset_filter"><i class="icon-reset-filter"></i></a>
+                        <!-- <a class="btn btn-default" role="button" data-bind="click:function(){exportToXls('jqxgridAddGroup')}" data-i18n="[title]exportToXls"><i class="icon-export-excel"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-area">
+                        <div id="jqxgridAddGroup"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" data-bind="click:function(){assignDevicesToGroups('Devicejqxgrid', 'jqxgridAddGroup', $parent.unloadTempPopup)},visible:fromDeviceSearchScreen" class="btn btn-primary" data-i18n="save"></button>
+            <button type="button" data-dismiss="modal" data-bind="click:function(){saveBtnClicked('jqxgridAddGroup',$parent.unloadTempPopup,$parent.refereshHierarchyfordeviceProfile)},visible:fromDeviceProfileScreen" class="btn btn-primary" data-i18n="save"></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:function(){$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deviceModified" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="deviceModifiedText"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="deviceModified_ConfoYes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){ refreshData('Devicejqxgrid', $parent.observableModelPopup)}"></button>
+                    <button id="deviceModified_ConfoNo" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelPopup"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

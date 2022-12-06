@@ -1,0 +1,136 @@
+﻿<div class="modal-dialog modal-big" id="mdlPackageQualifiers">
+	<div class="modal-content">
+		<div class="modal-header" id="mdlPackageQualifiersHeader">
+			<button type="button" id="btnClosePackageQualifiers" tabindex="0" class="close" data-bind="click: function () { handleCloseEvent($parent.unloadTempPopup) }" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-i18n="package_download_qualifiers"></h4>
+		</div>
+
+		<div class="modal-body">
+
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="downloadConditionDiv" class="row border-box"
+								 style="margin-bottom: 5px; margin-left: 2px;margin-right: 2px">
+								<div class="border-box-group-white">
+									<span class="border-box-group-text" data-i18n="download_conditions"></span>
+								</div>
+								<div class="row border-box"
+									 style="margin-bottom: 5px; margin-left: 15px;margin-right: 15px;margin-top: 10px">
+									<div class="col-md-12 checkbox border-box-group-white" style="margin-bottom: 0px">
+										<label class="border-box-group-text">
+											<input type="checkbox" id="checkboxSyncVerification" value="" data-bind="checked:chkSyncVerification,event: { change: checkSyncVerification }">
+											<span data-i18n="perform_sync_verification"></span>
+										</label>
+									</div>
+									<div class="col-md-12" id="syncVerificationDiv">
+										<h4 data-i18n="perform_sync_verification_text"></h4>
+										<label style="display:flex">
+											Notes:
+											<ul>
+												<li data-i18n="sync_verification_note_one"></li>
+												<li data-i18n="sync_verification_note_two"></li>
+											</ul>
+										</label>
+
+									</div>
+								</div>
+								<div id="additionalConditionsDiv">
+									<div class="col-md-12">
+										<div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-top:10px; border-color:#ddd">
+											<div style="margin-left: 15px" class="border-box-group-white">
+												<span class="border-box-group-text" data-i18n="additional_conditions"></span>
+											</div>
+											<div class="panel panel-custom">
+												<div class="panel-heading" id="divAddconditions">
+													<div class='btn-mg' style="top:-12px;right:2px;position:absolute">
+														<label style="margin-right: 40px;margin-top: 10px;" data-i18n='additional_conditions_add_condtions'></label>
+														<a id="addAttrib" tabindex="0" class="btn btn-mg" role="button" data-bind="click:addItems" data-i18n="[title]add_attribute_reference"><i class="icon-plus"></i></a>
+													</div>
+												</div>
+												<div class="panel-body p0" style="display: block; height: 250px; overflow-y: auto; width: inherit;">
+													<table class="table table-striped m0" style="margin-top: 0px">
+														<tr>
+															<th data-i18n="package_qualifiers_Operator_set_attribute" style="font-weight: normal"></th>
+															<th data-i18n="package_qualifiers_app_name" style="font-weight: normal"></th>
+															<th data-i18n="package_qualifiers_app_version" style="font-weight: normal"></th>
+															<th data-i18n="ref_remove" style="font-weight: normal" id="colRemoveCondition"></th>
+														</tr>
+														<tbody id="itemTbody" data-bind="foreach:applicationItems">
+															<tr>
+																<td>
+																	<select tabindex="0" class="form-control table-inc inFontSizeDeviceNAdvance" data-bind="attr:{id:'selectComparisonOperator'+$index()},event:{change:function($data,event, id){$parents[0].onChangeCondition($data, event, 'selectComparisonOperator'+$index(), $index())}},foreach:$parent.conditionalOperators">
+																		<option data-bind="value:Id,text:Name"></option>
+																	</select>
+																</td>
+																<td><input class="form-control" data-bind="attr:{id:'txtAppNameValue'+$index()}" tabindex="0" maxlength="255" type="text" style="width: 100%" /></td>
+																<td>
+																	<input class="form-control" data-bind="attr:{id:'txtAppVersionValue'+$index()}" maxlength="255" type="text" style="width: 100%" />
+																</td>
+																<td data-bind="visible:isAllowed"><a class="btn btn-default" tabindex="0" role="button" data-bind="click:$parent.removeItems" title="Remove"><i class="icon-bin"></i></a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<label style="margin-left:15px" data-i18n="package_qualifiers_condition_information"></label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="downloadSettingsDiv" class="row border-box"
+								 style="padding-bottom: 1em;margin-bottom: 5px; margin-left: 2px;margin-right: 2px;margin-top:10px">
+								<div class="border-box-group-white">
+									<span class="border-box-group-text" data-i18n="install_settings"></span>
+								</div>
+								<div class="row col-md-12">
+									<div class="col-md-2">
+										<h4 data-i18n="post_install_actn"></h4>
+									</div>
+									<div class="col-md-3" id="divPostInstallActionddl">
+										<div class="v-chosen">
+											<select id="selectPostInstallAction" class="chosen-select form-control" data-bind="event:{change:onChangeAction},chosen: postInstallActions, optionsText: 'action',
+                                                optionsValue: 'action'"></select>
+										</div>
+									</div>
+									<div class="col-md-3" id="divPostInstallActionLabel" style="display:none">
+										<h4 class="b" data-bind="text:postInstallAction"></h4>
+									</div>
+									<div class="col-md-6" id="postInstalActionInfoTag">
+										<h6 data-i18n="post_install_actn_information"></h6>
+									</div>
+									<div class="col-md-12">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="checkboxOptionalPackage" value="" data-bind="checked:chkOptionalPackage,event: { change: checkOptionalPackage }">
+												<span style="font-size:14px" data-i18n="optional_package"></span>
+											</label>
+										</div>
+										<div id="optionalPackageDiv">
+											<h4 data-i18n="optional_package_text"></h4>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<label data-i18n="installation_settings_notes"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" id="btnSaveDownloadQualifiers" tabindex="0" data-i18n="save" data-bind="click:function(){ saveDownloadQualifiers($parent.unloadTempPopup)}"></button>
+			<button type="button" class="btn btn-default" id="btnCancelDownloadQualifiers" tabindex="0" data-dismiss="modal" data-i18n="cancel" data-bind="click: function () { handleCloseEvent($parent.unloadTempPopup) }"></button>
+		</div>
+	</div>
+
+</div>

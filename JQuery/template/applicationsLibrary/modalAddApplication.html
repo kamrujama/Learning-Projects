@@ -1,0 +1,233 @@
+﻿<div class="modal-dialog modal-lgs" id="modelAddApplication">
+    <div class="modal-content" id="modelAddApplicationContent">
+        <div class="modal-header" id="modelAddApplicationHeader">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="application_library_add_tooltip" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div id="application">
+                    <div class="p10">
+                        <form id="addApplication">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label data-i18n="app_library_app_file"></label>
+                                        <span class="required">*</span>
+                                        <div class="row">
+                                            <div class="col-md-8 pr0">
+                                                <input id="selectFile" data-bind="enable:false" type="text" class="form-control">
+                                                <span id="ApplicationFile" class="error-v animated fadeIn"></span>
+                                            </div>
+                                            <div class="col-md-4 pl0 pr">
+                                                <div id="divBtnFileInput">
+                                                    <button class="btn btn-primary" type="file" data-i18n="browse" style="height: 26px; padding: 2px 10px !important;"></button>
+                                                    <input id="fileinput" type="file" tabindex="12" data-bind="event:{change:handleFileSelect}" class="form-control file-inputs" accept=".zip" style="cursor:pointer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="applicationName_Version">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label data-i18n="app_library_app_name"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="txtApplicationName" data-bind="value:ApplicationName" class="form-control" maxlength="50" tabindex="2">
+                                        <span data-bind="validationMessage:ApplicationName" class="error-v animated fadeIn"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label data-i18n="app_library_app_version"></label>
+                                        <span class="required">*</span>
+                                        <input type="text" id="txpAplicationVersion" data-bind="value:ApplicationVersion" class="form-control" maxlength="50" tabindex="2">
+                                        <span data-bind="validationMessage:ApplicationVersion" class="error-v animated fadeIn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label data-i18n="app_library_select_gid"></label>
+                                        <span class="required">*</span>
+                                        <div class="v-chosen">
+                                            <select id="selectApplicationGID" class="chosen-select form-control" tabindex="4" data-bind="event:{change:onChangeGIDEdit},chosen: applicationGIDsList, optionsText: 'GIDValue',
+                                                    optionsValue: 'GIDValue',optionsCaption: 'Select GID'"></select>
+                                        </div>
+                                        <span id="validateGID" class="error-v animated fadeIn"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label data-i18n="models_label"></label>
+                                        <span class="required">*</span>
+                                        <div class="v-chosen">
+                                            <select id="modelTypeId" class="chosen-select form-control" tabindex="3" data-placeholder="Select Model(s)" multiple data-bind="event:{change:onChangeModel},chosen: modelsByPlatformList, optionsText: 'ModelName',
+                                                 optionsValue: 'ModelId',value: modelOption"></select>
+                                        </div>
+                                        <span id="modelType" class="error-v animated fadeIn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div id="isDisableDownloadDuration" style="background: rgb(0, 0, 0); width: 95.8%; height: 203px; margin-top:27px; float: left;display:none; position: absolute; z-index: 997; opacity: 0.1;"></div>
+                                <div class="row">
+                                    <label style="padding-bottom:5px;padding-left:15px" data-i18n="app_library_download_duration"></label>
+                                    <div class="col-md-12" style="display: block; height: 200px; overflow-y: auto;">
+                                        <table class="table table-striped" style="margin-top: 0px">
+                                            <tr>
+                                                <th data-i18n="app_library_media" style="font-weight: normal"></th>
+                                                <th data-i18n="app_library_duration" style="font-weight: normal"></th>
+                                            </tr>
+                                            <tbody id="itemTbody" data-bind="foreach:GetConfigurableValuesForDownloadMedia">
+                                                <tr>
+                                                    <td><span data-bind="text:DisplayConfigName,attr:{id:'ConfigName'+$index()}"></span></td>
+                                                    <td>
+                                                        <div class="input-group spinner" style="display: table-cell" data-trigger="spinner">
+                                                            <input type="text" style="width: 75px; height: 34px;" data-bind="attr:{'placeholder':ConfigValue,id:'txtAttrValue'+ConfigId},event:{focusout:$parents[0].ValidateNumber},value:ConfigValue" class="form-control spinner" value="5" data-rule="downloadDuration" maxlength="3">
+                                                            <div class="input-group-addon" style="display: table-cell;float: left;width: 25px">
+                                                                <a href="javascript:;" class="spin-up" data-spin="up" data-bind="attr:{id:'templateNumericUp'+ConfigId},click:$parent.upNumber"><i class="icon-angle-up"></i></a>
+                                                                <a href="javascript:;" class="spin-down" data-spin="down" data-bind="attr:{id:'templateNumericDown'+ConfigId},click:$parent.downNumber"><i class="icon-angle-down"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="chkAllowDownload" data-bind="event:{change:allowDownloadChkboxClick},checked:allowDownloadChkbox">
+                                                <span data-i18n="app_library_allow_download"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="chkExcludeFromMADChkbox" data-bind="event:{change:excludeFromMADChkboxClick},checked:excludeFromMADChkbox">
+                                                <span data-i18n="app_library_ea_from_ma_download"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="chkallowParamDwldChkbox" data-bind="event:{change:allowParamDwldChkboxClick},checked:allowParamDwldChkbox">
+                                                <span data-i18n="app_library_allow_parameter_download"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="chkperformExcDwld" data-bind="event:{change:performExcDwldChkboxClick},checked:performExcDwldChkbox">
+                                                <span data-i18n="app_library_perform_exclusive_download"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="checkbox" id="downloadAutomation">
+                                            <label>
+                                                <input type="checkbox" id="chkdownloadAutomation" data-bind="event:{change:downloadAutomationChkboxClick},checked:downloadAutomationChkbox" disabled>
+                                                <span data-i18n="app_library_download_auto"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" data-bind="visible: showSaveCancel">
+            <span data-i18n="field_marked_with_are_mandatory" style="color: red; text-align: left; float: left;"></span>
+            <button type="button" id="btn_uploadLibrary" class="btn btn-primary" data-bind="click:function(){addApplication($parent.observableModelPopup)}" data-i18n="add_package" disabled tabindex="11"></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel" tabindex="10"></button>
+        </div>
+    </div>
+</div>
+<!--Application Doesnot Support AutomateDownloads confirmation popup-->
+<div class="modal" id="modelAutomateID" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-sm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                    <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                    <p data-i18n="Application_Doesnot_Support_AutomateDownloads"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click:function(){addApplication($parent.observableModelPopup)}"></button>
+                    <button type="button" class="btn btn-default mr5" data-dismiss="modal" data-i18n="btn_NO" data-bind="click: function () {unloadTempPopup('unloadTemplate')}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="childApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" style="width: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="H1"></h4>
+                    <span id="parameter_for_application"></span>
+                </div>
+                <div class="modal-body">
+
+                    <div class="grid-area" style="display: block; height: 300px; overflow-y: auto">
+                        <div id="PADTreeGrid"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="informationAddApplicationPopup" style="z-index:99999" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center  m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i id="infoAddApplicationicon" class="icon-information c-blue"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 id="infoAddApplicationHead" class="modal-title c-blue">Information</h4>
+                            <p id="infoAddApplicationMessage" style="word-wrap: break-word;"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="infoAddApplicationBtnOk" data-bind="click:hideinfo" class="btn btn-primary" tabindex="0">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

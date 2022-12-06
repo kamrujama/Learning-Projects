@@ -1,0 +1,40 @@
+﻿<div class="row" style="width:102%;margin-left:-27px!important">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="pull-left btn-mgl">
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right btn-mg">
+                    <a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilter('jqxgridCommunicationHistory')}"><i class="icon-reset-filter"></i></a>
+                    <a class="btn btn-default" id="btnShowHide" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridCommunicationHistory',null)}" data-toggle="modal" data-target="#hideShowColumns"><i class="icon-hide-column"></i></a>
+                    <a class="btn btn-default" id="btnExportToexcel" role="button" data-bind="click:function(){exportToExcel(true,'jqxgridCommunicationHistory')},visible:VHQFlag" data-i18n="[title]exportToXls"><i class="icon-export-excel"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-area">
+                    <div id="jqxgridCommunicationHistory"></div>
+                    <div id="pagerDivCommunicationHistory"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal" id="downloadModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

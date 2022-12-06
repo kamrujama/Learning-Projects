@@ -1,0 +1,167 @@
+﻿<div class="modal-dialog modal-big" id="mdlAddLib">
+	<div class="modal-content" id="addlibrary">
+		<div class="modal-header" id="mdlAddLibHeader">
+			<button type="button" id="btnCloseContent" tabindex="0" class="close" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" data-i18n="library_upload"></h4>
+		</div>
+		<div class="modal-body vf-modal-body" style="height:405px; overflow-x:hidden">
+			<div class="tabpanelMainContent hide">
+				<ul class="nav nav-tabs" role="tablist">
+					<li id="generalContentTab" class="tablinks disabled active" style="opacity:1" role="presentation"><a id="selectGeneralContentData" href="#generalArea" aria-controls="generalArea" role="tab" data-toggle="tab" data-i18n="software_assignment_general_tab" data-bind="click:function(){onChangeTab( 'generalContent')}"></a></li>
+					<li id="modelsContentTab" class="tablinks disabled" style="opacity:1" role="presentation"><a id="" href="#modelsArea" aria-controls="modelsArea" role="tab" data-toggle="tab" data-i18n="software_assignment_models_tab" data-bind="click:function(){onChangeTab('modelsContent')}"></a></li>
+					<li id="configurationsContentTab" class="tablinks disabled" style="opacity:1" role="presentation"><a id="" href="#configurationsArea" aria-controls="configurationsArea" role="tab" data-toggle="tab" data-i18n="configurations" data-bind="click:function(){onChangeTab('configurationsContent')}"></a></li>
+				</ul>
+			</div>
+			<div>
+				<ul id="treeBreadcrumbRFS" data-bind="foreach:breadCrumbContent">
+					<li>
+						<span data-bind="attr: { id: id },text:menuName"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-12" style="padding:0px;">
+				<div id="generalContent" class="tab-content">
+					<div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+						<form>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="exampleInputEmail1" data-i18n="file"></label>
+										<span class="required">*</span>
+										<div class="row">
+											<div class="col-md-8 pr0">
+												<input id="selectFile" tabindex="0" style="width: 490px;" type="text" disabled class="form-control file-input">
+												<span id="PackageFile" class="error-v animated fadeIn"></span>
+											</div>
+											<div class="col-md-4 pl0 pr" style="float:right; right:20px; width: 70px;">
+												<div id="divBtnFileInput">
+													<button id="fileinputBtn" tabindex="0" class="btn btn-primary" style="height: 26px; padding: 2px 10px !important;" type="file" data-i18n="browse"></button>
+													<input id="fileinput" type="file" data-bind="event:{change:handleFileSelect}" class="form-control file-inputs" accept=".avi,.mpg,.wav,.jpg,.png,.tiff,.eet,.mp3,.frm,.tgz,.gif,.pam,.bmp,.mp4" style="cursor:pointer">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label data-i18n="content_name_new">
+										</label>
+										<span class="required">*</span>
+										<input id="fileContentName" tabindex="0" data-bind="value:PackageName" type="text" class="form-control" maxlength="50">
+										<span data-bind="validationMessage:PackageName" class="error-v animated fadeIn"></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label data-i18n="content_version_new"></label>
+										<span class="required">*</span>
+										<input data-bind="value:FileVersionAdd" id="fileVersionAdd" tabindex="0" type="text" class="form-control" maxlength="20">
+										<span data-bind="validationMessage:FileVersionAdd" class="error-v animated fadeIn"></span>
+									</div>
+									<div class="col-md-6">
+										<label data-i18n="content_description">
+										</label>
+										<input type="text" id="txtDesc" tabindex="0" class="form-control" maxlength="255">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="exampleInputEmail1" data-i18n="tags"></label>
+										<div class="v-chosen">
+											<select id="tagsCombo" class="chosen-select form-control" data-placeholder="Select Tags" multiple data-bind="event: {change: onChangeTags}, chosen: tags, optionsText: 'TagName',
+                                                 optionsValue: 'TagId',value: tagsOption"></select>
+										</div>
+										<span id="modelType" data-bind="validationMessage:TagName" class="error-v animated fadeIn"></span>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" style="padding:0px;">
+				<div id="modelsContent" class="tab-content hide">
+					<div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+						<div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+							<div class="panel panel-custom">
+								<div class="panel-heading">
+									<h4 class="m0" data-i18n="selct_models" style="margin-left:3px !important;"></h4>
+								</div>
+								<div class="panel-body p0">
+									<div class="col-md-12" data-bind="foreach:models">
+										<div class="col-md-4 col-lg-2">
+											<div class="form-group" id="columnDiv">
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" data-bind="attr: { id: 'chkModel-' + ModelId, checked: IsSelected}, value: ModelName, checked: IsSelected">
+														<span data-bind="text:ModelName"></span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" style="padding:0px;">
+				<div id="configurationsContent" class="tab-content hide">
+					<div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+						<form>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label data-i18n="device_file_location_new">
+										</label>
+										<div class="v-chosen">
+											<select id="selectDeviceFileLocation" tabindex="0" class="chosen-select form-control" data-bind="event:{change:onChangeDeviceFileLocationEdit},chosen: deviceFileLocationsArray, optionsText: 'ConfigName',
+												optionsValue: 'ConfigValue',optionsCaption: 'Select Device file Location'"></select>
+										</div>
+										<span id="validateDeviceLocation" class="error-v animated fadeIn"></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label data-i18n="filename_on_device">
+										</label>
+										<div class="v-chosen">
+											<select id="selectFileNameOnDevice" tabindex="0" class="chosen-select form-control" data-bind="event:{change:onChangeFileNameEdit},chosen: fileNamesArray, optionsText: 'ConfigName',
+												optionsValue: 'ConfigValue',optionsCaption: 'Select Filename on Device'"></select>
+										</div>
+										<span id="validateFileName" class="error-v animated fadeIn"></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="exampleInputPassword1" data-i18n="target_user"></label>
+										<div class="v-chosen">
+											<select id="selectTargetUser" tabindex="0" class="chosen-select form-control" data-bind="event:{change:onChangeTargetUserEdit},chosen: targetUsersArray, optionsText: 'ConfigName',
+												optionsValue: 'ConfigValue',optionsCaption: 'Select Target User'"></select>
+										</div>
+										<span id="validateTargetUser" class="error-v animated fadeIn"></span>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="btnBackContent" tabindex="0" class="btn btn-default hide" data-bind="click:function(){backToPrevious()}" data-i18n="rfs_back_btn"></button>
+			<button type="button" id="btnNextContent" tabindex="0" class="btn btn-default" data-bind="click:function(){moveToNext()}" data-i18n="rfs_next_btn"></button>
+			<button type="button" id="btnUploadContent" tabindex="0" class="btn btn-primary hide" data-i18n="upload_file" disabled data-bind="click:function(){addlibrary($parent.observableModelPopup,$parent.isGridVisible,$parent.refershTileview)}"></button>
+			<button type="button" id="btnCancelContent" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+		</div>
+	</div>
+</div>

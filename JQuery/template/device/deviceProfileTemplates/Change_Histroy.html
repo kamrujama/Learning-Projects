@@ -1,0 +1,82 @@
+﻿<div class="row mt15">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="pull-left btn-mgl">
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right btn-mg">
+                    <a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridChangeHistory')}"><i class="icon-reset-filter"></i></a>
+                    <a class="btn btn-default" id="btnShowHide" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridChangeHistory',null)}" data-toggle="modal" data-target="#hideShowColumns"><i class="icon-hide-column"></i></a>
+                    <a class="btn btn-default" id="btnExportToexcel" role="button" data-bind="click:function(){exportToExcel(true,'jqxgridChangeHistory')},visible:VHQFlag" data-i18n="[title]exportToXls"><i class="icon-export-excel"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-area">
+                    <div id="jqxgridChangeHistory"></div>
+                    <div id="pagerDivChangeHistory"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal" id="downloadModel" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- click on viewresult modal popup open ----->
+<div class="modal bs-example-modal-lg" id="openModalPopupAuditReportDetails" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-lg" id="mdlÄuditReportLogs">
+            <div class="modal-content">
+                <div class="modal-header" id="mdlÄuditReportLogsHeader">
+                    <button type="button" class="close" data-bind="click: function () {closeOpenModel('jqxgridChangeHistory','jqxGridChangeHistoryAuditLogReportDetails')}" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="testhead" class="modal-title"></h4>
+                    <span data-i18n="change_history_details"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right btn-mg">
+                                <a class="btn btn-default" id="btnModelRestFilterId" role="button" data-i18n="[title]show_all_data" data-bind="click: function () {clearfilter('jqxGridChangeHistoryAuditLogReportDetails')}"><i class="icon-reset-filter"></i></a>
+                                <a class="btn btn-default" id="btnModelShowHideId" role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxGridChangeHistoryAuditLogReportDetails')}"><i class="icon-hide-column"></i></a>
+                                <a class="btn btn-default" id="btnModelExportToexcelId" role="button" data-i18n="[title]exportToXls" data-bind="click: function () {exportToExcel(true,'jqxGridChangeHistoryAuditLogReportDetails')},visible:VHQFlag"><i class="icon-export-excel"></i></a>
+                                <a class="btn btn-default" id="btnModelRefreshId" role="button" data-i18n="[title]refresh" data-bind="click: function () {refreshGrid('jqxGridChangeHistoryAuditLogReportDetails')}"><i class="icon-spinner9"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--grid area start-->
+                            <div class="grid-area">
+                                <div id="jqxGridChangeHistoryAuditLogReportDetails"></div>
+                                <div id="pagerDivChangeHistoryAuditReportDetails">
+                                </div>
+                                <!--grid area end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

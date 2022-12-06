@@ -1,0 +1,11 @@
+<hr>
+<p> Array input demo</p>
+
+<input type="text" [(ngModel)] = "valueName"><button (click)="push()">Check</button>
+<hr>
+
+<div *ngFor="let a of arrayDemo">
+    <input type="checkbox" id="checkbox" [checked]="checkMe()"><label>{{a}}</label>
+</div>
+<!-- <p>{{valueName}}</p> -->
+

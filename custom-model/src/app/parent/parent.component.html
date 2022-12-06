@@ -1,0 +1,6 @@
+<div class="container">
+  {{ superuser }} child works here
+
+  <h2>Now calling another child inside this</h2>
+  <app-child *ngFor="let x of childpower" [superchild]="x"></app-child>
+</div>

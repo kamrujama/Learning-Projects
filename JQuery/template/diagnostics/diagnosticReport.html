@@ -1,0 +1,142 @@
+﻿<h1 class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                         <div class="col-md-12" data-bind='component:observableCriteria'></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">                            
+                            <a class="btn btn-default" id="btnExportFiles" tabindex='0' role="button" data-i18n="[title]export_files" data-bind="click: function () {openPopup('modelExportFiles','jqxgridDetailedAction')}"><i class="icon-download2"></i></a>							
+                            <a class="btn btn-default" id="btnClearCreatedByActionJobDetails" tabindex="0" role="button" data-bind="click:function(){showHideSystemCreatedJobs('jqxgridDetailedAction')}"><i class="icon-user"></i></a>
+                            <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilter('jqxgridDetailedAction')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" id="btnShowHide" tabindex="0" role="button" data-toggle="modal" data-target="#hideShowColumns" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridDetailedAction')}"><i class="icon-hide-column"></i></a>
+                            <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridDetailedAction')}"><i class="icon-export-excel"></i></a>
+                            <a class="btn btn-default" id="btnRefresh" tabindex="0" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridDetailedAction')}"><i class="icon-spinner9"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-md-12">
+                   <div id="criteriabtnDiv" style="display:none">
+                            <div class="panel panel-default mt10">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="m0" data-i18n="search_criteria"></h4>
+                                        </div>
+                                        <div class="col-md-6 tar">
+                                            <div id="expandQuickLinkDiv" data-bind="click:expandCriteria" style="float: right;">
+                                                <a class="btn btn-default btn-xs" tabindex="0" role="button" data-i18n="[title]collapse"><i class="icon-angle-up"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="deviceCriteriaDiv"  class="truncate p10">
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div class="grid-area">
+                                <div id="jqxgridDetailedAction" style="width: 100%"></div>
+                                <div id="pagerDivDetailAction"></div>
+                            </div>
+                        </div>
+
+                        <!--grid area end-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal start-->
+<div class="modal bs-example-modal-lg" id="exportFilesDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content" id="exportFilesDivContent">
+                <div class="modal-header" id="exportFilesDivHeader" style="height:40px">
+                    <button type="button" class="close" style="margin: 0px" tabindex="0" data-dismiss="modal" data-bind="click:closeFolderModal" data-i18n="[title]close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title-dialog" id="exportFilesModalLabel"></h4>
+                </div>
+                <div class="modal-body" style="padding-bottom: 15px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label data-i18n="export_file_name"></label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" id="txtExportFilesName" name="exportFilesNameText" tabindex="0" maxlength="50" data-bind="textInput: exportFileValue, event: { focusout: validateFileName }" class="form-control">
+                                    <span id="foldersErrorTip" class="error_tooltip" data-i18n="folder_name_characters" data-bind="visible:false"></span>
+                                    <span id="characters" class="hide" style="color:red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSaveExportFiles" disabled class="btn btn-primary"
+                        data-bind="click:function(){exportDiagnosticFiles('jqxgridDetailedAction')}" data-i18n="rpt_Save"></button>
+                    <button type="button" class="btn btn-default" data-i18n="cancel"
+                        data-bind="click:closeFolderModal"
+                        data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal end-->
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="actionModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal end-->
+
+<!--for Advanced Modal code -->
+<div class="modal bs-example-modal-lg" id="AdvanceSearchModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-big">
+            <div class="modal-content modalContentReposition" id="AdvanceSearchModalContent">
+                <div class="modal-header" id="diagAdvancedSearchHeader">
+                    <button type="button" class="close" tabindex="0" data-dismiss="modal" data-bind="click:unloadAdvancedSearch" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1" data-i18n="advance_search"></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="if: AdvanceTemplateFlag">
+                        <div data-bind='component:observableAdvancedSearchModelPopup'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

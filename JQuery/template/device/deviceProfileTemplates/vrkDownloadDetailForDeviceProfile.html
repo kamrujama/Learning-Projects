@@ -1,0 +1,132 @@
+﻿<div class="row" style="width:102%;margin-left:-27px!important">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-8">
+
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right btn-mg">
+                    <a class="btn btn-primary" role="button" id="rescheduleBtn" title="Reschedule" data-bind="click: function () {downloadDetailReschedule('jqxgridVRKDownloadDetailsForDeviceProfile')},css:{'disabled':!checkRights('Download Schedule', 'IsModifyAllowed')}"><i class="icon-reschedule"></i></a>
+                    <a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilter('jqxgridVRKDownloadDetailsForDeviceProfile')}"><i class="icon-reset-filter"></i></a>
+                    <a class="btn btn-default" id="btnShowHide" role="button" data-toggle="modal" data-target="#hideShowColumns" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridVRKDownloadDetailsForDeviceProfile')}"><i class="icon-hide-column"></i></a>
+                    <a class="btn btn-default" id="btnExportToexcel" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridVRKDownloadDetailsForDeviceProfile')},visible:VHQFlag"><i class="icon-export-excel"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--grid area start-->
+                <div class="grid-area">
+                    <div id="jqxgridVRKDownloadDetailsForDeviceProfile" style="width: 100%"></div>
+                    <div id="pagerDivVRKDetailDownload">
+                    </div>
+
+                    <!--grid area end-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="viewDetailDownload" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->
+<!-- Information model--->
+<div class="modal bs-example-modal-lg" id="scheduleInfoID" data-backdrop="static" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" id="draggInfoID">
+            <div class="modal-content modal-sm">
+                <div class="modal-header">
+                    <h4 class="modal-title" data-i18n="Information_filter"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 pr0">
+                            <span data-i18n="there_are_no_downloads_selected_to_reschedule"></span>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="button" class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal" data-bind="click: function(){unloadTempPopup('unloadTemplate',0)}"></button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Information model end--->
+
+
+<div class="modal" id="scheduleConfId" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <p data-i18n="are_you_sure_you_want_to_reschedule_software_downloads_for_the_selected_devices"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" tabindex="3" data-bind="click: function () {rescheduleDownload('jqxgridVRKDownloadDetailsForDeviceProfile')}">Yes</button>
+                    <button id="scheduleConfoNo" type="button" class="btn btn-default" data-dismiss="modal" tabindex="2" data-bind="click: function () { unloadTempPopup('unloadTemplate', 0) }">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---- model end---->
+
+
+
+
+<div class="modal" id="modalScheduleID" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirm_reschedule"></h4>
+                            <span data-i18n="vrk_downloads_packages"></span>
+                            <span>
+                                <label data-bind="text: packageName"></label>
+                            </span>
+                            <span data-i18n="cannot_be_rescheduled_as_they_are_deleted_from_vrk_bundle_library"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {unloadTempPopup('unloadTemplate',0)}">No</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: function () {reschedulePackage('jqxgridVRKDownloadDetailsForDeviceProfile',true)}">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

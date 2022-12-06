@@ -1,0 +1,26 @@
+﻿<div class="modal-dialog" style="width:450px;">
+    <div class="modal-content" tabindex="-1">
+        <div class="modal-header" id="modelAddParentReferenceSetHeader">
+            <button type="button" id="modelAddParentReferenceSetClose" tabindex="0" class="close" data-dismiss="modal" data-i18n="[title]close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="add_parent_reference_set"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label data-i18n="parent_reference_set_name">
+                </label>
+                <span class="required">*</span>
+                <input data-bind="textInput:ParentReferenceSetName" id="txtParentReferenceSetName" tabindex="0" type="text" class="form-control" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label data-i18n="description"></label>
+                <textarea class="form-control" id="txtAreaParentRFSDescription" rows="4" tabindex="0" maxlength="255"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnAddParentReferenceSet" tabindex="0" class="btn btn-primary" data-i18n="Add_btn" data-bind="click: function () {addParentReferenceSet($parent.observableModelPopup,'jqxgridParentReferenceSets')}" disabled></button>
+            <button type="button" id="btnCancelParentReferenceSet" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,312 @@
+﻿<div class="classGlbSel" id="mdlUpdateParameterMultiInstance">
+    <div id="mdlUpdateParameterMultiInstanceContent">
+        <!--<div class="modal-header hide" id="mdlUpdateParameterMultiInstanceHeader">
+          <button type="button" class="close" aria-label="Close" data-bind="click: function () {cancelPopup($parent.unloadTempPopup)}">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" data-bind="text:editMultiInstanceDetailsHeader"></h4>
+      </div>-->
+        <div>
+            <ul id="treeBreadcrumb" data-bind="foreach:breadcrumbColl">
+                <li>
+                    <span data-bind="text:LevelName"></span>
+                </li>
+            </ul>
+            <div id="mainSplitterGlobal">
+                <div id="treeSectionColumn" data-bind="visible:versionFlag" class="splitter-panel">
+                    <div class="treeHolder">
+                        <script type="text/html" id="tree-node2">
+                            <li class="treeNodeCntr">
+                                <span class="nodeGText" data-bind="css: { 'vf-hide':Level() == 0,'firstLevel' : Level() == 1 ,'lastLevel' : parentInstanceId() > 0 },text:LevelName, click:function($data,event){onClickGlobalLevel($data,event);}"></span>
+                                <ul data-bind="template: {name: 'tree-node2', foreach: children}"></ul>
+                            </li>
+                        </script>
+                        <ul data-bind="template: {name: 'tree-node2', foreach: treeColl}" class="treeRoot"></ul>
+                    </div>
+                </div>
+                <div id="resultSectionAllInstances" data-bind="css: { 'versionClass' : versionFlag  }" class="splitter-panel" style="min-height:500px">
+                    <div class="tabpanelMainContent" id="instanceDetailsDiv">
+                        <a class="btn btn-default moveTabLeft" id="moveEPLeft" data-i18n="[title]Move left" data-bind="click:moveLeft"><i class="icon-angle-left"></i></a>
+                        <a class="btn btn-default moveTabRight" id="moveEPRight" data-i18n="[title]Move right" data-bind="click:moveRight"><i class="icon-angle-right"></i></a>
+                        <div role="tabpanel" class="tabpanelDiv">
+                            <ul class="nav nav-tabs-custom" id="templateTabs" data-bind="foreach:templateXML" role="tablist">
+                                <li role="presentation" data-bind="css:{'active':$index()==0}, click:function(){onTabSelect(this);}">
+                                    <a data-bind="attr:{'href':'#templateGlobalTabNO'+$index()}" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span data-bind="text:DisplayName"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row hide" id="noContainerAccessDivGlobal">
+                        <div class="col-md-12">
+                            <div class="panel panel-white" id="noContainerAccessPanelGlobal">
+                                <div class="panel-body" style="margin-top:25% !important;text-align: center;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span data-i18n="you_do_not_have_access_to_add_new_instance" style="color:rgb(143,143,143);font-size:20px;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script id="ContainerElementGlobal" type="text/html">
+                        <div style="margin-left: 0px" data-bind="foreach:$data">
+                            <fieldset class="customFieldset">
+                                <legend style="border-bottom: 0px; width: auto; font-size: 15px" data-bind="text:DisplayName"></legend>
+                                <div class="row">
+                                    <div class="col-md-12" data-bind="foreach:Param">
+                                        <div class="col-md-6 col-lg-4" data-bind="visible:AllowView">
+                                            <div class="form-group">
+                                                <label data-bind="text:DisplayName+' :',attr:{'title':'Name: '+DisplayName+'\n Description:'+Description},visible:(ValueType.Type!='Boolean' && ValueType.Type!='CheckBox')">URL</label>
+												<div class="row">
+													<div data-bind="if:ValueType.Type=='String'">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<input type="text" class="form-control" data-bind="attr: { id: 'templateGlobalTxt' + ParamId, maxlength: ValueType.String.MaxLen }, event: { focusout: focusOutMaskValue, focusin: focusInMaskValue, 'keyup input': checkTxtValue }, enable: AllowModify" autocomplete="off">
+															<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+														</div>
+													</div>
+													<div data-bind="if:ValueType.Type=='Enumeration'">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<select class="chosen" data-bind="attr:{id:'templateGlobalCombo'+ParamId},event: { change:function(){checkDllValue($data)}},chosen: ValueType.Enumeration.EnumItem, optionsValue:'Value',optionsCaption:'--Select--', optionsText:'Name',enable:AllowModify"></select>
+														</div>
+													</div>
+													<div data-bind="if:ValueType.Type=='ReferenceEnumeration'">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<select class="chosen" data-bind="attr:{id:'templateGlobalReferenceCombo'+ParamId},event: { change:function(){checkReferenceEnumValue($data)}},chosen: ValueType.ReferenceEnumeration.ReferenceEnumItem, optionsValue:'Value',optionsCaption:'--Select--', optionsText:'Name',enable:AllowModify"></select>
+														</div>
+													</div>
+													<div data-bind="if:ValueType.Type=='Numeric'">
+														<div class="col-lg-9 col-md-9 pr0" style="margin-right: 10px;">
+															<div class="input-group spinner" data-trigger="spinner">
+																<input type="number" data-bind="attr:{id:'templateGlobalNumeric'+ParamId,max:ValueType.Numeric.MaxVal,min:ValueType.Numeric.MinVal},event: {'blur':validateGlobalNumber,'keydown':isNumberKey},enable:AllowModify" style="width: 100% !important;text-align:left;" class="form-control">
+																<div class="input-group-addon">
+																	<a href="javascript:;" class="spin-up" data-spin="up" data-bind="attr:{id:'templateGlobalNumericUp'+ParamId},click:upNumber"><i class="icon-angle-up"></i></a>
+																	<a href="javascript:;" class="spin-down" data-spin="down" data-bind="attr:{id:'templateGlobalNumericDown'+ParamId},click:downNumber"><i class="icon-angle-down"></i></a>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div data-bind="if:ValueType.Type=='DateTime'">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<!--<input type="text" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify" class="form-control datepic-icon" placeholder="dd/MM/YYYY">-->
+															<div class="input-group date form_datetime" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify">
+																<input class="form-control" data-bind="attr:{id:'templateGlobalInputDate'+ParamId}" type="text" readonly>
+																<span class="input-group-addon" data-bind="event: { click: clearDateParameter}"><span class="glyphicon glyphicon-remove"></span></span>
+																<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+															</div>
+														</div>
+													</div>
+													<div data-bind="if:(ValueType.Type=='Boolean' || ValueType.Type=='CheckBox')">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<input type="checkbox" class="alignChkbox" data-bind="attr:{id:'templateGlobalCheck'+ParamId,value:ParamValue},event:{click:checkCheckboxValue},enable:AllowModify" data-toggle="dropdown">
+															<label data-bind="text:DisplayName,attr:{'title':'Name: '+DisplayName+'\n Description:'+Description}" style="margin-left: 10px;">URL</label>
+															<ul class="dropdown-menu dropDownUl" role="menu" data-bind="foreach:checkboxActions">
+																<li><a data-bind="text:actionName,click:function(){checkboxParamDropDownSelect(actionName)}"></a></li>
+															</ul>
+														</div>
+													</div>
+													<div data-bind="if:(ValueType.Type!='String' && ValueType.Type!='Enumeration' && ValueType.Type!='ReferenceEnumeration' && ValueType.Type!='Numeric' && ValueType.Type!='DateTime' && ValueType.Type!='Boolean' && ValueType.Type!='CheckBox' && ValueType.Type!='File')">
+														<div class="col-md-10 pr0" style="margin-right: 10px;">
+															<input type="text" class="form-control" maxlength="50" data-bind="attr: { id: 'templateGlobalTxt' + ParamId }, event: { focusout:focusOutMaskValue, focusin:focusInMaskValue, 'keyup input': checkTxtValue }, enable: AllowModify" autocomplete="off">
+															<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+														</div>
+													</div>
+													<div id="globalBlankCheckBoxDiv1" class="col-md-1 pl0" title="Assign blank value">
+														<input type="checkbox" data-bind="attr:{id:'chkBlank'+ParamId},event:{change:setBlankValue},enable:AllowModify,visible:(ValueType.Type=='String')">
+													</div>
+												</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div data-bind="template: { name: 'ContainerElementGlobal', foreach: Container }">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </script>
+
+                    <script id="subTabsGlobal" type="text/html">
+                        <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+                        <div style="margin-left: 0px" role="tabpanel" class="tab-pane" data-bind="attr:{id:'templateGlobalSubTabNO'+$index()},css:{'active':$index()==0},foreach:$data">
+                            <div class="col-md-12" data-bind="foreach:Param">
+                                <div class="col-md-6 col-lg-4" data-bind="visible:AllowView">
+                                    <div class="form-group">
+                                        <label data-bind="text:DisplayName+' :',attr:{'title':'Name: '+DisplayName+'\n Description:'+Description},visible:(ValueType.Type!='Boolean' && ValueType.Type!='CheckBox')">URL</label>
+										<div class="row">
+											<div data-bind="if:ValueType.Type=='String'">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<input type="text" class="form-control" data-bind="attr: { id: 'templateGlobalTxt' + ParamId, maxlength: ValueType.String.MaxLen }, event: { focusout: focusOutMaskValue, focusin: focusInMaskValue, 'keyup input':checkTxtValue }, enable: AllowModify" autocomplete="off">
+													<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+												</div>
+											</div>
+											<div data-bind="if:ValueType.Type=='Enumeration'">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<select class="chosen" data-bind="attr:{id:'templateGlobalCombo'+ParamId},event: { change:function(){checkDllValue($data)}},chosen: ValueType.Enumeration.EnumItem, optionsValue:'Value',optionsCaption:'--Select--', optionsText:'Name',enable:AllowModify"></select>
+												</div>
+											</div>
+											<div data-bind="if:ValueType.Type=='ReferenceEnumeration'">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<select class="chosen" data-bind="attr:{id:'templateGlobalReferenceCombo'+ParamId},event: { change:function(){checkDllValue($data)}},chosen: ValueType.ReferenceEnumeration.ReferenceEnumItem, optionsValue:'Value',optionsCaption:'--Select--', optionsText:'Name',enable:AllowModify"></select>
+												</div>
+											</div>
+											<div data-bind="if:ValueType.Type=='Numeric'">
+												<div class="col-lg-9 col-md-9 pr0" style="margin-right: 10px;">
+													<div class="input-group spinner" data-trigger="spinner">
+														<input type="number" data-bind="attr:{id:'templateGlobalNumeric'+ParamId,max:ValueType.Numeric.MaxVal,min:ValueType.Numeric.MinVal},event: {'blur':validateGlobalNumber,'keydown':isNumberKey},enable:AllowModify" style="width: 100% !important;text-align:left;" class="form-control">
+														<div class="input-group-addon">
+															<a href="javascript:;" class="spin-up" data-spin="up" data-bind="attr:{id:'templateGlobalNumericUp'+ParamId},click:upNumber"><i class="icon-angle-up"></i></a>
+															<a href="javascript:;" class="spin-down" data-spin="down" data-bind="attr:{id:'templateGlobalNumericDown'+ParamId},click:downNumber"><i class="icon-angle-down"></i></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div data-bind="if:ValueType.Type=='DateTime'">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<!--<input type="text" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify" class="form-control datepic-icon" placeholder="dd/MM/YYYY">-->
+													<div class="input-group date form_datetime" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify">
+														<input class="form-control" data-bind="attr:{id:'templateGlobalInputDate'+ParamId}" type="text" readonly>
+														<span class="input-group-addon" data-bind="event: { click: clearDateParameter}"><span class="glyphicon glyphicon-remove"></span></span>
+														<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+													</div>
+												</div>
+											</div>
+											<div data-bind="if:(ValueType.Type=='Boolean' || ValueType.Type=='CheckBox')">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<input type="checkbox" class="alignChkbox" data-bind="attr:{id:'templateGlobalCheck'+ParamId,value:ParamValue},event:{click:checkCheckboxValue},enable:AllowModify" data-toggle="dropdown">
+													<label data-bind="text:DisplayName,attr:{'title':'Name: '+DisplayName+'\n Description:'+Description}" style="margin-left: 10px;">URL</label>
+													<ul class="dropdown-menu dropDownUl" role="menu" data-bind="foreach:checkboxActions">
+														<li><a data-bind="text:actionName,click:function(){checkboxParamDropDownSelect(actionName)}"></a></li>
+													</ul>
+												</div>
+											</div>
+											<div data-bind="if:(ValueType.Type!='String' && ValueType.Type!='Enumeration' && ValueType.Type!='ReferenceEnumeration' && ValueType.Type!='Numeric' && ValueType.Type!='DateTime' && ValueType.Type!='Boolean' && ValueType.Type!='CheckBox' && ValueType.Type!='File')">
+												<div class="col-md-10 pr0" style="margin-right: 10px;">
+													<input type="text" class="form-control" maxlength="50" data-bind="attr: { id: 'templateGlobalTxt' + ParamId }, event: { focusout:focusOutMaskValue, focusin: focusInMaskValue, 'keyup input': checkTxtValue }, enable: AllowModify" autocomplete="off">
+													<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+												</div>
+											</div>
+											<div id="globalBlankCheckBoxDiv2" class="col-md-1 pl0" title="Assign blank value">
+												<input type="checkbox" data-bind="attr:{id:'chkBlank'+ParamId},event:{change:setBlankValue},enable:AllowModify,visible:(ValueType.Type=='String')">
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div data-bind="template: { name: 'ContainerElementGlobal', foreach: Container }">
+                                </div>
+                            </div>
+                        </div>
+
+                    </script>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="min-height:400px" data-bind="foreach:templateXML" id="instanceParametersDivGlobal">
+                        <div role="tabpanel" class="tab-pane" data-bind="attr:{id:'templateGlobalTabNO'+$index()},css:{'active':$index()==0}">
+                            <div class="p10">
+                                <div data-bind="foreach:Container">
+                                    <div class="row" data-bind="if:String(Type).toUpperCase()=='DETAILS'">
+                                        <div role="tabpanel">
+                                            <ul class="nav nav-tabs-custom" data-bind="foreach:Container" role="tablist">
+                                                <li role="presentation" data-bind="css:{'active':$index()==0}">
+                                                    <a data-bind="attr:{'href':'#templateGlobalSubTabNO'+$index()}" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span data-bind="text:$data[0].DisplayName"></span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="subContainerDivGlobal" class="tab-content" style="min-height:400px" data-bind="template: { name: 'subTabsGlobal', foreach: Container }">
+                                        </div>
+                                    </div>
+
+                                    <div class="row" data-bind="if:(String(Type).toUpperCase()!='GRID' && String(Type).toUpperCase()!='DETAILS')">
+                                        <div data-bind="if:!AllowModify"><span class="viewMask"></span></div>
+                                        <div class="col-md-12" data-bind="foreach:Param">
+                                            <div class="col-md-6 col-lg-4" data-bind="visible:AllowView">
+                                                <div class="form-group">
+                                                    <label data-bind="text:DisplayName+' :',attr:{'title':'Name: '+DisplayName+'\n Description:'+Description},visible:(ValueType.Type!='Boolean' && ValueType.Type!='CheckBox')">URL</label>
+
+													<div class="row">
+														<div data-bind="if:ValueType.Type=='String'">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<input type="text" class="form-control" data-bind="event: { focusout: focusOutMaskValue, focusin: focusInMaskValue, 'keyup input': checkTxtValue }, attr: { id: 'templateGlobalTxt' + ParamId,maxlength: ValueType.String.MaxLen}, value: ParamValue, enable: AllowModify" autocomplete="off">
+																<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+															</div>
+														</div>
+														<div data-bind="if:ValueType.Type=='Enumeration'">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<select class="chosen" data-bind="attr:{id:'templateGlobalCombo'+ParamId},event: { change:function(){checkDllValue($data)}},chosen: ValueType.Enumeration.EnumItem, optionsValue:'Value', optionsCaption:'--Select--',optionsText:'Name',enable:AllowModify"></select>
+															</div>
+														</div>
+														<div data-bind="if:ValueType.Type=='ReferenceEnumeration'">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<select class="chosen" data-bind="attr:{id:'templateGlobalReferenceCombo'+ParamId},event: { change:function(){checkReferenceEnumValue($data)}},chosen: ValueType.ReferenceEnumeration.ReferenceEnumItem, optionsValue:'Value', optionsCaption:'--Select--',optionsText:'Name',enable:AllowModify"></select>
+															</div>
+														</div>
+														<div data-bind="if:ValueType.Type=='Numeric'">
+															<div class="col-lg-9 col-md-9 pr0" style="margin-right: 10px;">
+																<div class="input-group spinner" data-trigger="spinner">
+																	<input type="number" data-bind="attr:{id:'templateGlobalNumeric'+ParamId,max:ValueType.Numeric.MaxVal,min:ValueType.Numeric.MinVal},event: { 'blur':validateGlobalNumber,'keydown':isNumberKey},enable:AllowModify" style="width: 100% !important;text-align:left;" class="form-control">
+																	<div class="input-group-addon">
+																		<a href="javascript:;" class="spin-up" data-spin="up" data-bind="attr:{id:'templateGlobalNumericUp'+ParamId},click:upNumber"><i class="icon-angle-up"></i></a>
+																		<a href="javascript:;" class="spin-down" data-spin="down" data-bind="attr:{id:'templateGlobalNumericDown'+ParamId},click:downNumber"><i class="icon-angle-down"></i></a>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+														<div data-bind="if:ValueType.Type=='DateTime'">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<!--<input type="text" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify" class="form-control datepic-icon" placeholder="dd/MM/YYYY">-->
+																<div class="input-group date form_datetime" data-bind="attr:{id:'templateGlobalDate'+ParamId},event: { change: checkDateValue},enable:AllowModify">
+																	<input class="form-control" data-bind="attr:{id:'templateGlobalInputDate'+ParamId}" type="text" readonly>
+																	<span class="input-group-addon" data-bind="event: { click:clearDateParameter}"><span class="glyphicon glyphicon-remove"></span></span>
+																	<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+																</div>
+															</div>
+														</div>
+														<div data-bind="if:(ValueType.Type=='Boolean' || ValueType.Type=='CheckBox')">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<input type="checkbox" class="alignChkbox" data-bind="attr:{id:'templateGlobalCheck'+ParamId,value:ParamValue},event:{click:checkCheckboxValue},enable:AllowModify" data-toggle="dropdown">
+																<label data-bind="text:DisplayName,attr:{'title':'Name: '+DisplayName+'\n Description:'+Description}" style="margin-left: 10px;">URL</label>
+																<ul class="dropdown-menu dropDownUl" role="menu" data-bind="foreach:checkboxActions">
+																	<li><a data-bind="text:actionName,click:function(){checkboxParamDropDownSelect(actionName)}"></a></li>
+																</ul>
+															</div>
+														</div>
+														<div data-bind="if:(ValueType.Type!='String' && ValueType.Type!='Enumeration' && ValueType.Type!='ReferenceEnumeration' && ValueType.Type!='Numeric' && ValueType.Type!='DateTime' && ValueType.Type!='Boolean' && ValueType.Type!='CheckBox' && ValueType.Type!='File')">
+															<div class="col-md-10 pr0" style="margin-right: 10px;">
+																<input type="text" class="form-control" maxlength="50" data-bind="attr: { id: 'templateGlobalTxt' + ParamId }, event: { focusout:.focusOutMaskValue, focusin: focusInMaskValue, 'keyup input': checkTxtValue }, enable: AllowModify" autocomplete="off">
+																<span class="error_tooltip" data-bind="text: ValueType.String.ErrorOnValidationFailure != undefined && ValueType.String.ErrorOnValidationFailure != '' ? ValueType.String.ErrorOnValidationFailure : 'The value is not matching the Valid Chars pattern defined in VPFX.'">The value is not matching the Valid Chars pattern defined in VPFX.</span>
+															</div>
+														</div>
+														<div id="globalBlankCheckBoxDiv3" class="col-md-1 pl0" title="Assign blank value">
+															<input type="checkbox" data-bind="attr:{id:'chkBlank'+ParamId},event:{change:setBlankValue},enable:AllowModify,visible:(ValueType.Type=='String')">
+														</div>
+													</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div data-bind="template: { name: 'ContainerElementGlobal', foreach: Container }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnSaveMultiInstanceTemplate" disabled data-bind="click:function(){setDeviceMultiInstanceParameters($parents[1].unloadTempPopup)}" data-i18n="rpt_Save" class="btn btn-primary"></button>
+            <button class="btn btn-default" type="button" data-i18n="cancel" data-bind="click: function () {cancelPopup($parents[1].unloadTempPopup)}"></button>
+        </div>
+    </div>
+</div>

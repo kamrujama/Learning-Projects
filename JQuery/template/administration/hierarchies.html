@@ -1,0 +1,264 @@
+﻿<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+	<li>
+		<a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+	</li>
+	<li data-bind="css : {'active':$root.menulevel3() == ''}">
+		<a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+	</li>
+	<li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-white">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="pull-left btn-mgl">
+							<a tabindex="0" class="btn btn-default hide" id="btnRefresh" role="button" data-i18n="[title]refresh_hierarchies" data-bind="click:refreshData"><i class="icon-spinner9"></i></a>
+							<a tabindex="0" class="btn btn-default" id="manageHierarchyLevelId" href="#" role="button" data-i18n="Manage_Hierarchy_Levels_lbl" data-bind="click: function () {openPopup('modelHierarchyLevels')},css:{'disabled':!checkRights('Groups and Hierarchies', 'IsModifyAllowed')}"><i class="icon-hierarchy"></i></a>
+							<a tabindex="0" class="btn btn-default" id="uploadHierarchyFile" href="#" role="button" data-i18n="Upload_Hierarchy_File" data-bind="click: function () {openPopup('modelUploadHierarchyFile')},css:{'disabled':!checkRights('Import', 'IsModifyAllowed')}"><i class="icon-upload2"></i></a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row mt20">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading v-list-h">
+								<h4 class="m0">Hierarchy Values</h4>
+							</div>
+							<div class="v-chosen grid-area dropdown" id="ddlUserHierarchiesDiv" style="padding-bottom: 0px;" data-bind="visible:UserHiearchies().length>1">
+								<span class='caret' style="left: 284px; position: absolute; top: 20px;"></span>
+								<button type="button" id="userhierarchiesddlBtn" tabindex="0" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-bind="text: selectedUserHierarchy().HierarchyName" style="width: 294px; margin-left: 10px; text-align: left; overflow: hidden; text-overflow: ellipsis;"></button>
+								<ul class="dropdown-menu" role="menu" data-bind="foreach:UserHiearchies" style="margin-left: 10px;">
+									<li class="dropdown">
+										<a href="javascript:;" tabindex="0" data-toggle="dropdown" class="dropdown-toggle f-s-14" aria-expanded="false" style="padding:2px; margin: 2px;" data-bind="click: function () { $parent.changeHierarchyData(this); }">
+											<span class="multiple-hierarchy-dropdown-text" data-bind="text: HierarchyName"></span>
+											<span class="multiple-hierarchy-dropdown-text reverse" data-bind="text: LevelName"></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="subcriptionlist">
+									<div class="grid-area htile-area p10">
+										<div class="row htile-w" id="mainHierarchyViewDiv" data-bind="foreach:HierarchyLevels" style="width: 4510px">
+											<div class="col-md-3" style="width: 280px !important; margin-right: -20px; display: inline-block !important; padding-right:12px">
+												<div class="panel panel-default mb0 " tabindex="4">
+													<div class="panel-heading v-list-h" data-bind="attr:{title:Name}"><span data-bind="text:Name"></span><a class="icon-default" style="float: right" data-bind="if:hierarchies().length>0,click:$parent.storeLevel(Level()),attr:{id:Level()+'hielevelFIcon'}"><i class="icon-filter " title="filter"></i></a></div>
+													<div><input type="text" class="form-control input-sm hide" maxlength="50" data-bind="attr:{id:Level()+'hielevelFilter'},value:$parent.filter,valueUpdate: 'keyup'" /></div>
+													<div class="panel-body v-list-panel-est" data-bind="attr:{id:Level()+'hielevelDiv'}">
+														<ul class="v-table-list" data-bind="foreach:$parent.filteredList(hierarchies())">
+															<li class="" data-bind="attr:{title:HierarchyName,id:Id+'Li'}" style="cursor:pointer;">
+																<div>
+																	<i class="folderopen" data-bind="visible:!IsChildExists"></i>
+																	<i class="folder" data-bind="visible:IsChildExists"></i>
+																	<span class="hierarchy-name-txt" tabindex="0" data-bind="text:HierarchyName,click:function(){$parents[1].getHierarchy($data)}"></span><a style="float: right" tabindex="0" data-bind="click:function(){$parents[1].addHierarchy($data)},visible:$parents[1].checkRights('Groups and Hierarchies', 'IsModifyAllowed') && Level!=$parents[1].maximumHierarchyLevel()"><i class="icon-plus" title="Add Hierarchy"></i></a><a style="float: right" data-bind="attr:{id:'addHierarchy'+$index()},click:function(){$parents[1].deleteHierarchy($data)},visible:$parents[1].checkRights('Groups and Hierarchies', 'IsDeleteAllowed') && Level!=1"><i class="icon-bin" title="Delete Hierarchy"></i></a>
+																</div>
+																<!--<div style ="cursor:pointer;" data-bind="click:function(){$parents[1].getHierarchy($data)}">
+																	<i class="folderopen" data-bind="visible:!IsChildExists"></i>
+																	<i class="folder" data-bind="visible:IsChildExists"></i>
+																	<span class="hierarchy-name-txt" data-bind="text:HierarchyName"></span><a style="float: right" data-bind="click:function(){$parents[1].addHierarchy($data,event)},visible:$parents[1].checkRights('Groups and Hierarchies', 'IsModifyAllowed') && Level!=$parents[1].maximumHierarchyLevel()"><i class="icon-plus" title="Add Hierarchy"></i></a><a style="float: right" data-bind="attr:{id:'addHierarchy'+$index()},click:function(){$parents[1].deleteHierarchy($data,event)},visible:$parents[1].checkRights('Groups and Hierarchies', 'IsDeleteAllowed') && Level!=1"><i class="icon-bin" title="Delete Hierarchy"></i></a>
+																</div>-->
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt20">
+					<div class="col-md-12" id="entityDetails">
+						<div class="panel panel-default">
+							<div class="panel-heading v-list-h">
+								<h4 class="m0">Hierarchy Value Properties</h4>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="Hierarchy_name_lbl"></label>
+											<span class="required" style="padding-left: 5px;">*</span>
+											<input type="text" class="form-control" data-bind="value:hierarchyName" id="hierarchyName" maxlength="50" tabindex="5">
+											<span data-bind="validationMessage:hierarchyName" class="error-v animated fadeIn"></span>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="Description_hierarchy_lbl"></label>
+											<input type="text" class="form-control" data-bind="value:description" id="description" maxlength="255" tabindex="6">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="IP_starting_address_lbl"></label>
+											<input type="text" class="form-control" data-bind="value:ipStartingAddress" id="startIpAddress" maxlength="15" tabindex="7">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="IP_ending_address_lbl"></label>
+											<input type="text"  class="form-control" data-bind="value:ipEndingAddress" id="endIpAddress" maxlength="15" tabindex="8">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="Location_identifier_lbl"></label>
+											<input type="text" class="form-control" data-bind="value:locationIdentifier" maxlength="50" id="locationIdentifier" tabindex="9">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="Time_zone_lbl">
+											</label>
+											<div class="v-chosen">
+												<select id="timeZone"  class="chosen-select form-control" data-bind="event:{change:onChangeTimeZone},chosen: getTimeZoneArray, optionsText:'Description',
+                                                                optionsValue:'TimeZoneId'" tabindex="10"></select>
+											</div>
+											<span id="validateTimeZone" class="error-v animated fadeIn"></span>
+										</div>
+									</div>
+								</div>
+								<div class="row" data-bind="visible:isVisible">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="entity_uid"></label>
+											<!-- <input type="text" class="form-control" data-bind="value:entityUid" id="txtEntityUid" maxlength="30" tabindex="11"> -->
+											<input type="text" class="form-control" data-bind="value:entityUid" id="txtEntityUid"  tabindex="11">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label data-i18n="entity_type"></label>
+											<div class="v-chosen">
+												<select id="selectEntityType" class="chosen-select form-control" data-bind="event:{change:onChangeEntityType},chosen: getEntityTypes, optionsText:'Value',
+												optionsValue:'ControlValue',optionsCaption: '-Select-'" data-placeholder="Select Entity Type" tabindex="12">
+												</select>
+											</div>
+											<span id="" class="error-v animated fadeIn"></span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 tar">
+										<button type="button" id="saveBtn" disabled tabindex="0" class="btn btn-primary" data-i18n="rpt_Save" data-bind="click:function(){saveConfirmation($parent.observableModelPopup)}"></button>
+										<button type="button" id="addBtn" disabled tabindex="0" class="btn btn-primary" data-i18n="add" data-bind="click:function(){saveConfirmation($parent.observableModelPopup)}"></button>
+										<button type="button" id="cancelBtn" class="btn btn-default" tabindex="0" data-dismiss="modal" data-bind="click: function () {cancelClick()}" data-i18n="cancel"></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div class="row">
+	<div style="padding-bottom:100px;"></div>
+</div>-->
+<!-- Modal start-->
+<div class="modal" id="downloadModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div data-bind="if: templateFlag">
+				<div data-bind='component:observableModelPopup'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal end-->
+
+<div class="modal" id="hierarchyDelete" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons">
+								<i class="icon-confirmation c-green"></i>
+							</div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<span id="deleteHierarchy"></span>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button id="hierarchyDelete_Yes" tabindex="0" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){deleteHierarchyCall($parent.observableModelPopup)}"></button>
+					<button id="hierarchyDelete_No" tabindex="0" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:function(){cancelReset(),$parent.unloadTempPopup('unloadTemplate')}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="setHierarchyModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons">
+								<i class="icon-confirmation c-green"></i>
+							</div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<span id="setHierarchy"></span>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button id="setHierarchyModel_Yes" tabindex="0" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){saveHierarchy($parent.observableModelPopup)}"></button>
+					<button id="setHierarchyModel_No" tabindex="0" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:function(){cancelSetHierarchy()}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="setPreviousSelection" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center  modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons">
+								<i class="icon-confirmation c-green"></i>
+							</div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<span id="setPreviousHierarchySelection"></span>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button id="setPreviousSelection_Yes" tabindex="0" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){setPreviousSelection()}"></button>
+					<button id="setPreviousSelection_No" tabindex="0" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:function(){setInitialSelection()}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

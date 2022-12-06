@@ -1,0 +1,156 @@
+﻿<div class="modal-dialog modal-lgs" id="paramValueForTempResult">
+    <div class="modal-content" id="modelStandardfileID">
+        <div class="modal-header" id="paramValueForTempResultHeader">
+            <button type="button" class="close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="headingForViewParameterID" data-bind="text:headingForViewParameter"></h4>
+        </div>
+        <div id="resultSectionTemplate" class="modal-body">
+            <div class="tabpanelMainContent">
+                <a class="btn btn-default moveTabLeft" id="movePVTLeft" data-i18n="[title]Move left" data-bind="click:moveLeft"><i class="icon-angle-left"></i></a>
+                <a class="btn btn-default moveTabRight" id="movePVTRight" data-i18n="[title]Move right" data-bind="click:moveRight"><i class="icon-angle-right"></i></a>
+                <div role="tabpanel" class="tabpanelDiv">
+                    <ul class="nav nav-tabs-custom" id="templateTabs" data-bind="foreach:templateXML" role="tablist">
+                        <li role="presentation" data-bind="css:{'active':$index()==0}"><a data-bind="attr:{'href':'#templateTabNO'+$index()}" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span data-bind="text:DisplayName,title:DisplayName"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <script id="ContainerElement" type="text/html">
+                <div style="margin-left: 0px" data-bind="foreach:$data">
+                    <fieldset style="border: 1px solid; margin: 2px; padding: 2px; width: auto; margin-left: auto">
+                        <legend style="border-bottom: 0px; width: auto; font-size: 15px" data-bind="text:DisplayName"></legend>
+                        <div class="row">
+                            <div class="col-md-6" data-bind="foreach:Param">
+                                <div class="form-group" data-bind="attr:{'class':'controldiv'+ParamId},visible:AllowView">
+                                    <label data-bind="text:DisplayName+' :',attr:{'title':'Name: '+DisplayName+'\n Description:'+Description},visible:(ValueType.Type!='Boolean' && ValueType.Type!='CheckBox')">URL</label>
+
+                                    <div class="row">
+                                        <div data-bind="if:ValueType.Type=='String'">
+                                            <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                <input type="text" class="form-control" maxlength="15" readonly="true" data-bind="attr:{id:'templateTxt'+ParamId},enable:false">
+                                            </div>
+                                        </div>
+                                        <div data-bind="if:ValueType.Type=='Enumeration'">
+                                            <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                <select class="chosen" data-bind="attr:{id:'templateCombo'+ParamId},chosen: ValueType.Enumeration.EnumItem, optionsValue:'Value', optionsText:'Name',optionsCaption:'--Select--',enable:false"></select>
+                                            </div>
+                                        </div>
+                                        <div data-bind="if:ValueType.Type=='Numeric'">
+                                            <div class="col-md-10 pr0" style="margin-right: 37px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input type="number"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-bind="attr:{id:'templateNumeric'+ParamId},enable:false'" style="width: 40px;text-align:left;" class="form-control" max="65000" min="0" data-rule="yearDays">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up" data-bind="css: { disabled: false }"><i class="icon-angle-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down" data-bind="css: { disabled: false }"><i class="icon-angle-down"></i></a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div data-bind="if:ValueType.Type=='DateTime'">
+                                            <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                <input type="text" data-bind="attr:{id:'templateDate'+ParamId},enable:false" class="form-control datepic-icon" placeholder="DD-MM-YYYY">
+                                            </div>
+                                        </div>
+                                        <div data-bind="if:(ValueType.Type=='Boolean' || ValueType.Type=='CheckBox')">
+                                            <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                <input type="checkbox" data-bind="attr:{id:'templateCheck'+ParamId,value:ParamValue},enable:false">
+                                                <label data-bind="text:DisplayName,attr:{'title':'Name: '+DisplayName+'\n Description:'+Description}" style="margin-left: 10px;">URL</label>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-md-1 pl0">
+                                            <a class="btn btn-default btn-in" data-i18n="[title]restore_to_default"><i class="icon-restoredefault"></i></a>
+                                        </div>-->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <div data-bind="template: { name: 'ContainerElement', foreach: Container }">
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+
+
+            </script>
+
+
+            <!-- Tab panes -->
+            <div class="tab-content" data-bind="foreach:templateXML">
+                <div role="tabpanel" class="tab-pane" data-bind="attr:{id:'templateTabNO'+$index()},css:{'active':$index()==0}">
+                    <div class="p10">
+
+                        <div data-bind="foreach:Container">
+                            <div class="row">
+                                <div class="col-md-6" data-bind="foreach:Param">
+                                    <div class="form-group" data-bind="attr:{'class':'controldiv'+ParamId}">
+                                        <label data-bind="text:DisplayName+' :',attr:{'title':'Name: '+DisplayName+'\n Description:'+Description},visible:(ValueType.Type!='Boolean' && ValueType.Type!='CheckBox')">URL</label>
+
+                                        <div class="row">
+                                            <div data-bind="if:ValueType.Type=='String'">
+                                                <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                    <input type="text" class="form-control" maxlength="15" data-bind="attr:{id:'templateTxt'+ParamId},enable:false">
+                                                </div>
+                                            </div>
+                                            <div data-bind="if:ValueType.Type=='Enumeration'">
+                                                <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                    <select class="chosen" data-bind="attr:{id:'templateCombo'+ParamId},chosen: ValueType.Enumeration.EnumItem, optionsValue:'Value', optionsText:'Name',optionsCaption:'--Select--',enable:false"></select>
+                                                </div>
+                                            </div>
+                                            <div data-bind="if:ValueType.Type=='Numeric'">
+                                                <div class="col-md-10 pr0" style="margin-right: 37px;">
+                                                    <div class="input-group spinner" data-trigger="spinner">
+                                                        <input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-bind="attr:{id:'templateNumeric'+ParamId},enable:false" style="width: 40px;text-align:left;" class="form-control" max="65000" min="0" data-rule="yearDays">
+                                                        <div class="input-group-addon">
+                                                            <a href="javascript:;" class="spin-up" data-spin="up" data-bind="css: { disabled: false }"><i class="icon-angle-up"></i></a>
+                                                            <a href="javascript:;" class="spin-down" data-spin="down" data-bind="css: { disabled: false }"><i class="icon-angle-down"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div data-bind="if:ValueType.Type=='DateTime'">
+                                                <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                    <input type="text" data-bind="attr:{id:'templateDate'+ParamId},enable:false" class="form-control datepic-icon" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                            <div data-bind="if:(ValueType.Type=='Boolean' || ValueType.Type=='CheckBox')">
+                                                <div class="col-md-10 pr0" style="margin-right: 10px;">
+                                                    <input type="checkbox" data-bind="attr:{id:'templateCheck'+ParamId,value:ParamValue},enable:false">
+                                                    <label data-bind="text:DisplayName,attr:{'title':'Name: '+DisplayName+'\n Description:'+Description}" style="margin-left: 10px;">URL</label>
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-md-1 pl0">
+                                                <a class="btn btn-default btn-in" data-i18n="[title]restore_to_default"><i class="icon-restoredefault"></i></a>
+                                            </div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div>
+
+                                <div data-bind="template: { name: 'ContainerElement', foreach: Container }">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-i18n="close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" tabindex="5"></button>
+        </div>
+    </div>
+</div>

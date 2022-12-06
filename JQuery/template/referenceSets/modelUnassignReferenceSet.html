@@ -1,0 +1,62 @@
+﻿<div class="modal-dialog" id="modelUnassignRFS">
+    <div class="modal-content">
+        <div class="modal-header" id="modelUnassignReferenceSetHeader">
+            <button type="button" id="unAssignRFSCloseBtn" tabindex="0" class="close" data-bind="click: function () { handleCloseEvent($parent.unloadTempPopup) }" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="unassign_reference_sets"></h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-4">
+                    <div class="pull-right btn-mg">
+                        <a class="btn btn-default" role="button" data-i18n="[title]Reset_filter" data-bind="click: function () { clearfilter('jqxgridUnassignReferenceSet') }"><i class="icon-reset-filter"></i></a>
+                        <a class="btn btn-default" role="button" data-i18n="[title]exportToXls" data-bind="click: function () { exportToXls('jqxgridUnassignReferenceSet') }"><i class="icon-export-excel"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-area">
+                        <div id="jqxgridUnassignReferenceSet"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button type="button" data-bind="click: function () { unAssignReferenceSetsConfirmation('jqxgridUnassignReferenceSet', $parent.observableModelPopup, 'false') }" class="btn btn-primary" data-i18n="save" id="btnSave"></button>
+            <button type="button" class="btn btn-default" data-i18n="cancel" data-dismiss="modal" data-bind="click: $parent.unloadTempPopup"></button>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal" id="unAssignConfirmationPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="hierarchy"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="unAssignYes" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-bind="click: function() {unAssignReferenceSets('jqxgridUnassignReferenceSet', $parent.observableModelPopup, 'true')}"></button>
+                    <button type="button" id="unAssignNo" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:closeConfirmation" autofocus></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Events</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <h2>Student Form - Form Events</h2>
+    <form action="" id="sform">
+        <label for="">Name : </label><input type="text" placeholder="Name..." id="sname"><br><br>
+        <label for="">Class : </label><input type="text" placeholder="Class..." id="sclass"><br><br>
+        <label for="">Country : </label><select id="scountry">
+            <option value="India">India</option>
+            <option value="Nepal">Nepal</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Arab">Arab</option>
+            <option value="Bangladesh">Bangladesh</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+
+    <hr>
+    <div class="selected">
+
+    </div>
+    
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        $(document).ready(function(){
+            // Various form events 
+            $("#sname, #sclass, #scountry").focus(function(){
+                $(this).css("background-color","skyblue")
+            })
+            $("#sname, #sclass, #scountry").blur(function(){
+                $(this).css("background-color","")
+            })
+
+            $("#scountry, #sname, #sclass").change(function(){
+                let selectedText = $(this).val()
+                $(".selected").html(selectedText)
+            })
+
+            $("#sname, #sclass, #scountry").select(function(){
+                $(this).css("background-color","yellow")
+            })
+
+            $("#sform").submit(function(){
+                alert("Submitted data")
+                $("body").css("background-color","maroon")
+            })
+
+            // $("#sname").keypress(function(){
+            //     $(this).css("color","red")
+            // })
+            $("#sname").keydown(function(){
+                $(this).css("color","red")
+            })
+            $("#sname").keyup(function(){
+                $(this).css("color","white")
+            })
+        })
+    </script>
+</body>
+</html>

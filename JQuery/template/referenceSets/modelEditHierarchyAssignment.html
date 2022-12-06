@@ -1,0 +1,478 @@
+﻿<!-- Modal start -->
+<div class="modal-dialog modal-big" id="mdlEditHierarchyAssgnmt">
+    <div class="modal-content">
+        <div class="modal-header" id="mdlEditHierarchyAssgnmtHeader">
+            <button type="button" id="editHIerarchyAssignCloseBtn" tabindex="0" class="close" data-bind="click: function () { handleCloseEvent($parent.unloadTempPopup) }" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="edit_reference_set_assignment"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="col-md-12">
+                <div class="col-md-12" style="padding:0px;" data-bind="visible: !IsMultiEdit">
+                    <div class="row" style="margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                        <div class="col-md-1 pr0" style="width:140px">
+                            <h4 data-i18n="edit_hierarchy_path_assignment" class="b"></h4>
+                        </div>
+                        <div class="col-md-9" style="width:793px">
+                            <span style="font-size: 14px; margin-top: 9px; margin-left: -15px;" class="hierarchy-path-txt" id="hierarchyFullPathID" data-bind="text:hierarchyFullPath"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tabpanelMainContent">
+                                    <ul id="editReferenceSetTabHeader" class="nav nav-tabs" role="tablist">
+                                        <li id="editAssignmentHierarchyTab" class="tablinks active" role="presentation"><a id="" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="edit_hierarchy_hierarchy_tab" data-bind="click:function(){onChangeAssignmentTab( 'editAssignmentHierarchy')}"></a></li>
+                                        <li id="editReferenceSetsTemplatesTab" class="tablinks" role="presentation"><a id="" href="#templateArea" aria-controls="templateArea" role="tab" data-toggle="tab" data-i18n="edit_hierarchy_referenceset_parameter_templates_tab" data-bind="click:function(){onChangeAssignmentTab('editReferenceSetsTemplates')}"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Tab panes -->
+                                <div id="editAssignmentHierarchy" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                                        <div class="col-sm-12" style="padding:0px;">
+                                            <div class="col-md-12" style="padding:5px 0px 0px 0px" data-bind="visible: !isRootHierarchy">
+                                                <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px; background-color: #f5f5f5; border-color: #ddd">
+                                                    <div class="col-md-3">
+                                                        <div class="checkbox" data-bind="visible: IsMultiEdit">
+                                                            <label id="chkInherit" class="maintainceCheckbox" tabindex="0">
+                                                                <input type="checkbox" id="chkFromHierarchy" tabindex="0" data-bind="event:{change:chkFromHierarchyChange}">
+                                                                <span data-i18n="inherit_from_parent"></span>
+                                                            </label>
+                                                        </div>
+                                                        <h5 data-i18n="inherit_from_parent" data-bind="visible: !IsMultiEdit"></h5>
+                                                    </div>
+                                                    <div class="col-md-9" id="inheritRadioDiv">
+                                                        <div class="radio">
+                                                            <div class="backColorWhite" style="border: 1px groove; margin-left: -18px; margin-right: 1px; margin-bottom: 10px; padding-left: 5px; width:50%; background-color: white; border-color: #ddd">
+                                                                <label class="radio-inline" tabindex="0" style="width: 45%">
+                                                                    <input type="radio" name="inheritFromParentHierarchy" id="inheritYes" tabindex="0" value="true" data-bind="checked:checkedFromHierarchy, event: {change: inheritFromHierarchySelect}">
+                                                                    <span data-i18n="confirmation_yes"></span>
+                                                                </label>
+                                                                <label class="radio-inline" tabindex="0" style="width: 45%">
+                                                                    <input type="radio" name="inheritFromParentHierarchy" id="inheritNo" tabindex="0" value="false" data-bind="checked:checkedFromHierarchy, event: { change: inheritFromHierarchySelect }">
+                                                                    <span data-i18n="confirmation_no"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="invalidParameterTemplate" class="col-md-12 hide" style="padding:0px; margin-top:10px">
+                                                <h4 class="mt0 b" data-i18n="conflicting_parameter_templates"></h4>
+                                                <div id="invalidParameterTemplateDiv">
+                                                    <div id="invalidParameterTemplateGrid"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding:5px 0px 0px 0px">
+                                                <div class="row" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px; background-color: #f5f5f5; border-color: #ddd">
+                                                    <div class="col-md-3">
+                                                        <div class="checkbox" id="downloadAutomationDiv" data-bind="visible: IsMultiEdit">
+                                                            <label class="maintainceCheckbox" tabindex="0">
+                                                                <input type="checkbox" id="chkDownloadAutomation" tabindex="0" data-bind="event: {change: changeDownloadAutomation}">
+                                                                <span data-i18n="download_automation_addDevice"></span>
+                                                            </label>
+                                                        </div>
+                                                        <h5 data-i18n="download_automation_addDevice" data-bind="visible: !IsMultiEdit"></h5>
+                                                    </div>
+
+                                                    <div class="col-md-9" style="margin-left:-18px;" id="downloadAutomationRadioDiv">
+                                                        <div class="radio">
+                                                            <div class="backColorWhite" style="border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px; padding-left: 5px; width:50%; background-color: white; border-color: #ddd">
+                                                                <label class="radio-inline" tabindex="0" style="width: 45%">
+                                                                    <input type="radio" name="downloadAutomation" id="downloadTrueId" tabindex="0" value="true" data-bind="checked: downloadAutomation, click: getValue">
+                                                                    <span data-i18n="enabled"></span>
+                                                                </label>
+                                                                <label class="radio-inline" tabindex="0" style="width: 45%">
+                                                                    <input type="radio" name="downloadAutomation" id="downloadFalseId" tabindex="0" value="false" data-bind="checked: downloadAutomation, click: getValue">
+                                                                    <span data-i18n="disabled"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 panel-group mb0" style="padding:0px;" id="accordion" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-accordion">
+                                                <div class="panel-heading" role="tab" id="headingOne">
+                                                    <h4 class="panel-title" data-i18n="select_schedule_content"></h4>
+                                                    <!--<a class="collapsed" data-toggle="collapse" tabindex='0' data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></a>
+                                                    <div class="accordion-arrow">
+                                                        <i class="indicator icon-angle-up"></i>
+                                                    </div>-->
+                                                </div>
+                                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                                    <div id="downloadOnDisabledId" class="disbaledDownload panel-body">
+                                                        <div class="col-sm-6">
+                                                            <div class="radio">
+                                                                <label tabindex="0">
+                                                                    <input type="radio" name="downloadedOn" id="contactId" tabindex="0" value="Next Contact" data-bind="checked: downloadedOn, click: getTimeSlotValue">
+                                                                    <span data-i18n="next_contact"></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio" tabindex="0">
+                                                                <label>
+                                                                    <input type="radio" name="downloadedOn" id="windowId" tabindex="0" value="Next Maintenance Window" data-bind="checked: downloadedOn, click: getTimeSlotValue">
+                                                                    <span data-i18n="maintenance_window"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="radio" name="downloadedOn" id="timeSlotId" value="Next Available Free Time Slot" data-bind="checked: downloadedOn , click: getTimeSlotValue">
+                                                                        <span data-i18n="next_available_free_time_slot"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label id="chkMaintaince" class="maintainceCheckbox">
+                                                                        <input type="checkbox" id="chkautoSchedulingDuringMHB" value="" data-bind="checked:autoSchedulingDuringMHB">
+                                                                        <span data-i18n="download_during_maintainance_window"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="editReferenceSetsTemplates" class="tab-content" style="display: none">
+                                    <div role="tabpanel" class="tab-pane active" style="padding-top:8px;">
+                                        <!-- Qualified Reference Sets -->
+                                        <div id="qualifiedReferenceSetPanel" class="col-md-12" style="padding:0px;border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                                            <div class="col-lg-12" style="padding-left: 0px; padding-right: 0px">
+                                                <div class="col-md-3">
+                                                    <h4 class="mt10 mb0 b" data-i18n="qualified_reference_set"></h4>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span style="font-size: 14px; margin-top: 8px" class="hierarchy-path-txt" id="Span2" data-bind="text:qualifiedReferenceSetsText"></span>
+                                                </div>
+                                                <div class="col-md-1" style="margin-top:6px">
+                                                    <a title="Expand/Collapse" id="imageId" tabindex="0" class="pull-right" data-bind="click: viewQualifiedReferenceSetDetails"><i id="qualifiedDetails" class="icon-angle-down" style="font-size: 20px; font-weight: bold;"></i></a>
+                                                </div>
+                                            </div>
+                                            <div id="qualifiedReferencesetDetails" class="col-md-12 hide" style="padding:5px">
+                                                <div id="qualifiedReferencesetDetailsDiv">
+                                                    <div id="jqxGridQualifiedReferencesets"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Reference Sets -->
+                                        <div class="col-md-12" style="padding:0px; margin-top:10px">
+                                            <div id="availabledReferenceSetId" class="availabledReference">
+                                                <h4 class="mt0 b" data-i18n="select_reference_sets"></h4>
+                                                <div class="row" style="border: 1px groove; padding-top:5px;padding-bottom:5px; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                                                    <div class="col-md-5 pl0" style="width:45% !important">
+                                                        <div class="panel panel-custom">
+                                                            <div class="panel-heading" style="height:34px; padding-left:5px">
+                                                                <h4 class="m0" data-i18n="available_reference_sets" style="font-weight:normal"></h4>
+                                                                <div class="btn-mg">
+                                                                    <a class="btn" role="button" tabindex="0" data-i18n="[title]show_all_data" data-bind="click:function(){clearWildcardFilter('jqxGridAvailableHierarchyReferenceSets')}"><i class="icon-reset-filter"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body p0">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!--grid area start-->
+                                                                        <div id="availableHierarchyReferenseSetsDiv">
+                                                                            <div id="jqxGridAvailableHierarchyReferenceSets"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1" style="width:5% !important">
+                                                        <div class="btnv pl0">
+                                                            <div>
+                                                                <a id="btnMoveRightReferenceSet" tabindex="0" class="btn btn-default" data-bind="click: function() {rightReferenceSetMove('jqxGridAvailableHierarchyReferenceSets')}"><b class="icon-angle-right"></b></a>
+                                                            </div>
+                                                            <div>
+                                                                <a id="btnMoveLeftReferenceSet" tabindex="0" class="btn btn-default" data-bind="click: function() {leftReferenceSetMove('jqxGridAssignedHierarchyReferenseSets')}"><b class="icon-angle-left"></b></a>
+                                                            </div>
+                                                            <div>
+                                                                <div>
+                                                                    <a id="btnMoveLeftAllReferenceSets" tabindex="0" class="btn btn-default btn-padd" data-bind="click: function() {allReferenceSetsMove('jqxGridAssignedHierarchyReferenseSets')}"><b class="icon-angle-left"></b><b class="icon-angle-left"></b></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5" style="width:45% !important">
+                                                        <div class="panel panel-custom">
+                                                            <div class="panel-heading" style="height: 34px; padding-left: 5px;">
+                                                                <h4 class="m0" data-i18n="selected_reference_sets" style="font-weight:normal"></h4>
+                                                                <div class="btn-mg">
+                                                                    <a class="btn" role="button" tabindex="0" data-i18n="[title]show_all_data" data-bind="click:function(){clearWildcardFilter('jqxGridAssignedHierarchyReferenseSets')}"><i class="icon-reset-filter"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body p0">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!--grid area start-->
+                                                                        <div id="assignedHierarchyReferenseSetsDiv">
+                                                                            <div id="jqxGridAssignedHierarchyReferenseSets"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1 pr0" style="width:5% !important">
+                                                        <div class="btnv pl0">
+                                                            <div>
+                                                                <a id="btnMoveUpReferenceSet" tabindex="0" class="btn btn-default angletop" data-bind="click: moveItemsUP"><b class="icon-angle-right"></b></a>
+                                                            </div>
+                                                            <div>
+                                                                <a id="btnMoveDownReferenceSet" tabindex="0" class="btn btn-default anglebottom" data-bind="click:moveItemsDown"><b class="icon-angle-right"></b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Reference Sets -->
+
+                                        <!-- Qualified Parameter Templates -->
+                                        <div id="qualifiedTemplatesPanel" class="col-md-12" style="padding:0px;border: 1px groove; margin-left: 1px; margin-right: 1px; margin-bottom: 10px;background-color:#f5f5f5;border-color:#ddd">
+                                            <div class="col-lg-12" style="padding-left: 0px; padding-right: 0px">
+                                                <div class="col-md-3">
+                                                    <h4 class="mt10 mb0 b" data-i18n="pt_assignedtohierarchy"></h4>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span style="font-size: 14px; margin-top: 8px" class="hierarchy-path-txt" id="Span2" data-bind="text:assignedPramenterTemplatesText"></span>
+                                                </div>
+                                                <div class="col-md-1" style="margin-top:6px">
+                                                    <a title="Expand/Collapse" id="imageId" tabindex="0" class="pull-right" data-bind="click: viewQualifiedParameterTemplateDetails"><i id="qualifiedPTDetails" class="icon-angle-down" style="font-size: 20px; font-weight: bold;"></i></a>
+                                                </div>
+                                            </div>
+                                            <div id="qualifiedParamenterTemplateDetails" class="col-md-12 hide" style="padding:5px">
+                                                <div id="qualifiedParamenterTemplateDetailsDiv">
+                                                    <div id="jqxGridQualifiedParameterTemplates"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Qualified Parameter Templates -->
+                                        <!-- Parameter Templates -->
+                                        <div class="col-md-12" style="padding:0px; margin-top:10px">
+                                            <div id="availabledParameterTemplateId" class="availabledParameterTemplate">
+                                                <h4 class="mt0 b" data-i18n="select_parameter_templates"></h4>
+                                                <div class="row" style="border: 1px groove; padding-top:5px;padding-bottom:2px; margin-left: 1px; margin-right: 1px; margin-bottom: 2px;background-color:#f5f5f5;border-color:#ddd">
+                                                    <div class="col-md-5 pl0" style="padding-left:0px; width:45% !important">
+                                                        <div class="panel panel-custom">
+                                                            <div class="panel-heading" style="height:34px; padding-left:5px;">
+                                                                <h4 class="m0" data-i18n="available_parameter_templates_edit_referenceset" style="font-weight:normal"></h4>
+                                                                <div class="btn-mg">
+                                                                    <a class="btn" role="button" tabindex="0" data-i18n="[title]show_all_data" data-bind="click:function(){clearWildcardFilter('jqxGridAvailableHierarchyTemplates')}"><i class="icon-reset-filter"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body p0">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!--grid area start-->
+                                                                        <div id="availableHierarchyTemplatesDiv">
+                                                                            <div id="jqxGridAvailableHierarchyTemplates"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1" style="width:5% !important">
+                                                        <div class="btnv pl0">
+                                                            <div>
+                                                                <a id="btnMoveRightHierarchyTemplate" tabindex="0" class="btn btn-default" data-bind="click: function() {rightTemplateMove('jqxGridAvailableHierarchyTemplates')}"><b class="icon-angle-right"></b></a>
+                                                            </div>
+                                                            <div>
+                                                                <a id="btnMoveLeftHierarchyTemplate" tabindex="0" class="btn btn-default" data-bind="click: function() {leftTemplateMove('jqxGridAssignedHierarchyTemplates')}"><b class="icon-angle-left"></b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 pl0 pr0" style="width:48% !important">
+                                                        <div class="panel panel-custom">
+                                                            <div class="panel-heading" style="height: 34px; padding-left: 5px; padding-top: 10px;">
+                                                                <h4 class="m0" data-i18n="selected_parameter_templates" style="font-weight:normal"></h4>
+                                                                <div class="btn-mg">
+                                                                    <a class="btn" role="button" tabindex="0" data-i18n="[title]show_all_data" data-bind="click:function(){clearWildcardFilter('jqxGridAssignedHierarchyTemplates')}"><i class="icon-reset-filter"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body p0">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!--grid area start-->
+                                                                        <div id="assignedHierarchyTemplatesDiv">
+                                                                            <div id="jqxGridAssignedHierarchyTemplates"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Parameter Templates -->
+                                        <div id="duplicateParameterTemplates" class="col-md-12 hide" style="padding:0px; margin-top:10px">
+                                            <h4 class="mt0 b" data-i18n="duplicate_parameter_templates"></h4>
+                                            <div id="duplicateParameterTemplatesDiv">
+                                                <div id="duplicateParameterTemplateGrid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <label class="maintainceCheckbox" id="chkoverwriteassignmentLbl" style="padding-right:20px" tabindex="0" data-bind="visible: IsMultiEdit">
+                <input type="checkbox" id="chkoverwriteassignment" tabindex="0" data-bind="checked: checkedOverriteAssignment,event: {change: changeoverwriteassignment}">
+                <span data-i18n="overrite_existing_assignment"></span>
+            </label>
+            <button type="button" disabled class="btn btn-primary" id="btnSaveHierarchyAssignment" tabindex="0" data-i18n="save" data-bind="click:function(){ saveHierarchyAssignmentChanges($parent.observableModelPopup)}"></button>
+            <button type="button" class="btn btn-default" id="cancelEditHierarchyRefer" tabindex="0" data-dismiss="modal" data-i18n="cancel" data-bind="click: function () { handleCloseEvent($parent.unloadTempPopup) }"></button>
+        </div>
+    </div>
+</div>
+<!-- Modal hierarchy popup end -->
+<!-- Modal confirmation popup -->
+<div class="modal" id="confirmationPTPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="confirmationText"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="templatePopup_ConfoYes" tabindex="0" class="btn btn-success" data-i18n="btn_YES" data-bind="click: function() {unAssignParameterTemplate('jqxgridHierarchyAssignment', $parent.observableModelPopup)}"></button>
+                    <button type="button" id="templatePopup_ConfoNo" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:closeConfirmationParameter" autofocus></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+<!-- Modal confirmation on save popup -->
+<div class="modal" id="informationPTSavePopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-information c-blue"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-blue" data-i18n="information_title"></h4>
+                            <span id="informationSaveText"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="templatePopup_ConfoYes" tabindex="0" class="btn btn-primary" data-i18n="btn_OK" data-bind="click: function() {closeInformationPopup()}"></button>
+                    <!--<button type="button" id="templatePopup_ConfoNo" tabindex="0" class="btn btn-default" data-i18n="btn_NO" data-bind="click:closeConfirmationSaveParameter" autofocus></button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+<!---Changes confirmation---->
+<div class="modal" id="ParameterConfirmPopup" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-confirmation c-green"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span data-i18n="changes_discarded"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="TemplateConfirmPopup_Confo_Yes" type="button" class="btn btn-success" data-i18n="btn_YES" data-bind="click:function(){revertTabChanges()}"></button>
+                    <button id="TemplateConfirmPopup_Confo_No" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelconfirmation"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----end-->
+<!-------Error Message-------->
+<div class="modal in " id="informationPopupParameter" style="z-index:99999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i id="erroricon" class="icon-times-circle c-red"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <div style="padding:4px;">
+                                <h4 id="infoHeadParameter" class="modal-title c-red">ERROR</h4>
+                                <span id="infoMessageParameter"></span>
+                                <a id="duplicateParametersViewDetails" title="Click to view duplicate parameters" tabindex="0" style="text-decoration:underline;" data-bind="click:function () {viewDuplicateReferenceSetDetails()}">here</a>
+                                <a id="invalidParametersViewDetails" class="hide" title="Click to view parameters" tabindex="0" style="text-decoration:underline;" data-bind="click:function () {viewInvalidParameterDetails()}">here</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="infoBtnPTOk" tabindex="0" data-bind="click:function () {hideErrorMessage('informationPopupParameter')}" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------------->
+<!-----------------Warning Message--------------->
+<div class="modal" id="warningHierarchyAssignment" style="z-index: 9999" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts" style="width: 550px;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-warning c-red"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-red" data-i18n="warning_title"></h4>
+                            <span id="warningHierarchyAssignmentMsg"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="margin-top:10px">
+                    <button id="WarningPopup_Confo_Yes" type="button" class="btn btn-danger" data-i18n="btn_YES" data-bind="click:function(){ addHierarchyAssignment('jqxgridHierarchyAssignment', $parent.observableModelPopup)}"></button>
+                    <button id="WarningPopup_Confo_No" type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:cancelWarningForHierarchyAssignment"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------>

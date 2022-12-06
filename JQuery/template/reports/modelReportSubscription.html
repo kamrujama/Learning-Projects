@@ -1,0 +1,481 @@
+﻿<div class="modal-dialog modal-big" id="mdlReportSubscription">
+    <div class="modal-content">
+        <div class="modal-header" id="mdlReportSubscriptionHeader">
+            <button type="button" tabindex="0" class="close" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 id="subscriptionHead" class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="m0" data-i18n="rpt_reportSelected"></h5>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label data-bind="text:reportName"></label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 pr0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="m0" data-i18n="rpt_recurrence_pattern"></h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="radio">
+                                        <label tabindex="0">
+                                            <input type="radio" tabindex="0" name="optionsRadios" data-bind="checked:checkRecurrence,click:showRecurrenceHourly" id="rbtHourly" value="Hourly" checked>
+                                            <span data-i18n="hourly"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label tabindex="0">
+                                            <input type="radio" tabindex="0" name="optionsRadios" data-bind="checked:checkRecurrence,click:showRecurrenceDaily" id="rbtDaily" value="Daily">
+                                            <span data-i18n="daily"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio" tabindex="0">
+                                        <label>
+                                            <input type="radio" tabindex="0" name="optionsRadios" data-bind="checked:checkRecurrence,click:showRecurrenceWeekly" id="rbtWeekly" value="Weekly">
+                                            <span data-i18n="weekly"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio" tabindex="0">
+                                        <label>
+                                            <input type="radio" tabindex="0" name="optionsRadios" data-bind="checked:checkRecurrence,click:showRecurrenceMonthly" id="rbtMonthly" value="Monthly">
+                                            <span data-i18n="monthly"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!--Hour Start-->
+                                <div id="hourDiv" class="col-md-10">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="control-label" tabindex="0">
+                                                <span data-i18n="recure_every"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="textPeriodHourly" tabindex="0" style="width: 40px;" class="form-control" value="1" data-rule="hour" maxlength="2">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                <span data-i18n="date_hours"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="dailyDiv" class="col-md-10">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" tabindex="0" name="dayRediogroup" id="rbtEveryDaily" data-bind="checked:DailycheckSub,click:showEveryDaily" value="every" checked>
+                                                <span data-i18n="every"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtPeriodDaily" tabindex="0" style="width: 40px;" class="form-control" value="1" data-rule="yearDays" data-bind="event:{keyup:checkPeriod(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" tabindex="0" class="spin-up" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" tabindex="0" class="spin-down" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                <span data-i18n="date_day"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" name="dayRediogroup" id="rbtEveryWeekDayDaily" tabindex="0" data-bind="checked:DailycheckSub,click:showEveryWeekDayDaily" value="everyweekday">
+                                                <span data-i18n="every_weekday"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label>
+                                                <span data-i18n="subs_At"></span>
+                                            </label>
+                                        </div>
+                                        <!-- <div class="form-group mb10 pl10">
+                                                    <input type="text" id="datepicker0" class="form-control datepic-icon" placeholder="DD-MM-YYYY">
+                                                </div>-->
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtHourDaily" tabindex="0" style="width: 46px;" class="form-control" value="1" data-rule="hour12" data-bind="event:{keyup:checkHour(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" tabindex="0" class="spin-up" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" tabindex="0" class="spin-down" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtMinuteDaily" tabindex="0" style="width: 46px;" class="form-control" value="1" data-rule="minute" data-bind="event:{keyup:checkMinute(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" tabindex="0" class="spin-up" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" tabindex="0" class="spin-down" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <select id="ddlHourDaily" tabindex="0" class="form-control">
+                                                <option>AM</option>
+                                                <option>PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="weeklyDiv" class="col-md-9">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label for="name" data-i18n="recurenceevery" style="margin-left: 1px"></label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtPeriodWeekly" tabindex="0" style="width: 40px;" class="form-control" value="1" data-rule="yearWeeks">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" tabindex="0" class="spin-up" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" tabindex="0" class="spin-down" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                week(s) on:
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb10" id="weekdaysDiv">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="checkSunday" tabindex="0" value="sunday">
+                                                    Sunday
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckMonday" tabindex="0" value="Monday">
+                                                    Monday
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckTuesday" tabindex="0" value="Tuesday">
+                                                    Tuesday
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckWednesday" tabindex="0" value="Wednesday">
+                                                    Wednesday
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckThursday" tabindex="0" value="Thursday">
+                                                    Thursday
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckFriday" tabindex="0" value="Friday">
+                                                    Friday
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="checkbox-inline" tabindex="0">
+                                                    <input type="checkbox" id="CheckSaturday" tabindex="0" value="Saturday">
+                                                    Saturday
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:1px">
+                                                <span data-i18n="subs_At"></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtHourWeekly" tabindex="0" style="width: 46px;" class="form-control" data-rule="hour12" data-bind="event:{keyup:checkHour(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtMinuteWeekly" tabindex="0" style="width: 46px;" class="form-control" data-rule="minute" data-bind="event:{keyup:checkMinute(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <select id="ddlHourWeekly" tabindex="0" class="form-control">
+                                                <option>AM</option>
+                                                <option>PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="MonthlyDiv" class="col-md-9">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" tabindex="0" name="dayMonthlyGroup" id="rbtDayMonthly" value="day" checked>
+                                                <span data-i18n="day"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtPriodDays" tabindex="0" style="width: 40px;" class="form-control" value="1" data-rule="monthDays">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                <span data-i18n="of_every"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtPeriodMonthly" tabindex="0" style="width: 40px;" class="form-control" value="1" data-rule="month">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                <span data-i18n="date_months"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:1px">
+                                                <span data-i18n="subs_At"></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtHourMonthly" tabindex="0" style="width: 46px;" class="form-control" value="1" data-rule="hour12" data-bind="event:{keyup:checkHour(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" id="txtMinuteMonthly" tabindex="0" style="width: 46px;" class="form-control" value="1" data-rule="minute" data-bind="event:{keyup:checkMinute(event)}">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" class="spin-up" tabindex="0" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" class="spin-down" tabindex="0" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <select id="ddlHourMonthly" tabindex="0" class="form-control">
+                                                <option>AM</option>
+                                                <option>PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="m0" data-i18n="range_of_recurrence"></h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline">
+                                                <span data-i18n="Start"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl10">
+                                            <input type="text" id="txtStartDate" tabindex="0" class="form-control datepic-icon" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" name="rangeRbtGroup" id="rbtNoEnd" tabindex="0" data-bind="checked:checkRange,click:showRangeNoEnd" value="noEnd">
+                                                <span data-i18n="noendDate"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" name="rangeRbtGroup" id="rbtEndAffter" tabindex="0" data-bind="checked:checkRange,click:showEndAffter" value="EndAfter">
+                                                <span data-i18n="endAfter"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl5">
+                                            <div class="input-group spinner" data-trigger="spinner">
+                                                <input type="text" style="width: 40px;" id="txtEndAfter" tabindex="0" class="form-control" value="1" data-rule="quantity">
+                                                <div class="input-group-addon">
+                                                    <a href="javascript:;" tabindex="0" class="spin-up" data-spin="up"><i class="icon-angle-up"></i></a>
+                                                    <a href="javascript:;" tabindex="0" class="spin-down" data-spin="down"><i class="icon-angle-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb10">
+                                            <label class="control-label" style="margin-left:5px">
+                                                <span data-i18n="Occurrences"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline m0">
+                                        <div class="form-group mb10">
+                                            <label class="radio-inline" tabindex="0">
+                                                <input type="radio" name="rangeRbtGroup" id="rbtEndBy" tabindex="0" data-bind="checked:checkRange,click:showEndBy" value="EndBy">
+                                                <span data-i18n="endby"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group mb10 pl10">
+                                            <input type="text" id="txtEndBy" tabindex="0" class="form-control datepic-icon" placeholder="DD-MM-YYYY" style="margin-left:9px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 pr0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="m0" data-i18n="recipients"></h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="activeUserGrid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="m0" data-i18n="attachment_format"></h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="radio-inline" tabindex="0">
+                                        <input type="radio" name="rbtAttachmnetGroup" id="rbtPDF" tabindex="0" data-bind="checked:checkAttachment" value="PDF" checked>
+                                        PDF
+                                    </label>
+                                    <label class="radio-inline" tabindex="0">
+                                        <input type="radio" name="rbtAttachmnetGroup" id="rbtCSV" tabindex="0" data-bind="checked:checkAttachment" value="CSV">
+                                        CSV
+                                    </label>
+                                    <label class="radio-inline" tabindex="0">
+                                        <input type="radio" name="rbtAttachmnetGroup" id="rbtExcel" tabindex="0" data-bind="checked:checkAttachment" value="Excel">
+                                        EXCEL
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group  col-md-5">
+                                <label>
+                                    <span data-i18n="subcription_name_lable"></span><span class="required">*</span>
+                                </label>
+                                <input type="text" id="txtSubcription" tabindex="0" maxlength="50" data-bind="textInput: subscriptiontext" class="form-control">
+                            </div>
+                            <div class="form-group col-md-7 vf-SFTP-div" id="sftpDistributionDiv">
+                                <label class="checkbox-inline vf-SFTP-div-child1">
+                                    <input type="checkbox" id="chkSFTPDistributionId" data-bind="checked:checkSFTPDistribution,event:{change:onChangeSFTPDistributions}">
+                                    <span data-i18n="enable_sftp_distribution"></span>
+                                </label>
+                                <div class="vf-display-inline-block" id="sftgZipCompressionDiv">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chkgZipCompressionId" data-bind="checked:checkgZipCompression,event:{change:onChangegZipCompression}">
+                                        <span data-i18n="sftp_compress_to_gz"></span>
+                                    </label>
+                                </div>
+                                <div class="vf-display-inline-block" id="sftpasswordProtectionDiv">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chkSFTPPwdProtectedId" data-bind="checked:checkSFTPPasswordProtected,event:{change:onChangeSFTPPasswordProtected}">
+                                        <span data-i18n="sftp_password_protect"></span>
+                                    </label>
+                                    <input type="password" tabindex="0" class="form-control vf-SFTP-Password-Protect" id="protectedPWDID" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" id="btnAdd" tabindex="0" disabled data-i18n="Add_btn" class="btn btn-primary"></button>
+            <button type="button" tabindex="0" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+
+        </div>
+    </div>
+</div>

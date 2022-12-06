@@ -1,0 +1,26 @@
+﻿<div id="showHideMainDiv" class="modal-dialog modal-sm">
+	<div class="modal-content" id="showHideMainDivScheduleContent">
+		<div class="modal-header" id="showHideMainDivScheduleHeader">
+			<button type="button" id="closedbtn" class="close" aria-label="Close" data-bind="click: function () {resetState();$parent.unloadTempPopup('unloadTemplate');closedpopup()}">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="H2" data-i18n="show_hide"></h4>
+		</div>
+		<div class="modal-body">
+			<div class="form-group" id="columnDiv" data-bind="foreach:$parent.columnlist">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" onclick="funShowHide(this.id, this.checked)" data-bind="attr:{id:gridId+'-check-'+columnfield,checked:!checked},value:columnfield,checked:!checked">
+						<span data-bind="text:columnName"></span>
+					</label>
+				</div>
+			</div>
+			<div data-bind="visible:$parent.columnlist().length<=0">
+				<span data-i18n="no_items"></span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-i18n="btn_OK" id="btnOkShowHide" data-bind="click: function () { saveSelectedColumns(); $parent.unloadTempPopup('unloadTemplate'); closedpopup() }"></button>
+		</div>
+	</div>
+</div>

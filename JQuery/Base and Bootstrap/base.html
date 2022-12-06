@@ -1,0 +1,623 @@
+﻿
+<script data-main="js/indexMain" src="js/plugin/require.min.js"></script>
+<script>
+
+	$(".logout-li").on({
+		'mouseover' : function(){
+			$("#logout-color").css('color','#fff')
+		},
+		'mouseout': function(){
+			$("#logout-color").css('color','#333333')
+		}
+	})
+	
+	$("#loadingDiv").show();
+	$("#footerX").hide();
+	$('#navbar_head').hide();
+	$('#sidebar').hide();
+	$('#sidebarbgDiv').hide();
+	$('#collapsibleanimatedDiv').hide();
+</script>
+<div id="loadingDiv" class="vhq-loader" style="display: none">
+	<!-- <div class="vhq-loader-area"><div class="spinner"></div></div>-->
+	<div class="vhq-loader-area">
+		<div class="vhq-spinner"></div>
+	</div>
+</div>
+<div id="dashboardloading" class="vhq-loader" style="display: none">
+	<!-- <div class="vhq-loader-area"><div class="spinner"></div></div>-->
+	<div class="vhq-loader-area">
+		<div class="vhq-spinner"></div>
+	</div>
+</div>
+<div id="loader1" class="vhq-loader" style="display: none">
+	<!-- <div class="vhq-loader-area"><div class="spinner"></div></div>-->
+	<div class="vhq-loader-area">
+		<div class="vhq-spinner"></div>
+	</div>
+</div>
+<div id="loader2" class="vhq-loader" style="display: none">
+	<!-- <div class="vhq-loader-area"><div class="spinner"></div></div>-->
+	<div class="vhq-loader-area">
+		<div class="vhq-spinner"></div>
+	</div>
+</div>
+<div id="LoadingForReportData" class="vhq-loader" style="display: none">
+	<!-- <div class="vhq-loader-area"><div class="spinner"></div></div>-->
+	<div class="vhq-loader-area">
+		<div class="vhq-spinner"></div>
+	</div>
+</div>
+<!--loader example end-->
+<!--header start-->
+<div id="maindiv" class="wrapper">
+	<nav id="navbar_head" class="navbar navbar-default header" style="z-index:1021" data-bind="visible:VHQFlag">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="http://www.verifone.com/" target="_blank" style="cursor:pointer">
+					<img id="img_vhq_logo" width="130" src="assets/images/verifone_logo.png" class="logo" alt="">
+				</a>
+			</div>
+			<div class="navbar-header pt5">
+				<p class="m10 b f14" data-bind="text:customerFullName"></p>
+				<!--<ul class="hierarchyCntr">
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="hidden-xs" style="width:75px">Hierarchies</span><i class="icon-angle-down user-arrow"></i>
+						</a>
+						<table class="table table-condensed dropdown-menu animated fadeInDown user-drop" style="margin-top: 0px">
+							<tbody id="itemTbodyUserHierarchies"></tbody>
+						</table>
+					</li>
+				</ul>-->
+			</div>
+
+			<div class="collapse navbar-collapse">
+				<div id="notifiCation" class="notifyAlert hide">
+					<a class="notifyAlertmessage" href="javascript:;" data-bind="click:newAlertClick"
+						aria-expanded="false">
+						<i class="icon-bell"></i>&nbsp;&nbsp;<span class="">A new Alert has been generated</span>
+					</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown navbar-user" style="display:none">
+						<a class="dropdown-toggle" data-toggle="dropdown" tabindex="0">
+							<i class="icon-hierarchy pr5 pt5" style="float: left;"></i>
+							<span class="hidden-xs" style="width:75px">Hierarchies</span><i
+								class="icon-angle-down user-arrow"></i>
+						</a>
+						<table class="table table-condensed dropdown-menu animated fadeInDown user-drop"
+							style="margin-top: 0px">
+							<tbody id="itemTbodyUserHierarchies"></tbody>
+						</table>
+					</li>
+					<li>
+						<a href="javascript:;" data-toggle="dropdown" data-bind="click:help"
+							class="dropdown-toggle f-s-14" aria-expanded="false" tabindex="0">
+							<i class="icon-question pr5"></i>Help
+						</a>
+					</li>
+					<li class="dropdown navbar-user hide">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="hidden-xs">Select Theme</span><i class="icon-angle-down user-arrow"></i>
+						</a>
+						<ul class="dropdown-menu animated fadeInDown user-drop">
+							<li class="arrow"></li>
+							<li>
+								<a href="#" data-bind="click:function () {changetheme('default')}"><span
+										data-i18n="default_theme"></span></a>
+							</li>
+							<li>
+								<a href="#" data-bind="click:function () {changetheme('black')}"><span
+										data-i18n="black_theme"></span></a>
+							</li>
+							<!--<li>
+								<a href="#" data-bind="click:function () {changetheme('green')}"><span data-i18n="green_theme"></span></a>
+							</li>-->
+							<li>
+								<a href="#" data-bind="click:function () {changetheme('grey')}"><span
+										data-i18n="grey_theme"></span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
+							style="padding: 15px 10px 10px;" tabindex="0">
+							<img id="img_default-user" src="assets/images/user-13.jpg" alt="" />
+							<span id="userfullnameId" class="hidden-xs"></span><i
+								class="icon-angle-down user-arrow"></i>
+						</a>
+						<ul class="dropdown-menu animated fadeInDown user-drop">
+							<li class="arrow"></li>
+							<li>
+								<a href="#" tabindex="0"
+									data-bind="click: function () {openPopup('modelUserProfile')}"><i
+										class="icon-user"></i><span data-i18n="my_profile"></span></a>
+							</li>
+							<li>
+								<a href="#" tabindex="0" id="roles_subscriptions"
+									data-bind="click: function () {openPopup('modelUserPreferences')}"><i
+										class="icon-user-plus"></i><span data-i18n="my_preferences"></span></a>
+							</li>
+							<li class="dropdown-submenu" role="menu" id="customers"
+								data-bind="visible:customers().length>1">
+								<a class="customermenu" tabindex="0"><i class="icon icon-building"></i><span
+										data-i18n="customers_menu"></span><span class="arrow"></span></a>
+								<ul class="dropdown-menu submenus" style="width:200px; height: 600px !important;" data-bind="foreach:customers">
+									<li
+										data-bind="attr:{id:'customerli'+$index()},style: { backgroundColor: IsCurrentCustomer ? '#00AEEF' : ''},click:function(){$parents[0].switchCustomer($data)}">
+										<a class="device-status-name-txt" href="#"
+											data-bind="attr:{id:'anchor'+$index()},style: { backgroundColor: IsCurrentCustomer ? '#00AEEF' : '', cursor: IsCurrentCustomer ? 'default' : 'pointer'}">
+											<i class="icon icon-building" />
+											<span data-bind="text:Customer,attr:{'title':Customer}"></span>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li style="padding: 12px 20px;height: 40px;" class="logout-li">
+								<a style="color:#333333;display: block;" href="#" tabindex="0" class="logout" data-bind="click:backToLogin" id="logout-color"><i
+										class="icon-unlocked"></i><span data-i18n="logout_lbl"></span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--header end-->
+	<!--sidebar start-->
+	<div id="collapsibleanimatedDiv" style="z-index: 999;" class="collapsible animated" data-bind="visible:VHQFlag">
+		<a class="navbar-minimalize"><i class="icon-arrow-left2"></i></a>
+	</div>
+	
+	<div id="sidebar" class="sidebar scrolloverflow scroll-y-overflow sidebar-left" data-bind="visible:VHQFlag">
+		<div data-scrollbar="true" id="divsidescroll" data-height="100%">
+			<ul class="nav" id="mainMenuUl" data-bind="foreach: menus">
+				<li class="has-sub"
+					data-bind="css: {'active active-1' : id === defaultMenuOption,'nochild':$data.children.length<=0 },attr:{id:id}, event:{mouseover: function(){var titleData=i18n.t(this.name, { lng: lang }); $('#'+ this.id).attr('title',titleData)}},click: $root.goToMenu">
+					<a tabindex="0" href="javascript:;">
+						<b data-bind="visible:children.length>0" class="icon-angle-right pull-right arrow-adjust"></b>
+						<i data-bind="css: icon"></i><span data-bind="attr:{'data-i18n':name}"></span>
+					</a>
+					<ul class="sub-menu"
+						data-bind="attr:{id:'childUl'+id}, foreach: children ,visible:children.length>0">
+						<div class="hidechildHeader" data-bind="css:{'selectedHeader':$index()==0}"><span
+								style="height: 20px; color: white; margin-top: -10px;"
+								data-bind="attr:{'data-i18n':parentId},visible:$index()==0"></span></div>
+						<li data-bind="attr:{id:id},css:{'nochild':$data.Subchild.length<=0}, event:{mouseover: function(){var titleData=i18n.t(this.name, { lng: lang }); $('#'+ this.id).attr('title',titleData)}}"
+							class="has-sub">
+							<a tabindex="0" data-bind="click: $root.goToChildMenu" href="javascript:;">
+								<span data-bind="attr:{'data-i18n':name}"></span>
+								<b data-bind="visible:Subchild.length>0"
+									class="icon-angle-right pull-right arrow-adjust"></b>
+							</a>
+							<ul class="sub-menu s-menu-lt" data-bind="foreach: Subchild">
+								<li class="has-sub"
+									data-bind="attr:{id:'li'+$index()},css:{'nochild':$data.subChildChildern.length<=0}, event:{mouseover: function(){var titleData=i18n.t(this.name, { lng: lang }); $('#'+ this.name+'sublink').attr('title',titleData)}}">
+									<span data-bind="attr:{id:childParentId+name}"></span>
+									<a tabindex="0" href="#"
+										data-bind="attr:{id:name+'sublink'}, click:function(){$root.goToSubChildMenu($data,$index())}, visible:name!='modelAddVRKBundle'">
+										<span data-bind="attr:{'data-i18n':name}"></span>
+										<b data-bind="visible:subChildChildern.length>0"
+											class="icon-angle-right pull-right arrow-adjust"></b>
+									</a>
+									<ul class="sub-menu" data-bind="foreach: subChildChildern">
+										<li class="has-sub"
+											data-bind="attr:{id:'subChildChildernli'+$index()},click:function(){$root.goToSubChildChildren($data,$index())}">
+											<a tabindex="0" href="#" data-bind="attr:{id:id}">
+												<span class="hierarchy-name-txt"
+													data-bind="attr:{'data-i18n':name,'title':name}"></span>
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="draghandle" style="width: 6px"></div>
+	
+	<div id="sidebarbgDiv" class="sidebar-bg" data-bind="visible:VHQFlag"></div>
+	<!--sidebar end-->
+	<!-- content start -->
+	<div data-bind="css: { 'clientClass' : !VHQFlag }" class="content">
+		<div id="mainScrenContent" data-bind='component: observableWhoseValueIsAComponentName'></div>
+
+		<div id="errorDiv" style="left: 0px; top: 0px; width: 100%; height: 100%; position: absolute; background-color: rgb(229, 227, 223);display: none;">
+			<div class="hosted-page-err-container">
+				<div class="hosted-page-err-content">
+					<div class="hosted-page-err-icon"><img style="-ms-user-select: none;" draggable="false"
+							[src]="errorlogopath"></div>
+					<div class="hosted-page-err-title">Oops! Something went wrong.</div>
+					<div class="hosted-page-err-message" id="errorMessageDiv"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- content end -->
+	<!-- fixed footer -->
+	<div id="footerX" class="fixed-footer" data-bind="visible:VHQFlag" style="z-index: 999;">
+		<div class="col-md-6 copyright-txt">
+			VHQ
+			<span id="version" style="padding-right: 10px"></span>
+			<span id="copyright"></span>
+		</div>
+		<div class="col-md-6 text-right">
+			<span>Powered by Verifone</span>
+		</div>
+		<!--<div class="col-md-6 text-right">
+			<a href="http://www.verifone.com/" target="_blank">
+				<img src="assets/images/verifone-b.png" alt="" height="20" />
+			</a>
+		</div>-->
+	</div>
+</div>
+<!-- fixed footer -->
+<!-- Model start -->
+<!---AlertMsgmodel-->
+<div class="modal in bs-example-modal-sm" id="Alermsgmodel" tabindex="-1" data-keyboard="true" data-backdrop="static"
+	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="alertHeader"></h4>
+				</div>
+				<div class="modal-body">
+					<p id="pAlert"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" tabindex="0" id="btnAlert_OK" data-i18n="btn_OK" class="btn btn-primary"
+						data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end------------->
+<div class="modal in bs-example-modal-sm" id="model-pop-1" tabindex="-1" data-keyboard="true" data-backdrop="static"
+	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+					<h4 class="modal-title" id="myModalLabel">Message Header</h4>
+				</div>
+				<div class="modal-body">
+					<p id="msgBody"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="pbtnOK" tabindex="0" data-i18n="btn_OK" class="btn btn-success"
+						data-dismiss="modal"></button>
+					<button type="button" id="pbtnYES" tabindex="0" data-i18n="btn_YES" class="btn btn-success"
+						data-dismiss="modal"></button>
+					<button type="button" id="pbtnNO" tabindex="0" data-i18n="btn_NO" class="btn btn-default"
+						data-dismiss="modal"></button>
+					<button type="button" id="pbtnChange" tabindex="0" data-i18n="change_pwd" class="btn btn-success"
+						data-dismiss="modal"></button>
+					<button type="button" id="pbtnContinue" tabindex="0" data-i18n="btn_continue"
+						class="btn btn-default" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!------VHQ Device Profile Lite--------->
+<div class="modal bs-example-modal-lg" id="deviceProfileModel" data-keyboard="false" data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-big" id="hierarchyPopupDiv">
+			<div class="modal-content" id="deviceProfileHierachyModalContent">
+				<div class="modal-header" id="deviceProfileHierachyModalHeader">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+						data-bind="click:cancelHierarchy">&times;</button>
+					<h4 class="modal-title" id="head1" data-i18n="Select_Hierarchy"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-1 pr0" style="width:150px">
+							<h4 data-i18n="current_hierarchy" class="b"></h4>
+						</div>
+						<div class="col-md-10">
+							<span style="font-size: 14px; margin-top: 9px; margin-left: -15px;"
+								class="hierarchy-path-txt" id="hierarchyFullPathID"
+								data-bind="text:deviceHierarchy,attr:{'title':deviceHierarchy}"></span>
+						</div>
+					</div>
+					<div data-bind="if: isModelHierarchyPopup">
+						<div data-bind='component:observableModelPopupHierarchy'>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="vertical-align-center" id="modePopupDiv">
+			<div data-bind="if: isModelPopup">
+				<div data-bind='component:observableModelPopup'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!---------------- paremter synchronization template------------------->
+<div class="modal" id="parameterSyncDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog"
+	aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center">
+			<div class="modal-content" id="paramSycIDContent">
+				<div class="modal-header" id="paramSycIDHeader">
+					<button type="button" class="close"
+						data-bind="click: function(){closeParamSyncStatusModal('jqxGridForParameterSynchronization')}"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" data-i18n="parameters_sync_status"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="sychronizationID">
+								<div id="jqxGridForParameterSynchronization"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-i18n="btn_OK"
+						data-bind="click: function(){closeParamSyncStatusModal('jqxGridForParameterSynchronization')}"
+						tabindex="5"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-----------informationpopup--------->
+<!-- <div class="modal" id="informationPopup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm m-alarts">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="alart-icons">
+					<i id="infoicon" class="icon-information c-blue"></i>
+
+				</div>
+				<h4 id="infoHead" class="modal-title c-blue">Information</h4>
+				<p id="infoMessage">Are you sure you want to delete "Lorem Ipsum is simply dummy text of the printing.pnd" this file</p>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="infoBtnOk" data-i18n="btn_OK" class="btn btn-primary" data-dismiss="modal"></button>
+			</div>
+		</div>
+	</div>
+</div>-->
+<!-------------end---------------->
+<!--------------->
+<div class="modal in " id="informationPopup" style="z-index:99999" data-keyboard="true" data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i id="infoicon" class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<div style="padding:4px;">
+								<h4 id="infoHead" class="modal-title c-blue">Information</h4>
+								<!--<p id="infoMessage" style="word-wrap: break-word;">Are you sure you want to delete "Lorem Ipsum is simply dummy text of the printing.pnd" this file</p>-->
+								<span id="infoMessage"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="infoBtnOk" tabindex="0" data-bind="click:hideinfo"
+						class="btn btn-primary">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-------------------------------->
+<div class="modal in" id="datefilterPopup" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog"
+	aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i id="dateinfoicon" class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 id="dateinfoHead" class="modal-title c-blue">Error</h4>
+							<p id="dateinfoMessage">An internal error occurred. If problem persists, contact
+								Administrator</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="dateinfoBtnOk" tabindex="0" data-bind="click:datefilterhideinfo"
+						class="btn btn-primary">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="modelSwitchCustomerConfirmation" data-keyboard="true" data-backdrop="static" tabindex="-1"
+	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<span id="CustomerConfirmation"></span>&nbsp;
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="btnSwitchCustomerYes" class="btn btn-success" data-dismiss="modal"
+						data-bind="click:function () {switchCustomerForUser()}" data-i18n="btn_YES"></button>
+					<button type="button" id="btnSwitchCustomerNo" class="btn btn-default" data-dismiss="modal"
+						data-i18n="btn_NO"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="warningPageChange" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons">
+                                <i class="icon-warning c-red"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-red" data-i18n="warning_title"></h4>
+                            <label data-i18n="all_selections_will_be_lost"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-i18n="btn_YES" data-bind="click: function () { clearSelections('jqxgridHierarchyAssignment')}"></button>
+                    <button type="button" class="btn btn-default" data-i18n="btn_NO" data-bind="click:closeWarningModal" data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---invalid search popup------------>
+<div class="modal in" id="invalidSearchPopup" style="z-index:99999" data-keyboard="true" data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i id="infoicon" class="icon-times-circle c-red"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<div style="padding:4px;">
+								<h4 id="errorHead" class="modal-title c-red" data-i18n="error"></h4>
+								<!--<p id="infoMessage" style="word-wrap: break-word;">Are you sure you want to delete "Lorem Ipsum is simply dummy text of the printing.pnd" this file</p>-->
+								<span id="errorMessage" data-i18n="e_invalid_request_setdeviceparameters"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="errorBtnOk" tabindex="0" data-bind="click:hideErrorInfo"
+						class="btn btn-danger">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal in" id="invalidXMLorCSVPopup" style="z-index:99999" data-keyboard="true" data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i id="invalidinfoicon" class="icon-information c-blue"></i></div>
+						</div>
+						<div class="col-md-8 pl8">
+							<h4 id="invalidinfoHead" class="modal-title c-blue">Information</h4>
+							<p id="invalidinfoMessage">Invalid schema file</p>
+
+						</div>
+						<div class="col-md-2 pl8" style="margin-top:24px;" id="invalidXMLComponentDiv">
+							<a tabindex="0" data-bind="click:downloadLogMessage" class="btn" style="margin-left: 5px;"
+								height="60" title="Download" width="50"><i class="icon-download3"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="invalidinfoBtnOk" tabindex="0" data-bind="click:invalidXMLorCSVHideinfo"
+						class="btn btn-primary">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal in" id="DetailedInformationPopup" style="z-index:99999" data-keyboard="true" data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-times-circle c-red"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<div style="padding:4px;">
+								<h4 class="modal-title c-red">Error</h4>
+								<span id="infoApplicationMessage"></span>
+								<button id="infoMarkMessage" type="button" tabindex="0"
+									data-bind="click:function(){detailedLogs()}" class="btn btn-default btn-label"
+									style="margin-right:4px !important"></button>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="padding: 10px 18px" id="showMoreErrorInfo">
+						<div class="pl8 div-corners">
+							<span id="infoMoreMessage"></span>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" tabindex="1" data-bind="click:hideDetailedInfoPopup"
+							class="btn btn-danger">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="modalResizeResetColumnsConfirmation" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<span id="resizeResetColumnsConfirmationMessage" data-i18n="save_resized_columns_confirmation"></span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="btnYesResizeColumns" type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: function () {setcolumnWidth()}">Yes</button>
+					<button id="btnNoResizeColumns" type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: function () {unloadTempPopup('unloadTemplate')}">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--------------->
+<div class="overflow-strip"></div>
+<div id="allDisabledDiv" class="all-disabled"></div>

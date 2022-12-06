@@ -1,0 +1,35 @@
+﻿<div class="modal-dialog modal-lgs" id="modelEditRight">
+    <div class="modal-content">
+        <div class="modal-header" id="modelEditRightHeader">
+            <button type="button" class="close" tabindex="0" data-dismiss="modal" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" data-i18n="edit_rights" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="panel-body">
+                <div class="pull-right btn-mg">
+                    <!-- <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToXls('jqxgridForUnAssignedRightsForRoleEdit')}"><i class="icon-export-excel"></i></a> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-left:352px">
+                        <input type="checkbox" id="modifyCheckBox" tabindex="0" data-bind="event:{change:modifyChecked},checked:isModifyChecked">
+                        <input type="checkbox" style="margin-left:149px" id="deleteCheckbox" tabindex="0" data-bind="event:{change:deleteChecked},checked:isDeleteChecked" />
+                        <input type="checkbox" style="margin-left:122px" id="viewCheckbox" tabindex="0" data-bind="event:{change:viewChecked},checked:isViewChecked" />
+                    </div>
+                    <div class="col-md-12">
+                        <div id="gridArea" class="grid-area">
+                            <div id="jqxgridForUnAssignedRightsForRoleEdit"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+           
+            <button type="button" id="btn_uploadLibrary" tabindex="0" class="btn btn-primary" data-bind="click:function(){editRightsToRole($parent.observableModelPopup,'jqxgridForUnAssignedRightsForRoleEdit',$parent.getDetails)}" data-i18n="save"></button>
+            <button type="button" class="btn btn-default" tabindex="0" data-dismiss="modal" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-i18n="cancel"></button>
+        </div>
+    </div>
+</div>
+

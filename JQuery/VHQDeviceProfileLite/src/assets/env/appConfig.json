@@ -1,0 +1,143 @@
+{
+  "apiServer": {
+    "vhq_url":"https://blr2wvvhqdev4.verifone.com/VHQDataServices/VHQREST.svc",
+    "care_url":"https://blr2wvvhqdev4.verifone.com/DataServices/api/v1.0/vCare",
+    "help_url":"https://blr2wvvhqdev4.verifone.com/HelpGuide",
+    "mongo_api_url": "https://blr2wvvhqdev4.verifone.com/DeviceCommunication/api",
+    "api_key": "QXRJelNhU3lpREZKTGc3M2FTTHVGcmVodnFwdm9tUFd4a2wxSU5xV2YxSEMzVQ==",
+    "pagesize":"50",
+    "hierarchiesLimit": "100"
+  },
+  "keyIndicators":[
+    {
+      "category": "Battery",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Connection",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Device Status",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Download",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Install",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Memory",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Parameter Sync",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    },
+    {
+      "category": "Software Sync",
+      "deviceHealthIndicatorSeverity": "",
+      "current_Devicehealthindicatorseverity": "",
+      "__typename": "DeviceHealthStatus"
+    }
+  ],
+  "kpiMetrics": [
+    {
+      "displayName": "Newly Activated",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": false
+    },
+    {
+      "displayName": "Active Devices",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Missing Devices",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": false
+    },
+    {
+      "displayName": "Successful Downloads",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Successful Installs",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Successful Installs For New Devices",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Successful Swaps",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": false
+    },
+    {
+      "displayName": "Outdated Software",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Contactless Failures",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    },
+    {
+      "displayName": "Active Users",
+      "total": 0,
+      "percentage": 0,
+      "color": "#c4eeff",
+      "textColor": "#444444",
+      "isPercentage": true
+    }
+  ]
+}

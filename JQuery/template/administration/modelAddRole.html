@@ -1,0 +1,47 @@
+<div class="row" id="addRoleScreen">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <h4 class="vf-admin-heading" data-i18n="Add_Role" id="myModalLabel"></h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label data-i18n="role_name_label"></label>
+                            <span class="required">*</span>
+                            <input type="text" id="roleNameId" tabindex="0" maxlength="50" data-bind="value:roleName" class="form-control">
+                            <span data-bind="validationMessage:roleName" class="error-v animated fadeIn"></span>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="role_desc_label"></label>
+                            <input type="text" id="descriptionId" tabindex="0" data-bind="value:description" class="form-control" maxlength="255">
+                            <span data-bind="validationMessage:description" class="error-v animated fadeIn"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6 tar">
+                                <button type="button" id="addBtn" tabindex="0" disabled class="btn btn-primary" data-i18n="add_user_label" data-bind="click:function(){addRole($parent.observableModelPopup)}"></button>
+                                   <button type="button" class="btn btn-default mr5" tabindex="0" data-dismiss="modal" data-bind="click:cancel" data-i18n="cancel"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="deviceModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal end-->

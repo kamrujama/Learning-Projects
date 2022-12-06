@@ -1,0 +1,455 @@
+<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+	<li>
+		<a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+	</li>
+	<li data-bind="css : {'active':$root.menulevel3() == ''}">
+		<a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+	</li>
+	<li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+
+<div id="screenSplitter">
+	<div id="folderSection" class="splitter-panel">
+		<div class="row">
+			<div class="col-md-12" style="padding: 5px 20px 0px 30px">
+				<div class="pull-left btn-mgl">
+					<a tabindex="0" class="btn btn-default" id="btnAddFolder" role="button" data-i18n="[title]add_folder" data-bind="click: function () {openPopup('modelAddFolder','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+					<a tabindex="0" class="btn btn-default" id="btnEditFolder" role="button" data-i18n="[title]edit_folder" data-bind="click: function () {openPopup('modelEditFolder','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsModifyAllowed')}"><i class="icon-pencil"></i></a>
+					<a tabindex="0" class="btn btn-default" id="btnDeleteFolder" role="button" data-i18n="[title]delete_folder" data-bind="click: function () {openPopup('modelDeleteFolder')},css:{'disabled':!checkRights('Download Library', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+				</div>
+			</div>
+		</div>
+		<!--VHQ-19469-->
+		<div class="treeHolder" style='float: left; margin-left: -20px;height: 90% !important'>
+			<script type="text/html" id="tree-node">
+				<li style="height: 30px !important" data-bind="attr:{title:FolderName,id:FolderId()+'Li'}">
+					<div style="height: 100%;padding: 3px 5px 3px 5px; margin-top: 3px" data-bind="attr:{id:FolderId()+'Div'}, click: function($data) {$parents[Level()+1].selectSourceFolder($data, 'jqxgridDownloadlib')}">
+						<i class="icon icon-folder" data-bind="attr:{id:FolderId()+'icon'}"></i>
+						<span class="folder-name-txt" tabindex='0' data-bind="text: FolderName, attr:{ id:'Folder'+FolderId(), 'title':FolderName }"></span>
+					</div>
+					<ul id="mainTreeViewUL" data-bind="template: {name: 'tree-node', foreach: children}" style="padding-left:40px"></ul>
+				</li>
+			</script>
+			<ul data-bind="template: {name: 'tree-node', foreach: treeColl}" class="treeFolder"></ul>
+		</div>
+	</div>
+	<div id="gridSection" class="row">
+		<div class="col-md-12">
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="pull-left btn-mgl">
+								<a tabindex="0" class="btn btn-default" id="btnRefresh" role="button" data-i18n="[title]refresh_data" data-bind="click:function(){refreshGrid('jqxgridDownloadlib')}"><i class="icon-spinner9"></i></a>
+								<a tabindex="0" class="btn btn-default" id="btnAddPackage" role="button" data-i18n="[title]add_package_tooltip" data-bind="click: function () {openPopup('modelAddpackage','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+								<a tabindex="0" class="btn btn-default" id="btnEditPackage" role="button" data-i18n="[title]edit_package_tooltip" data-bind="click: function () {openPopup('modelEditpackage','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsModifyAllowed')}"><i class="icon-pencil"></i></a>
+								<a tabindex="0" class="btn btn-default" id="btnDeletePackage" role="button" data-i18n="[title]delete_package_tooltip" data-bind="click: function() {deletePackage('modelDeleteDownloadLibrary','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+								<a tabindex="0" class="btn btn-default" id="btnMovePackage" role="button" data-i18n="[title]move_package" data-bind="click: function() {showFoldersListToMove('jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Library', 'IsModifyAllowed')}"><i class="glyphicon glyphicon-move"></i></a>
+								<div id="movePackageDiv" class="col-md-4 hide" style="z-index: 999;position:absolute;left:190px;top:38px" data-keyboard="true" data-backdrop="static" tabindex="-1">
+									<div class="con-area" style="width: 220px">
+										<div class="grid-pop">
+											<div id="checkboxdiv' + gId + '" style="display: block;overflow-y: auto;">
+												<ul id="movePackagesList" data-bind="foreach: folders" style="padding-left:40px; height: 200px">
+													<li style="margin-left: -40px; cursor: pointer" data-bind="attr:{title:FolderName,id:FolderId+'moveLi'}, click: function() {$parent.selectDestinationFolder(this, 'jqxgridDownloadlib')}">
+														<div style="padding: 3px 5px 3px 5px; margin-top: 3px" data-bind="attr:{id:FolderId+'moveDiv'}">
+															<i class="icon icon-folder" data-bind="attr:{id:FolderId+'moveicon'}"></i>
+															<span class="hierarchy-name-txt" tabindex='0' data-bind="text: FolderName, attr:{ id:'moveFolder'+FolderId, 'title':FolderName }"></span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="btn-footer pull-right btn-mgl" style="width:220px;border: 1px solid #ccc;margin-right:-1px">
+												<button id="btnMoveFolder" class="btn btn-primary" disabled data-i18n="folder_move" data-bind="click:movePackageConfirmation"></button>
+												<button id="btnCancelMoveFolder" class="btn btn-default" data-i18n="cancel" data-bind="click:cancelMovePackage"></button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a tabindex="0" class="btn btn-default" id="btnScheduleFile" role="button" data-i18n="[title]schedule_file" data-bind="click:function(){schedulePackage('jqxgridDownloadlib')}"><span data-i18n="schedule_file"></span></a>
+								<a tabindex="0" class="btn btn-primary" id="btnConfigureReferenceSet" role="button" title="Add Reference Set" data-bind="click: function () {openPopup('modelAddReference','jqxgridDownloadlib')},css:{'disabled':!checkRights('Download Schedule', 'IsModifyAllowed')}"><i class="icon-reschedule"></i></a>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="pull-right btn-mg">
+								<a class="btn btn-default" id="btnRestFilterMain" tabindex='0' role="button" data-i18n="[title]reset_report" data-bind="click:function(){clearfilter('jqxgridDownloadlib')}"><i class="icon-reset-filter"></i></a>
+								<a class="btn btn-default" id="btnShowHide" tabindex='0' role="button" data-i18n="[title]show_hide" data-bind="click: function () {openPopup('modelShowHideCol','jqxgridDownloadlib')}"><i class="icon-hide-column"></i></a>
+								<a class="btn btn-default" id="btnExportToexcelMain" tabindex='0' role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridDownloadlib')}"><i class="icon-export-excel"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="grid-area" id="downloadLibraryGridDiv">
+								<div id="jqxgridDownloadlib"></div>
+								<div id="pagerDivDownloadlib">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="downloadModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="vertical-align-center">
+			<div data-bind="if: templateFlag">
+				<div data-bind='component:observableModelPopup'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal end-->
+<!--model foegrid Application--->
+<div class="modal" id="ApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" style="width: 829px;" id="mdlApplication">
+			<div class="modal-content">
+				<div class="modal-header" id="applnViewHeader">
+					<button type="button" tabindex='0' class="close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel"></h4>
+					<span data-i18n="applications_of_package"></span>
+					<span id="packageNameAppln"></span>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right btn-mg" id="showHideRestBtn">
+								<a class="btn btn-default" id="btnRestFilter" tabindex='0' role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilterApplication('jqxApplicationView')}"><i class="icon-reset-filter"></i></a>
+								<a class="btn btn-default" id="btnExportToexcel" tabindex='0' role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelApplication('jqxApplicationView')}"><i class="icon-export-excel"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="grid-area">
+						<div id="jqxApplicationView"></div>
+					</div>
+					<div class="grid-area">
+						<div id="jqxBundleView"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" tabindex='0' class="btn btn-primary" data-dismiss="modal" data-i18n="btn_OK"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end------>
+<!--model foegrid childApplication--->
+<div class="modal" id="childApplicationView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" style="width: 700px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" tabindex='0' class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel"></h4>
+					<span id="parameter_for_application"></span>
+				</div>
+				<div class="modal-body">
+
+					<div class="grid-area" style="display: block; height: 300px; overflow-y: auto">
+						<div id="PADTreeGrid"></div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" tabindex='0' class="btn btn-default" data-dismiss="modal" data-i18n="btn_OK" autofocus></button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end------>
+<!-- modal validation for edit --->
+<div class="modal bs-example-modal-lg" id="alertLibraryID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggAlertID">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="Information_filter"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="select_item"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal validation end---->
+<!-- modal edit for only one validation --->
+<div class="modal bs-example-modal-lg" id="modalLibraryID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggModalLibraryID">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="Information_filter"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="select_item"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal end---->
+<!-- modal delete validation --->
+<div class="modal bs-example-modal-lg" id="modalDeleteID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggDeleteID">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="Information_filter"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="select_item"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-12 pr0">
+							<div class="modal-footer" style="padding-bottom: 5px; padding-top: 5px;">
+								<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal end---->
+<!-- modal schedule validation --->
+<div class="modal bs-example-modal-lg" id="modalScheduleID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggScheduleID">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="Information_filter"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="select_item"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal end---->
+<!-- modal add success --->
+<div class="modal bs-example-modal-lg" id="addLibraryID" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggAddID">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="success"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="alert_file_update_success_device"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal success end--->
+<!-- modal edit success --->
+<div class="modal bs-example-modal-lg" id="modalEditLibrary" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center" id="draggEditId">
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<h4 class="modal-title" data-i18n="success"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12 pr0">
+							<span data-i18n="alert_file_updat_success_device"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<button type="button" tabindex='0' class="btn btn-default" data-i18n="btn_OK" data-dismiss="modal"></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal success end--->
+<!------ all packages deleted information popup ---->
+<div class="modal" id="infoAllDeleted" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p data-i18n="all_package_associations_will_be_lost_Are_you_sure_you_want_to_continue"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="infoAllDeleted_Yes" tabindex='0' class="btn btn-danger" data-bind="click: function () {deleteAllLibrary('jqxgridDownloadlib')}" data-i18n="btn_YES" data-dismiss="modal"></button>
+					<button type="button" id="infoAllDeleted_No" tabindex='0' class="btn btn-default mr5" data-i18n="btn_NO" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal end---->
+<!-- Add/Edit Folder -->
+<div class="modal bs-example-modal-lg" id="folderDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content" id="folderDivContent">
+				<div class="modal-header" id="folderDivHeader" style="height:40px">
+					<button type="button" class="close" style="margin: 0px" tabindex="0" data-dismiss="modal" data-bind="click:closeFolderModal" data-i18n="[title]close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-dialog" id="folderModalLabel"></h4>
+				</div>
+				<div class="modal-body" style="padding-bottom: 15px">
+					<div class="row">
+						<div class="col-md-12">
+							<label data-i18n="folder_name">
+							</label>
+							<div class="row">
+								<div class="col-md-12">
+									<input type="text" id="txtFolderName" tabindex="0" maxlength="50" data-bind="textInput: folderValue, event: { focusout: validateFolderName }" class="form-control">
+									<span id="folderErrorTip" class="error_tooltip" data-i18n="folder_name_characters" data-bind="visible:false"></span>
+									<span id="characters" class="hide" style="color:red"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="btnFolderAdd" tabindex="0" disabled data-i18n="Add_btn" data-bind="click:function(){AddSaveFolder('jqxgridDownloadlib')}" class="btn btn-primary hide"></button>
+					<button type="button" id="btnFolderSave" tabindex="0" disabled data-i18n="save" data-bind="click:function(){AddSaveFolder('jqxgridDownloadlib')}" class="btn btn-primary hide"></button>
+					<button type="button" id="btnCancelFolder" tabindex="0" data-dismiss="modal" data-i18n="cancel" class="btn btn-default"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Delete Folder -->
+<div class="modal" id="deleteFolderConfirmationDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p id="deleteFolderConfirmationMsg"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="deleteFolder_Yes" tabindex='0' class="btn btn-danger" data-i18n="btn_YES" data-bind="click: function () {deleteFolder('jqxgridDownloadlib')}"></button>
+					<button type="button" id="deleteFolder_No" tabindex='0' class="btn btn-default mr5" data-i18n="btn_NO" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Move Packages -->
+<div class="modal" id="movePackagesConfirmationDiv" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center modal-mm m-alarts">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-2 pr0">
+							<div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+						</div>
+						<div class="col-md-10 pl8">
+							<h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+							<p id="movePackageConfirmationMsg"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="movePackage_Yes" tabindex='0' class="btn btn-danger" data-i18n="btn_YES" data-bind="click: function () {movePackage('jqxgridDownloadlib')}"></button>
+					<button type="button" id="movePackage_No" tabindex='0' class="btn btn-default mr5" data-i18n="btn_NO" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+﻿
+    <div class="modal-dialog modal-mm m-alarts" id="modelDeviceStatus">
+        <div class="modal-content" id="modelDeviceStatusContent">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2 pr0">
+                        <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                    </div>
+                    <div class="col-md-10 pl8">
+                        <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                        <div class="row" style="padding-right: 15px;">
+                            <div class="col-md-12 pr0">
+                                <span id="infoID"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-right: 15px;">
+                            <div class="col-md-12 pr0" >
+                                <span id="countMsgId"></span><!--<span data-bind="text: undeleteCount"></span>&nbsp;-->
+                                <span id="countMsgdeviceId"></span>&nbsp;<br>
+                                <span id="notBlackListId"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  id="btnDeletedBlacklisted_Yes" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click: function() {deletedAndBlacklistDevicesDeviceSearch('Devicejqxgrid',$parent.observableModelPopup)}"></button>
+                 <button type="button" id="btnDeletedBlacklisted" class="btn btn-default" data-i18n="btn_NO" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}" data-dismiss="modal"></button>
+            </div>
+        </div>
+    </div>
+

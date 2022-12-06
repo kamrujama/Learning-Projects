@@ -1,0 +1,45 @@
+﻿<div class="modal-dialog modal-lg" id="modelViewParentDownloadLib">
+    <div class="modal-content" id="modelViewParentDownloadLibContent">
+        <div class="modal-header" id="modelViewParentDownloadLibHeader">
+            <button type="button" class="close" aria-label="Close" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><span data-i18n="applications_of_package"></span><span id="packageNameAppln"></span></h4>
+        </div>
+        <div class="modal-body" style="min-height: 150px">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-right btn-mg" id="showHideRestBtnParentModel" style="display: block;">
+                        <a class="btn btn-default" id="btnRestFilter" role="button" data-i18n="[title]show_all_data" data-bind="click:function(){clearfilterApplicationParent('jqxgridViewParentDownloadLib')}"><i class="icon-reset-filter"></i></a>
+                        <a class="btn btn-default" id="btnExportToexcel" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcelApplicationParent('jqxgridViewParentDownloadLib')}"><i class="icon-export-excel"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!--grid area start-->
+                    <div class="grid-area">
+                        <div id="jqxgridViewParentDownloadLib" style="width: 100%"></div>
+                    </div>
+                    <!--grid area end-->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div id="showResult" style="float: left;">
+            </div>
+            <button type="button" class="btn btn-primary" data-i18n="btn_OK" data-bind="click: function () {$parent.unloadTempPopup('unloadTemplate')}"></button>
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal" id="downloadModelParent" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopupParent'>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

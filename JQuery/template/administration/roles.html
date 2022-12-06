@@ -1,0 +1,83 @@
+﻿<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+<div class="row" id="roleMain">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pull-left btn-mgl">
+                            <a tabindex="0" class="btn btn-default" id="btnRefresh" role="button" data-i18n="[title]refresh_role_list" data-bind="click:function(){refreshGrid('jqxgridRoles')}"><i class="icon-spinner9"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="addUserBtn" role="button" data-i18n="[title]Add_Role" data-bind="click: function () {openPopup('modelAddRole')},css:{'disabled':!checkRights('Roles and Users', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="editRoleBtn" role="button" data-i18n="[title]Edit_role" data-bind="click: function () {openPopup('modelEditRole')},css:{'disabled':!checkRights('Roles and Users', 'IsModifyAllowed')}"><i class="icon-pencil"></i></a>
+                            <a tabindex="0" class="btn btn-default" id="deleteBtn" role="button" data-i18n="[title]delete_role" data-bind="click: function() {deleteRoleClick('jqxgridRoles')},css:{'disabled':!checkRights('Roles and Users', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right btn-mg">
+                            <a class="btn btn-default" id="btnRestFilter" tabindex="0" role="button" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridRoles')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" id="btnExportToexcel" tabindex="0" role="button" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridRoles')}"><i class="icon-export-excel"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="grid-area">
+                            <div id="jqxgridRoles"></div>
+                            <div id="pagerDivRoles">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- content end -->
+
+
+
+<div id="rolesModel">
+    <div data-bind="if: templateFlag">
+        <div data-bind='component:observableModelPopup'>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal end-->
+
+<div class="modal" id="roleDeleteModel" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-mm m-alarts">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2 pr0">
+                            <div class="alart-icons"><i class="icon-confirmation c-green"></i></div>
+                        </div>
+                        <div class="col-md-10 pl8">
+                            <h4 class="modal-title c-green" data-i18n="confirmation_title"></h4>
+                            <span id="deleteRole"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="roleDeleteModelBtn_Yes" tabindex="0" type="button" class="btn btn-success" data-i18n="btn_YES" data-dismiss="modal" data-bind="click:function(){deleteRoleCall('jqxgridRoles')}"></button>
+                    <button id="roleDeleteModelBtn_No" tabindex="0" type="button" class="btn btn-default" data-i18n="btn_NO" data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

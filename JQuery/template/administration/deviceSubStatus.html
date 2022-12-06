@@ -1,0 +1,71 @@
+﻿
+<!-- content header start -->
+<h1 autofocus="autofocus" class="page-header" data-bind="attr:{'data-i18n':$root.menuHeader}"></h1>
+<ol class="breadcrumb pull-left">
+    <li><a href="javascript:;"><span data-bind="attr:{id:$root.menulevel1,'data-i18n':$root.menulevel1}"></span></a>
+    </li>
+    <li data-bind="css : {'active':$root.menulevel3() == ''}"><a href="javascript:;"><span data-bind="attr:{'data-i18n':$root.menulevel2}"></span></a>
+    </li>
+    <li data-bind="css : {'hide':$root.menulevel3() == ''}" class="active"><span data-bind="attr:{'data-i18n':$root.menulevel3}"></span></li>
+</ol>
+<!-- content header end -->
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="search-box-m">
+                            <div class="row">
+                                <div class="col-md-10 pr0">
+                                    <div class="pull-left btn-mgl">
+                                        <a tabindex="0" class="btn btn-default" role="button" id="refreshGroupList" data-i18n="[title]refresh"  data-bind="click:function(){refreshGrid('jqxgridDeviceSubStatus')}"><i class="icon-spinner9"></i></a>
+                                        <a tabindex="0" class="btn btn-default" role="button" id="addGroup" data-i18n="[title]add_device_sub_status"  data-bind="click: function () {openPopup('modelAddDeviceSubStatus','jqxgridDeviceSubStatus')},css:{'disabled':!checkRights('Devices', 'IsModifyAllowed')}"><i class="icon-plus"></i></a>
+                                        <a tabindex="0" class="btn btn-default" role="button" id="editGroup" data-i18n="[title]edit_device_sub_status"   data-bind="click: function () {openPopup('modelEditDeviceSubStatus','jqxgridDeviceSubStatus')},css:{'disabled':!checkRights('Devices', 'IsModifyAllowed')}"><i class="icon-pencil"></i></a>
+                                        <a tabindex="0" class="btn btn-default" role="button" id="deleteGroups" data-i18n="[title]delete_device_sub_status" data-bind="click: function () {openPopup('modelDeleteDeviceSubStatus','jqxgridDeviceSubStatus')},css:{'disabled':!checkRights('Devices', 'IsDeleteAllowed')}"><i class="icon-bin"></i></a>
+                                       
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pull-right btn-mg">
+                            <a class="btn btn-default" role="button" id="btnRestFilter" tabindex="0" data-i18n="[title]reset" data-bind="click:function(){clearfilter('jqxgridDeviceSubStatus')}"><i class="icon-reset-filter"></i></a>
+                            <a class="btn btn-default" role="button" id="btnExportToexcel" tabindex="0" data-i18n="[title]exportToXls" data-bind="click:function(){exportToExcel(true,'jqxgridDeviceSubStatus')}"><i class="icon-export-excel"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--grid area start-->
+                        <div class="grid-area">
+                            <div id="jqxgridDeviceSubStatus" style="width: 100%"></div>
+                            <div id="pagerDivjqxgridDeviceSubStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal start-->
+<div class="modal bs-example-modal-lg" id="viewDeviceSubStatusModal" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="vertical-align-center">
+            <div data-bind="if: templateFlag">
+                <div data-bind='component:observableModelPopup'>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+        <!-- Modal end-->
